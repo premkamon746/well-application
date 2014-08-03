@@ -17,6 +17,10 @@ class Index extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	function __construct(){
+		parent::__construct();
+	}
+	
 	public function index()
 	{
 		//$result = $this->db->query("select * from ar_province");
