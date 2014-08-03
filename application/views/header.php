@@ -5,13 +5,14 @@
 <title>Insert title here</title>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="<?=base_url()?>/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?=base_url()?>asset/bootstrap/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<?=base_url()?>asset/bootstrap/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="<?=base_url()?>asset/bootstrap/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="<?=base_url()?>asset/css/main_style.css">
 </head>
 <body>
