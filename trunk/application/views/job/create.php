@@ -1,5 +1,5 @@
 <?php $this->load->view("header");?>
-<div class="page-content">
+
             <div class="row">
                 <div class="col-md-12">
 					<h3 class="page-title">
@@ -130,5 +130,4 @@
 				</div>
 				<!-- End Portlet -->
             </div>
-        </div>
 <?php $this->load->view("footer");?>
