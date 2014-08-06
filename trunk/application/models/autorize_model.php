@@ -8,7 +8,7 @@
 			$sql = "select * from sec_users 
 					where usr_name='$user'
 					and passwd='$password'";
-			echo $sql;
+			//echo $sql;
 			$result = $this->db->query($sql);
 			if($result->num_rows() > 0){
 				return true;

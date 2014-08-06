@@ -3,8 +3,8 @@
 
       <form class="form-signin" role="form" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="user" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
+        <input type="input" name="user" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
