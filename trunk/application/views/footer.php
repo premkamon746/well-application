@@ -24,7 +24,7 @@
 <script src="<?=base_url()?>assets/plugins/respond.min.js"></script>
 <script src="<?=base_url()?>assets/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="<?=base_url()?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+
 <script src="<?=base_url()?>assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
@@ -34,11 +34,22 @@
 <script src="<?=base_url()?>assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <script src="<?=base_url()?>assets/scripts/core/app.js"></script>
+
+<script src="<?=base_url()?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/scripts/core/app.js" type="text/javascript"></script>
+
 <script>
-jQuery(document).ready(function() {   
-   // initiate layout and plugins
-   App.init();
-});
+	jQuery(document).ready(function() {    
+		App.init();
+		$('.date-picker').datepicker({
+			rtl: App.isRTL(),
+			autoclose: true
+		});
+	});
+
+	function createJobLine(){
+		window.location = "job_create_line.html";
+	}
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

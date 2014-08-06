@@ -32,11 +32,11 @@
 									<div class="col-md-9">
 										<select class="form-control input-inline input-medium">
 											<option>เลือกประเภทงาน</option>
-											<option>ซ่อมงานมอเตอร์ประเภท AC</option>
-											<option>ซ่อมงานมอเตอร์ประเภท DC</option>
-											<option>ซ่อมงาน Slip Ring</option>
-											<option>ซ่อมงาน Vabration</option>
-											<option>Onsite ประเภทงาน AC</option>
+											<? if($job_type->num_rows() > 0) {?>
+												<?foreach($job_type->result() as $jt){ ?>
+													<option value="<?=$jt->job_type_id ?>"><?=$jt->type_name ?></option>
+												<? }?>
+											<? } // job type?>
 										</select>
 									</div>
 								</div>
@@ -45,12 +45,11 @@
 									<div class="col-md-9">
 										<select class="form-control input-inline input-medium">
 											<option>เลือกประเภทงานย่อย</option>
-											<option>ไฟ 1  เฟส</option>
-											<option>ไฟ 3  เฟส</option>
-											<option>ไฟ 6  เฟส</option>
-											<option>ไฟ ประเภท DC</option>
-											<option>Slip Ring</option>
-											<option>Vabration</option>
+											<? if($job_subtype->num_rows() > 0) {?>
+												<?foreach($job_subtype->result() as $jst){ ?>
+													<option value="<?=$jst->sub_type_id ?>"><?=$jst->sub_type_name ?></option>
+												<? }?>
+											<? } // job type?>
 										</select>
 									</div>
 								</div>
@@ -66,23 +65,20 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">ลูกค้า</label>
 									<div class="col-md-9">
-										<select class="form-control input-inline input-medium">
+										<select id="customer_select" class="form-control input-inline input-medium">
 											<option>เลือกลูกค้า</option>
-											<option>บมจ. ปูนซีเมนต์ไทย</option>
-											<option>บมจ. บ้านปู</option>
-											<option>บ. ชิโนไทย เอ็นจิเนียริ่ง</option>
-											<option>บ. กว้างไพศาล</option>
+											<? if($customer->num_rows() > 0) {?>
+												<?foreach($customer->result() as $cs){ ?>
+													<option value="<?=$cs->customer_id ?>"><?=$cs->customer_name ?></option>
+												<? }?>
+											<? } // job type?>
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">สถานที่ติดตั้ง</label>
 									<div class="col-md-9">
-										<select class="form-control input-inline input-medium">
-											<option>เลือกสถานที่ติดตั้ง</option>
-											<option>โรงงานสมุทรปราการ</option>
-											<option>โรงงานบางพลี</option>
-											<option>โรงงานอยุธยา</option>
+										<select id="site_select" class="form-control input-inline input-medium">
 										</select>
 									</div>
 								</div>
@@ -130,4 +126,28 @@
 				</div>
 				<!-- End Portlet -->
             </div>
+ <script>
+ 	$(document).ready(function(){
+ 	 	$('#customer_select').change(function(){
+ 	 	 	cid = $(this).val();
+ 	 		url = "<?=base_url()?>job/get_cust_site_ajax/"+cid;
+ 	 		$.getJSON(url, function(data){
+ 	 			getDropDownList(data) 
+ 	 		});
+ 	 	});
+ 	});
+
+ 	//function getDropDownList(name, id, optionList) {
+ 	function getDropDownList(optionList) {
+ 	    //var combo = $("<select></select>").attr("id", id).attr("name", name);
+		var combo = $("#site_select");
+ 	    $.each(optionList, function (i, el) {
+ 	        combo.append("<option value="+el.site_id+">" + el.address + "</option>");
+ 	    });
+
+ 	    //return combo;
+ 	    // OR
+ 	    $("#site_select").append(combo);
+ 	}
+ </script>
 <?php $this->load->view("footer");?>
