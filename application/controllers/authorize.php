@@ -10,9 +10,11 @@ class Authorize extends CI_Controller {
 	
 	public function login()
 	{
-		
+
+		$post = $this->input->post();
+		//print_r($post);
 		if($post = $this->input->post()){
-			echo "xxxxxxxxx";
+			//echo "xxxxxxxxx";
 			extract($post);
 			$this->load->model('autorize_model');
 			
