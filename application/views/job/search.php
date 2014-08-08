@@ -19,7 +19,7 @@
 									<label class="col-md-3 control-label">Job No.</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-inline input-medium" placeholder="Job No." 
-										name="job_no">
+										name="job_no" value="<?=isset($job_no)?$job_no:''?>" >
 										<span class="help-inline"></span>
 									</div>
 								</div>
@@ -30,7 +30,8 @@
 										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 											<input type="text" class="form-control form-filter input-medium" 
 											readonlyplaceholder="วันที่รับงาน"
-											name="job_date">
+											name="job_date"
+											 value="<?=isset($job_date)?$job_date:''?>">
 											<!--span class="input-group-btn"-->
 												&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 											<!--/span-->

@@ -27,6 +27,24 @@
 			);
 			$this->db->set('create_date', 'now()',FALSE); 
 			$this->db->insert('job_t_orders', $data); 
+			return $this->db->insert_id();
+		}
+		
+		function createJobDetail($post,$job_id){
+			extract($post);
+			$create_user = 0;// implement session
+			$seq_no = 0;
+			$data = array(
+				"seq_no"=>$seq_no
+				,"job_id"=>$job_id
+				,"description"=>$description
+				,"status"=>'WAIT CONFIRM'
+				,"create_user"=>$create_user
+			);
+			
+			$this->db->set('create_date', 'now()',FALSE); 
+			$this->db->insert('job_t_order_lines', $data); 
+			
 		}
 		
 		function createJobNo(){
@@ -47,6 +65,16 @@
 			
 			$running = str_pad($str,5,"0",STR_PAD_LEFT);
 			return $running;
+		}
+		
+		function getJob($id){
+			$sql = "select * from job_t_orders where job_id = '$id'";
+			return $this->db->query($sql)->row();
+		}
+		
+		function getJobLine($jobid){
+			$sql = "select * from job_t_order_lines where job_id = '$jobid'";
+			return $this->db->query($sql);
 		}
 		
 		function getJobType(){
@@ -77,7 +105,9 @@
 		function getSearch($post){
 			extract($post);
 			$search = "";
-			
+			if(isset($job_no) && $job_no !=''){
+				$search .=" and o.job_no = '$job_no'";
+			}
 			if(isset($job_date)&&$job_date !=''){
 				$search .=" and o.job_date = '$job_date'";
 			}
