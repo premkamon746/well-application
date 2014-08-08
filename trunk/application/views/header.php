@@ -583,7 +583,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<?=site_url('job/search')?>">
 								<i class="fa fa-bullhorn"></i>
 								ค้นหาใบงาน
 							</a>

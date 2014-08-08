@@ -16,13 +16,17 @@
 						</div>
 					</div>
 					<div class="portlet-body form">
-						<form class="form-horizontal" role="form">
+				<b><?=isset($warngin_msg)?$warngin_msg:""?></b>
+						<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
 								<div class="form-group">
 									<label class="col-md-3 control-label">วันที่รับงาน</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-											<input type="text" class="form-control input-inline input-medium" readonly name="order_date_from" placeholder="วันที่รับงาน">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+											<input type="text" class="form-control input-inline input-medium" 
+											readonly name="job_date" placeholder="วันที่รับงาน" 
+											id="job_date"
+											value="<?=isset($job_date)?$job_date:''?>" >
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 										</div>
 									</div>
@@ -30,7 +34,15 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">ประเภทงาน</label>
 									<div class="col-md-9">
-										<select class="form-control input-inline input-medium">
+									
+									<? if(isset($job_type_id)){ ?>
+									<script>
+										$(document).ready(function(){
+											$('#job_type_id').val("<?=$job_type_id?>")
+										})
+									</script>
+									<? }?>
+										<select name="job_type_id" class="form-control input-inline input-medium" id="job_type_id">
 											<option>เลือกประเภทงาน</option>
 											<? if($job_type->num_rows() > 0) {?>
 												<?foreach($job_type->result() as $jt){ ?>
@@ -43,7 +55,15 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">ประเภทงานย่อย</label>
 									<div class="col-md-9">
-										<select class="form-control input-inline input-medium">
+									
+									<? if(isset($sub_type_id)){ ?>
+									<script>
+										$(document).ready(function(){
+											$('#sub_type_id').val("<?=$sub_type_id?>")
+										})
+									</script>
+									<? }?>
+										<select name="sub_type_id" class="form-control input-inline input-medium" id="sub_type_id">
 											<option>เลือกประเภทงานย่อย</option>
 											<? if($job_subtype->num_rows() > 0) {?>
 												<?foreach($job_subtype->result() as $jst){ ?>
@@ -56,8 +76,10 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">กำหนดวันส่งมอบ</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-											<input type="text" class="form-control input-inline input-medium" readonly name="order_date_from" placeholder="กำหนดวันส่งมอบ">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+											<input type="text" class="form-control input-inline input-medium" 
+											readonly name="job_end_date" placeholder="กำหนดวันส่งมอบ" 
+											id="job_end_date" value="<?=isset($job_end_date)?$job_end_date:''?>">
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 										</div>
 									</div>
@@ -65,7 +87,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">ลูกค้า</label>
 									<div class="col-md-9">
-										<select id="customer_select" class="form-control input-inline input-medium">
+									<? if(isset($customer_id)){ ?>
+									<script>
+										$(document).ready(function(){
+											$('#customer_select').val("<?=$customer_id?>");
+										})
+									</script>
+									<? }?>
+										<select name="customer_id" class="form-control input-inline input-medium" id="customer_select">
 											<option>เลือกลูกค้า</option>
 											<? if($customer->num_rows() > 0) {?>
 												<?foreach($customer->result() as $cs){ ?>
@@ -78,7 +107,22 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">สถานที่ติดตั้ง</label>
 									<div class="col-md-9">
-										<select id="site_select" class="form-control input-inline input-medium">
+									
+									<? if(isset($ship_to_id)&&isset($customer_id)){ ?>
+									<script>
+										$(document).ready(function(){
+											url = "<?=base_url()?>job/get_cust_site_ajax/"+<?=$customer_id?>;
+								 	 		$.getJSON(url, function(data){
+								 	 			getDropDownList(data);
+								 	 			$('#site_select').val("<?=$ship_to_id?>");
+								 	 		});
+											
+										})
+									</script>
+									<? }?>
+									
+										<select name="ship_to_id" class="form-control input-inline input-medium" id="site_select">
+											<option></option>
 										</select>
 									</div>
 								</div>
@@ -98,13 +142,13 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Tag</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Tag">
+										<input name="tag_no" type="text" class="form-control input-inline input-medium" id="tag_no" placeholder="Tag">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Serial</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Serial">
+										<input name="serial_number" type="text" class="form-control input-inline input-medium" id="serial_number" placeholder="Serial">
 									</div>
 								</div>
 								<div class="form-group">
@@ -116,7 +160,7 @@
 							</div>
 							<div class="form-actions fluid">
 								<div class="col-md-offset-3 col-md-9">
-									<button type="button" class="btn green" onclick="createJobLine()">สร้างใบงาน</button>
+									<button type="submit" class="btn green" onclick="">สร้างใบงาน</button>
 									&nbsp; &nbsp; &nbsp;
 									<button type="button" class="btn default">ยกเลิก</button>
 								</div>
