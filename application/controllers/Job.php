@@ -15,10 +15,52 @@ class Job extends MY_Controller {
 	public function create()
 	{
 		$data = array();
+		
+		
+		if($post = $this->input->post()){
+			if($this->validateForm($post)){
+				$this->job_model->createJob($post);
+			}else{
+				$data['warngin_msg'] ="Please fill all field.";
+				$data = array_merge($data, $post);
+			}
+		}
+		
+		
 		$data['customer'] = $this->job_model->getCustomer();
 		$data['job_type'] = $this->job_model->getJobType();
 		$data['job_subtype'] = $this->job_model->getJobSubtype();
+		
+		
 		$this->load->view('job/create',$data);
+	}
+	
+	public function search()
+	{
+		$data = array();
+		
+		if($post = $this->input->post()){
+			$data['job_search'] = $this->job_model->getSearch($post);
+			$data = array_merge($data, $post);
+		}
+		
+		
+		$data['customer'] = $this->job_model->getCustomer();
+		$data['job_type'] = $this->job_model->getJobType();
+		$data['job_subtype'] = $this->job_model->getJobSubtype();
+		$data['job_status'] = $this->job_model->getJobStatus();
+		
+		$this->load->view('job/search',$data);
+	}
+	
+	function validateForm($post){
+		extract($post);
+		if($customer_id==""||$ship_to_id==""||$job_date==""
+			||$job_end_date==""||$tag_no==""||$job_type_id==""
+			||$sub_type_id==""||$serial_number==""){
+			return false;
+		}	
+		return true;
 	}
 	
 	public function get_cust_site_ajax($cid){
