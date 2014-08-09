@@ -190,7 +190,9 @@
 							<? if(isset($job_search) > 0){?>
 							<? foreach ($job_search->result() as $js){ ?>
 							<tr>
-								<td align="center"><?=$js->job_no?></td>
+								<td align="center">
+									<a href="<?=base_url('job/detail/'.$js->job_id)?>"><?=$js->job_no?></a>
+								</td>
 								<td align="center"><?=$js->job_date?></td>
 								<td align="center"><?=$js->customer_name?></td>
 								<td align="center"><?=$js->job_status?></td>
@@ -208,4 +210,9 @@
 					<!-- END EXAMPLE TABLE PORTLET-->
 				</div>
 			</div>
+			<script>
+				function reload(){
+					window.location = "<?=base_url('job/search')?>";
+				}
+			</script>
 <?php $this->load->view("footer");?>

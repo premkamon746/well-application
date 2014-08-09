@@ -11,7 +11,7 @@
 			//echo $sql;
 			$result = $this->db->query($sql);
 			if($result->num_rows() > 0){
-				return true;
+				return $result->row();
 			}
 			return false;
 		}
