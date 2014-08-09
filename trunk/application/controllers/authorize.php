@@ -12,17 +12,24 @@ class Authorize extends CI_Controller {
 	{
 
 		$post = $this->input->post();
-		//print_r($post);
 		if($post = $this->input->post()){
-			//echo "xxxxxxxxx";
 			extract($post);
 			$this->load->model('autorize_model');
 			
-			if($this->autorize_model->isUser($user, $password))
+			if($user_data = $this->autorize_model->isUser($user, $password))
 			{
+				//print_r($user_data);
+				$this->setSession($user_data);
 				redirect('index');
 			}
 		}
 		$this->load->view('login');
+	}
+	
+	public function setSession($user_data){
+		$du = array("uname"	=>$user_data->usr_name,
+					"uid"	=>$user_data->user_id);
+		$this->session->set_userdata('login_object',$du);
+		//$this->session->set_userdata('uid',$user_data->user_id);
 	}
 }

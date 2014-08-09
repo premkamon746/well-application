@@ -50,7 +50,7 @@
 										<td><?=++$i?></td>
 										<td><?=$jl->description?></td>
 										<td><?=$jl->status?></td>
-										<td><?=$jl->create_user?></td>
+										<td><?=$jl->usr_name?></td>
 									</tr>
 								<? } ?>
 							<? } ?>

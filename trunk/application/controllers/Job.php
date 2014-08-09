@@ -14,11 +14,12 @@ class Job extends MY_Controller {
 	
 	public function create()
 	{
+		//echo $this->user_id."xxxxxxxxx";
 		$data = array();
 		if($post = $this->input->post()){
 			if($this->validateForm($post)){
-				$id = $this->job_model->createJob($post);
-				refresh(base_url("job/detail/$id"));
+				$id = $this->job_model->createJob($post,$this->user_id);
+				redirect(base_url("job/detail/$id"));
 			}else{
 				$data['warngin_msg'] ="Please fill all field.";
 				$data = array_merge($data, $post);
@@ -38,10 +39,11 @@ class Job extends MY_Controller {
 	{
 		$data = array();
 		$data['job'] = $this->job_model->getJob($id);
-		$data['job_line'] = $this->job_model->getJobLine($id);
+		
 		if($post = $this->input->post()){
-			$this->job_model->createJobDetail($post,$id);
+			$this->job_model->createJobDetail($post,$id,$this->user_id);
 		}
+		$data['job_line'] = $this->job_model->getJobLine($id);
 		$this->load->view('job/detail',$data);
 	}
 	

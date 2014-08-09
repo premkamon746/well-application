@@ -4,9 +4,9 @@
 			parent::__construct();
 		}
 		
-		function createJob($post){
+		function createJob($post,$create_user = 0){
 			extract($post);
-			$create_user = 0;// implement session
+			
 			$data = array(
 				"job_no"		=>$this->createJobNo()
 				,"customer_id"	=>$customer_id
@@ -30,9 +30,8 @@
 			return $this->db->insert_id();
 		}
 		
-		function createJobDetail($post,$job_id){
+		function createJobDetail($post,$job_id,$create_user = 0){
 			extract($post);
-			$create_user = 0;// implement session
 			$seq_no = 0;
 			$data = array(
 				"seq_no"=>$seq_no
@@ -73,7 +72,10 @@
 		}
 		
 		function getJobLine($jobid){
-			$sql = "select * from job_t_order_lines where job_id = '$jobid'";
+			$sql = "select * from job_t_order_lines o
+					join  sec_users s 
+					on s.user_id = o.create_user 
+					where job_id = '$jobid'";
 			return $this->db->query($sql);
 		}
 		
