@@ -1,0 +1,100 @@
+<?php $this->load->view("header");?>
+            <div class="row">
+                <div class="col-md-12">
+					<h3 class="page-title">ข้อมูลใบงาน &nbsp;<small>(รายละเอียดงาน)</small></h3>
+				</div>
+            </div>
+            <div class="row">
+				<div class="col-md-12">
+					<div class="portlet box green">
+						<div class="portlet-title"></div>
+						<div class="portlet-body">
+							<table width="75%" align="center">
+							<tbody><tr>
+								<td height="32px" width="20%"><b>วันที่รับงาน</b></td>
+								<td width="25%">10/6/2014</td>
+								<td width="18%"><b>ลูกค้า</b></td>
+								<td width="37%">บริษัท สยามคูโบต้า จำกัด</td>
+							</tr>
+							<tr>
+								<td height="32px"><b>ประเภทงาน</b></td>
+								<td>AC</td>
+								<td><b>สถานที่ติดตั้ง</b></td>
+								<td>ต.หัวตะเข้ อ.สามพราน จ. นครประถม</td>
+							</tr>
+							<tr>
+								<td height="32px"><b>ประเภทงานย่อย</b></td>
+								<td>AC Motor</td>
+								<td><b>ผู้ติดต่อ</b></td>
+								<td>นายสมชัย ใจดีมาก</td>
+							</tr>
+							<tr>
+								<td height="32px" width="15%"><b>กำหนดวันส่งมอบ</b></td>
+								<td width="35%">20/6/2014</td>
+								<td width="15%"><b>โทรศัพท์</b></td>
+								<td width="35%">02-635-9931</td>
+							</tr>
+							</tbody></table>
+							<br>
+							<table width="96%">
+							<tbody><tr>
+								<td width="30%" align="left" style="padding-left: 20px">
+									<button type="button" class="btn gray" onclick="">ยกเลิกใบสั่งงาน</button>
+									&nbsp; &nbsp; &nbsp;
+									<button type="button" class="btn blue" onclick=""> &nbsp; พิมพ์ Label &nbsp; </button>
+								</td>
+								<td width="18%">
+									<b>Tag:</b> &nbsp; &nbsp; 958465237
+								</td>
+								<td width="18%">
+									<b>Serial:</b> &nbsp; &nbsp; SN14060001
+								</td>
+								<td width="34%">
+									<b>หมายเหตุ: </b> -
+								</td>
+							</tr>
+							</tbody></table>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row"><!-- begin row -->
+				<div class="col-md-12">
+					<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-globe"></i>รายละเอียดงาน
+							</div>
+						</div>
+						<div class="portlet-body">
+							<table class="table table-striped table-bordered table-hover" id="tbl_job_line">
+							<thead>
+							<tr>
+								<td align="center"><b>No.</b></td>
+								<td align="center"><b>รายละเอียดงาน</b></td>
+								<td align="center"><b>สถานะ</b></td>
+								<td align="center"><b>บันทึกโดย</b></td>
+							</tr>
+							</thead>
+							<tbody>
+							
+							<? if($job_line->num_rows() > 0) {?>
+								<? $i=0; ?>
+								<? foreach ($job_line->result() as $jl) {?>
+									<tr class="odd gradeX">
+										<td><?=++$i?></td>
+										<td><?=$jl->description?></td>
+										<td><?=$jl->status?></td>
+										<td><?=$jl->usr_name?></td>
+									</tr>
+								<? } ?>
+							<? } ?>
+							
+							</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div><!-- end row -->
+<?php $this->load->view("footer");?>
