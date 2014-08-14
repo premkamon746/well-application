@@ -5,6 +5,7 @@ class Job extends MY_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('job_model');
+		$this->load->model('customer_model');
 	}
 	
 	public function index()
@@ -27,7 +28,7 @@ class Job extends MY_Controller {
 		}
 		
 		
-		$data['customer'] = $this->job_model->getCustomer();
+		$data['customer'] = $this->customer_model->getCustomer();
 		$data['job_type'] = $this->job_model->getJobType();
 		$data['job_subtype'] = $this->job_model->getJobSubtype();
 		
@@ -89,7 +90,7 @@ class Job extends MY_Controller {
 	}
 	
 	public function get_cust_site_ajax($cid){
-		 $result = $this->job_model->getSite($cid);
+		 $result = $this->customer_model->getSite($cid);
 		 $res_arr = array();
 		 $i = 0;
 		 foreach($result->result() as $r){

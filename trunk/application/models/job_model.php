@@ -99,16 +99,6 @@
 			return $this->db->query($sql);
 		}
 		
-		function getCustomer(){
-			$sql = "select * from ar_t_customers";
-			return $this->db->query($sql);
-		}
-		
-		function getSite($cid){
-			$sql = "select * from ar_t_sites where customer_id = $cid";
-			return $this->db->query($sql);
-		}
-		
 		function getJobStatus(){
 			$sql = "select * from job_t_status where active_flag = 'Y'";
 			return $this->db->query($sql);
