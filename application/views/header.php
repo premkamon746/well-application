@@ -559,18 +559,35 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start ">
-					<a href="index.html">
-						<i class="fa fa-home"></i>
+					<a href="javascript:;">
+						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
-							Dashboard
+							Quotation
+						</span>
+						<span class="arrow ">
 						</span>
 					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="<?=site_url('quotation/create')?>">
+								<i class="fa fa-bullhorn"></i>
+								สร้างใบเสนอราคา
+							</a>
+						</li>
+						<li>
+							<a href="<?=site_url('quotation/search')?>">
+								<i class="fa fa-bullhorn"></i>
+								ค้นหาใบเสนอราคา
+							</a>
+						</li>
+					</ul>
 				</li>
+				
 				<li class="last ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
-							E-Commerce
+							Job
 						</span>
 						<span class="arrow ">
 						</span>
