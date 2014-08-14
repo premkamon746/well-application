@@ -65,6 +65,18 @@ class Job extends MY_Controller {
 		$this->load->view('job/search',$data);
 	}
 	
+	public function search_detail($id)
+	{
+		$data = array();
+		$data['job'] = $this->job_model->getJob($id);
+		
+		if($post = $this->input->post()){
+			$this->job_model->createJobDetail($post,$id,$this->user_id);
+		}
+		$data['job_line'] = $this->job_model->getJobLine($id);
+		$this->load->view('job/search_detail',$data);
+	}
+	
 	function validateForm($post){
 		extract($post);
 		if($customer_id==""||$ship_to_id==""||$job_date==""
