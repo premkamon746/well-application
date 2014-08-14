@@ -71,6 +71,16 @@
 			return $this->db->query($sql)->row();
 		}
 		
+		function getJobCustomerDetail($id){
+			$sql = "select * from job_t_orders o
+					join ar_t_customers c
+					on c.customer_id = c.customer_id
+					left join ar_t_sites s
+					on s.customer_id = s.customer_id
+					where o.job_id = '$id' ";
+			return $this->db->query($sql)->row();
+		}
+		
 		function getJobLine($jobid){
 			$sql = "select * from job_t_order_lines o
 					join  sec_users s 
