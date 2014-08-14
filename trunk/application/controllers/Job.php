@@ -68,7 +68,8 @@ class Job extends MY_Controller {
 	public function search_detail($id)
 	{
 		$data = array();
-		$data['job'] = $this->job_model->getJob($id);
+		$this->load->helper("job");
+		$data['job'] = $this->job_model->getJobCustomerDetail($id);
 		
 		if($post = $this->input->post()){
 			$this->job_model->createJobDetail($post,$id,$this->user_id);

@@ -149,4 +149,14 @@
 			//echo $sql;
 			return $this->db->query($sql);
 		}
+		
+		function getJobTypeById($id){
+			$sql = "select * from job_t_type where job_type_id = $id";
+			return $this->db->query($sql)->row();
+		}
+		
+		function getJobSubTypeById($id){
+			$sql = "select * from job_t_subtype where sub_type_id = $id";
+			return $this->db->query($sql)->row();
+		}
 	}
