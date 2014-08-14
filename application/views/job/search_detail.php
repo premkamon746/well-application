@@ -12,27 +12,27 @@
 							<table width="75%" align="center">
 							<tbody><tr>
 								<td height="32px" width="20%"><b>วันที่รับงาน</b></td>
-								<td width="25%">10/6/2014</td>
+								<td width="25%"><?=$job->job_date ?></td>
 								<td width="18%"><b>ลูกค้า</b></td>
-								<td width="37%">บริษัท สยามคูโบต้า จำกัด</td>
+								<td width="37%"><?=$job->customer_name?></td>
 							</tr>
 							<tr>
 								<td height="32px"><b>ประเภทงาน</b></td>
-								<td>AC</td>
+								<td><?=getJobType($job->job_type_id)?></td>
 								<td><b>สถานที่ติดตั้ง</b></td>
-								<td>ต.หัวตะเข้ อ.สามพราน จ. นครประถม</td>
+								<td><?=$job->address1?><?=$job->address2?></td>
 							</tr>
 							<tr>
 								<td height="32px"><b>ประเภทงานย่อย</b></td>
-								<td>AC Motor</td>
+								<td><?=getJobSubType($job->sub_type_id)?></td>
 								<td><b>ผู้ติดต่อ</b></td>
-								<td>นายสมชัย ใจดีมาก</td>
+								<td><?=$job->job_end_date?></td>
 							</tr>
 							<tr>
 								<td height="32px" width="15%"><b>กำหนดวันส่งมอบ</b></td>
-								<td width="35%">20/6/2014</td>
+								<td width="35%"><?=$job->job_end_date?></td>
 								<td width="15%"><b>โทรศัพท์</b></td>
-								<td width="35%">02-635-9931</td>
+								<td width="35%"><?=$job->phone_number?> <?=$job->mobile_number?></td>
 							</tr>
 							</tbody></table>
 							<br>
@@ -44,10 +44,10 @@
 									<button type="button" class="btn blue" onclick=""> &nbsp; พิมพ์ Label &nbsp; </button>
 								</td>
 								<td width="18%">
-									<b>Tag:</b> &nbsp; &nbsp; 958465237
+									<b>Tag:</b> &nbsp; &nbsp; <?=$job->tag_no ?>
 								</td>
 								<td width="18%">
-									<b>Serial:</b> &nbsp; &nbsp; SN14060001
+									<b>Serial:</b> &nbsp; &nbsp; <?=$job->serial_number ?>
 								</td>
 								<td width="34%">
 									<b>หมายเหตุ: </b> -
