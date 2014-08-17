@@ -58,7 +58,7 @@ class Job extends MY_Controller {
 		}
 		
 		
-		$data['customer'] = $this->job_model->getCustomer();
+		$data['customer'] = $this->customer_model->getCustomer();
 		$data['job_type'] = $this->job_model->getJobType();
 		$data['job_subtype'] = $this->job_model->getJobSubtype();
 		$data['job_status'] = $this->job_model->getJobStatus();
