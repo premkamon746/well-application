@@ -29,11 +29,16 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=base_url()?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
+<link href="<?=base_url()?>assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+<link href="<?=base_url()?>assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+
+
 <link href="<?=base_url()?>assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"/>
+<script src="<?=base_url()?>assets/plugins/bootstrap-modal/js/ui-extended-modals.js"></script>
 	
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
@@ -43,6 +48,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=base_url()?>assets/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="<?=base_url()?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+
 <!-- END THEME STYLES -->
 
 <script src="<?=base_url()?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>

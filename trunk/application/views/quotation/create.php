@@ -16,20 +16,23 @@
 						</div>
 					</div>
 					<div class="portlet-body form">
-						<form class="form-horizontal" role="form">
+					<b><?=isset($warngin_msg)?$warngin_msg:""?></b>
+						<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
-								<div class="form-group">
+								<!--  div class="form-group">
 									<label class="col-md-3 control-label">Quotation No.</label>
 									<div class="col-md-9" valign="bottom">
 										<input type="text" class="form-control input-inline input-medium" name="order_date_from" value="QUO14060001" readonly="">
 										<input type="text" class="form-control input-inline input-medium" style="margin-left: 240px; background-color: #555555" value="Status" readonly="">
 									</div>
-								</div>
+								</div-->
 								<div class="form-group">
 									<label class="col-md-3 control-label">วันที่เสนอราคา</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-											<input type="text" class="form-control input-inline input-medium" readonly="" name="order_date_from" placeholder="วันที่เสนอราคา">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+											<input type="text" class="form-control input-inline input-medium" 
+											readonly="" name="quote_date" placeholder="วันที่เสนอราคา" id="quote_date"
+											value="<?=isset($quote_date)?$quote_date:''?>" >
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 										</div>
 									</div>
@@ -52,6 +55,8 @@
 												<? }?>
 											<? } // job type?>
 										</select>
+										
+										<input type="text" class="form-control input-inline input-medium" style="margin-left: 240px" value="บันทึกโดย" readonly="">
 									</div>
 								</div>
 								<div class="form-group">
@@ -67,13 +72,28 @@
 								 	 			getDropDownList(data,$('#bill_select'));
 								 	 			$('#bill_select').val("<?=$ship_to_id?>");
 								 	 		});
-											
 										})
 									</script>
 									<? }?>
 									
 										<select name="bill_to_id" class="form-control input-inline input-medium" id="bill_select">
 											<option></option>
+										</select>
+										<? if(isset($customer_id)){ ?>
+										<script>
+											$(document).ready(function(){
+												$('#credit_term').val("<?=$credit_term ?>");
+											})
+										</script>
+										<? }?>
+										<select class="form-control input-inline input-medium" 
+										style="margin-left: 240px" name="credit_term" id="credit_term">
+											<option value="">เครดิทเทอม</option>
+											<? if($term->num_rows() > 0) {?>
+												<?foreach($term->result() as $cs){ ?>
+													<option value="<?=$cs->credit_code ?>"><?=$cs->credit_term_day ?></option>
+												<? }?>
+											<? } // job type?>
 										</select>
 									</div>
 									
@@ -90,7 +110,6 @@
 								 	 			getDropDownList(data,$('#site_select'));
 								 	 			$('#site_select').val("<?=$ship_to_id?>");
 								 	 		});
-											
 										})
 									</script>
 									<? }?>
@@ -98,57 +117,74 @@
 										<select name="ship_to_id" class="form-control input-inline input-medium" id="site_select">
 											<option></option>
 										</select>
+										<input type="text" class="form-control input-inline input-medium" style="margin-left: 240px" value="จัดส่งภายใน (วัน)" readonly="">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">ชื่อผู้ติดต่อ</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="ชื่อผู้ติดต่อ">
+										<input name="contact_person" type="text" class="form-control input-inline input-medium" 
+										id="contact_person" placeholder="ชื่อผู้ติดต่อ"
+										value="<?=isset($contact_person)?$contact_person:''?>"
+										>
+										
 										<select class="form-control input-inline input-medium" style="margin-left: 240px">
-											<option>Sales</option>
+										  <option>Sales</option>
 											<option>Option 1</option>
 											<option>Option 2</option>
 											<option>Option 3</option>
 											<option>Option 4</option>
 											<option>Option 5</option>
 										</select>
+										
+										
 									</div>
 								</div>
 								<br>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Attention</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Attention">
+										<input name="attention" type="text" class="form-control input-inline input-medium" 
+										id="attention" placeholder="Attention"
+										value="<?=isset($attention)?$attention:''?>" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">CC</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="CC">
+										<input name="cc_to" type="text" class="form-control input-inline input-medium" 
+										id="cc_to" placeholder="CC"
+										value="<?=isset($cc_to)?$cc_to:''?>">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Subject</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Subject">
+										<input name="subject" type="text" class="form-control input-inline input-medium" 
+										id="subject" placeholder="Subject"
+										value="<?=isset($subject)?$subject:''?>" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Email</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Email">
+										<input name="email" type="text" class="form-control input-inline input-medium" 
+										id="email" placeholder="Email"
+										value="<?=isset($email)?$email:''?>">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Remark</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="Remark">
+										<input name="remarks" type="text" class="form-control input-inline input-medium" 
+										id="remarks" placeholder="Remark"
+										value="<?=isset($remarks)?$remarks:''?>">
 									</div>
 								</div>
 							</div>
 							<div class="form-actions fluid">
 								<div class="col-md-offset-3 col-md-9">
-									<button type="button" class="btn green" onclick="createQuoLine()">สร้างใบเสนอราคา</button>
+									<button type="submit" class="btn green">สร้างใบเสนอราคา</button>
 									&nbsp; &nbsp; &nbsp;
 									<button type="button" class="btn default">ยกเลิก</button>
 								</div>
