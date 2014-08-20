@@ -78,8 +78,35 @@ class Quotation extends MY_Controller {
 			//$data = array_merge($data, $post);
 		}
 		
-		
+		$data['item_cat'] = $this->quotation_model->getItemCatagory();
 		$this->load->view('quotation/create_line',$data);
+	}
+	
+	function sale_item_ajax($category){
+		$item_cat = $this->quotation_model->getItemCatagoryName($category);
+		$total = $this->quotation_model->getItemCatagoryRecord($category);
+		
+		/*$data = array();
+		foreach($item_cat->result() as $a){
+			$data[][]=  array("category"=>$a->category ,"segment1"=>$a->segment1);
+		}*/
+		
+		foreach($item_cat->result() as $a){
+			$data['aaData'][]=  array($a->category 
+									,$a->segment1
+									,$a->segment1
+									,$a->segment1
+									,$a->segment1
+									,$a->segment1
+									,$a->segment1
+									,$a->segment1);
+		}
+		$data['aaData'][]=array("recordsTotal"=>intval($total));
+		/*$json = array("data"=>$data,
+						"draw"=> 1,
+						"recordsFiltered"=>intval($total),
+						"recordsTotal"=>intval($total));*/
+		echo json_encode($data);
 	}
 	
 }

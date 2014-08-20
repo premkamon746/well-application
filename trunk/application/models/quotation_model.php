@@ -72,4 +72,40 @@
 			//echo $sql;
 			return $this->db->query($sql);
 		}
+		
+	function getItemCatagory(){
+		$sql = "select category from inv_item_list group by category";
+		$result = $this->db->query($sql);
+		return $result;
+	}
+	
+	function getItemCatagoryName($cat){
+		$sql = "select * from inv_item_list where  category = '$cat' ";
+		$result = $this->db->query($sql);
+		return $result;
+	}
+	
+	function getItemCatagoryRecord($cat){
+		$sql = "select count(*) to_record from inv_item_list where category = '$cat' ";
+		$result = $this->db->query($sql);
+		return $result->row()->to_record;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

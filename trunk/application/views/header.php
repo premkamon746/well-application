@@ -38,7 +38,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=base_url()?>assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"/>
-<script src="<?=base_url()?>assets/plugins/bootstrap-modal/js/ui-extended-modals.js"></script>
+
 	
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
