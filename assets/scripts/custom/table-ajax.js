@@ -2,10 +2,10 @@ var TableAjax = function () {
 
     var initPickers = function () {
         //init date pickers
-        $('.date-picker').datepicker({
+       /* $('.date-picker').datepicker({
             rtl: App.isRTL(),
             autoclose: true
-        });
+        });*/
     }
 
     var handleRecords = function() {
@@ -38,7 +38,7 @@ var TableAjax = function () {
             });
 
             // handle group actionsubmit button click
-            grid.getTableWrapper().on('click', '.table-group-action-submit', function(e){
+            /*grid.getTableWrapper().on('click', '.table-group-action-submit', function(e){
                 e.preventDefault();
                 var action = $(".table-group-action-input", grid.getTableWrapper());
                 if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
@@ -55,7 +55,7 @@ var TableAjax = function () {
                 } else if (grid.getSelectedRowsCount() === 0) {
                     App.alert({type: 'danger', icon: 'warning', message: 'No record selected', container: grid.getTableWrapper(), place: 'prepend'});
                 }
-            });
+            });*/
 
     }
 

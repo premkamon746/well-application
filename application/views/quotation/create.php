@@ -48,7 +48,7 @@
 									</script>
 									<? }?>
 										<select name="customer_id" class="form-control input-inline input-medium" id="customer_select">
-											<option>เลือกลูกค้า</option>
+											<option value="">เลือกลูกค้า</option>
 											<? if($customer->num_rows() > 0) {?>
 												<?foreach($customer->result() as $cs){ ?>
 													<option value="<?=$cs->customer_id ?>"><?=$cs->customer_name ?></option>
