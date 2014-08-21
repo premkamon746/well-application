@@ -218,7 +218,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./<?=base_url()?>assets/img/avatar2.jpg" alt=""/>
+										<img src="<?=base_url()?>assets/img/avatar2.jpg" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -236,7 +236,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./<?=base_url()?>assets/img/avatar3.jpg" alt=""/>
+										<img src="<?=base_url()?>assets/img/avatar3.jpg" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -254,7 +254,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./<?=base_url()?>assets/img/avatar1.jpg" alt=""/>
+										<img src="<?=base_url()?>assets/img/avatar1.jpg" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -272,7 +272,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./<?=base_url()?>assets/img/avatar2.jpg" alt=""/>
+										<img src="<?=base_url()?>assets/img/avatar2.jpg" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -290,7 +290,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./<?=base_url()?>assets/img/avatar3.jpg" alt=""/>
+										<img src="<?=base_url()?>assets/img/avatar3.jpg" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -576,13 +576,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="<?=site_url('quotation/create')?>">
+							<a href="<?=base_url('quotation/create')?>">
 								<i class="fa fa-bullhorn"></i>
 								สร้างใบเสนอราคา
 							</a>
 						</li>
 						<li>
-							<a href="<?=site_url('quotation/search')?>">
+							<a href="<?=base_url('quotation/search')?>">
 								<i class="fa fa-bullhorn"></i>
 								ค้นหาใบเสนอราคา
 							</a>
@@ -601,13 +601,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="<?=site_url('job/create')?>">
+							<a href="<?=base_url('job/create')?>">
 								<i class="fa fa-bullhorn"></i>
 								สร้างใบงาน
 							</a>
 						</li>
 						<li>
-							<a href="<?=site_url('job/search')?>">
+							<a href="<?=base_url('job/search')?>">
 								<i class="fa fa-bullhorn"></i>
 								ค้นหาใบงาน
 							</a>
