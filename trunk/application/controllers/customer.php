@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Quotation extends MY_Controller {
+class Customer extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -13,30 +13,34 @@ class Quotation extends MY_Controller {
 		$this->load->view('index');
 	}
 	
-	function create(){
+	function create($id=0){
 		$data = array();
-		//print_r($this->input->post());
 		if($post = $this->input->post()){
 			if($this->validateForm($post)){
-				$id = $this->quotation_model->createQuotation($post,$this->user_id);
-				redirect(base_url("quotation/line/$id"));
+				$id = $this->customer_model->createCustomer($post,$this->user_id);
+				redirect(base_url("customer/create/$id"));
 			}else{
 				$data['warngin_msg'] ="Please fill all field.";
 				$data = array_merge($data, $post);
 			}
 		}
 		
-		$data['customer'] = $this->customer_model->getCustomer();
-		$data['term'] = $this->quotation_model->getCreditTerm();
+		if($id){
+			$cusd = $this->customer_model->getCustomerById($id);
+			$data['customer_name'] = $cusd->customer_name;
+			$data['customer_type'] = $cusd->customer_type;
+		}
 		
-		$this->load->view('quotation/create',$data);
+		$this->load->view('customer/create',$data);
+	}
+	
+	function t(){
+		$this->load->view('customer/t');
 	}
 	
 	function validateForm($post){
 		extract($post);
-		if($quote_date==""||$customer_id==""||$bill_to_id==""
-			||$ship_to_id==""||$contact_person==""||$attention==""
-			||$cc_to==""||$subject==""||$email=="" ||$remarks==""){
+		if($customer_type==""||$customer_name==""){
 			return false;
 		}
 		return true;	
@@ -85,28 +89,8 @@ class Quotation extends MY_Controller {
 	function sale_item_ajax($category){
 		$item_cat = $this->quotation_model->getItemCatagoryName($category);
 		$total = $this->quotation_model->getItemCatagoryRecord($category);
-		
-		/*$data = array();
-		foreach($item_cat->result() as $a){
-			$data[][]=  array("category"=>$a->category ,"segment1"=>$a->segment1);
-		}*/
-		
-		foreach($item_cat->result() as $a){
-			$data['aaData'][]=  array($a->category 
-									,$a->segment1
-									,$a->segment1
-									,$a->segment1
-									,$a->segment1
-									,$a->segment1
-									,$a->segment1
-									,$a->segment1);
-		}
-		$data['aaData'][]=array("recordsTotal"=>intval($total));
-		/*$json = array("data"=>$data,
-						"draw"=> 1,
-						"recordsFiltered"=>intval($total),
-						"recordsTotal"=>intval($total));*/
-		echo json_encode($data);
+		$data['sale_item'] = $item_cat;
+		echo $this->load->view('quotation/sale_item',$data,false);
 	}
 	
 }

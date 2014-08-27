@@ -29,7 +29,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?=base_url()?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
-<link href="<?=base_url()?>assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+
+<link href="<?=base_url()?>assets/css/themes/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 
 
@@ -53,7 +54,25 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END THEME STYLES -->
 
 <script src="<?=base_url()?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+
 <link rel="shortcut icon" href="favicon.ico"/>
+<script src="<?=base_url()?>assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+
+<script src="<?=base_url()?>assets/scripts/core/app.js"></script>
+
+<script src="<?=base_url()?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/scripts/core/app.js" type="text/javascript"></script>
+
+<script src="<?=base_url()?>assets/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/scripts/custom/ui-extended-modals.js" type="text/javascript"></script>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -585,6 +604,31 @@ License: You must have a valid license purchased only from themeforest(the above
 							<a href="<?=base_url('quotation/search')?>">
 								<i class="fa fa-bullhorn"></i>
 								ค้นหาใบเสนอราคา
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<li class="start ">
+					<a href="javascript:;">
+						<i class="fa fa-shopping-cart"></i>
+						<span class="title">
+							Customer
+						</span>
+						<span class="arrow ">
+						</span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="<?=base_url('customer/search')?>">
+								<i class="fa fa-bullhorn"></i>
+								Customer Search
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url('customer/create')?>">
+								<i class="fa fa-bullhorn"></i>
+								new
 							</a>
 						</li>
 					</ul>
