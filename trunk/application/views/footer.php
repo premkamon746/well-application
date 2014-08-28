@@ -29,22 +29,15 @@
 
 
 
-<script>
-	/*jQuery(document).ready(function() {    
-		App.init();
-		$('.date-picker').datepicker({
-			rtl: App.isRTL(),
-			autoclose: true
-		});
-	});*/
-
-	
-</script>
-
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".btn").click(function(){
 		$("#myModal").modal('show');
+	});
+	App.init();
+	$('.date-picker').datepicker({
+		rtl: App.isRTL(),
+		autoclose: true
 	});
 });
 </script>

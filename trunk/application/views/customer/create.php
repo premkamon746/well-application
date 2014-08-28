@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-md-12">
 					<h3 class="page-title">
-					สร้างใบงาน &nbsp;<small>(Create Job)</small>
+					บันทึกข้อมูลลูกค้า &nbsp;<small>(Create Customer)</small>
 					</h3>
 				</div>
             </div>
@@ -65,42 +65,9 @@
 							<?php if(isset($customer_name)) {?>
 							
 							</br></br>
-									<a  href="#myModal"  type="button" class="btn blue" onclick="">ที่อยู่บิล</a>									<table id="tblMain" class="table table-striped table-bordered table-hover">
-										<thead>
-										<tr>
-											<td align="center" width="12%"><b>Site</b></td>
-											<td align="center" width="15%"><b>จังหวัด</b></td>
-											<td align="center" width="13%"><b>Primary</b></td>
-											<td align="center" width="10%"><b>ที่อยู่</b></td>
-											<td align="center" width="10%"><b>รหัสไปรษณีย์</b></td>
-											<td align="center" width="13%"><b>ประเทศ</b></td>
-											<td align="center" width="10%"><b>ผู้ติดต่อ</b></td>
-											<td align="center" width="12%"><b>โทรศัพท์</b></td>
-											<td align="center" width="12%"><b>มือถือ</b></td>
-											<td align="center" width="12%"><b>อีเมล์</b></td>
-										</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-											</tr>
-										</tbody>
-										<tfoot>
-										</tfoot>
-										</table>
-										
-							</br></br>
-									<a href="#myModal"  type="button" class="btn blue" onclick="">ที่อยู่จัดส่ง</a>
+									<a  href="#myModal"  type="button" class="btn blue add1" onclick="">เพิ่มที่อยู่</a>
+									
+									</br></br>									
 									<table id="tblMain" class="table table-striped table-bordered table-hover">
 										<thead>
 										<tr>
@@ -117,19 +84,63 @@
 										</tr>
 										</thead>
 										<tbody>
+											<? if ($ship->num_rows() > 0 ) { ?>
+												<? foreach ($ship->result() as $r) : ?>
+													<tr>
+														<td align="center" width=""><?=$r->site_code?></td>
+														<td align="center" width=""><?=$r->province_code?></td>
+														<td align="center" width=""><?=$r->primary_flag?></td>
+														<td align="center" width=""><?=$r->address1?><?=$r->address2?></td>
+														<td align="center" width=""><?=$r->postcode?></td>
+														
+														<td align="center" width=""></td>
+														<td align="center" width=""><?=$r->contact_person?></td>
+														<td align="center" width=""><?=$r->phone_number?></td>
+														<td align="center" width=""><?=$r->mobile_number?></td>
+														<td align="center" width=""></td>
+													</tr>
+												<? endforeach ?>
+											<? }?>
+										</tbody>
+										<tfoot>
+										</tfoot>
+										</table>
+										
+							</br></br>
+									
+									<table id="tblMain" class="table table-striped table-bordered table-hover">
+										<thead>
+										<tr>
+											<td align="center" width="12%"><b>Site</b></td>
+											<td align="center" width="15%"><b>จังหวัด</b></td>
+											<td align="center" width="13%"><b>Primary</b></td>
+											<td align="center" width="10%"><b>ที่อยู่</b></td>
+											<td align="center" width="10%"><b>รหัสไปรษณีย์</b></td>
+											<td align="center" width="13%"><b>ประเทศ</b></td>
+											<td align="center" width="10%"><b>ผู้ติดต่อ</b></td>
+											<td align="center" width="12%"><b>โทรศัพท์</b></td>
+											<td align="center" width="12%"><b>มือถือ</b></td>
+											<td align="center" width="12%"><b>อีเมล์</b></td>
+										</tr>
+										</thead>
+										<tbody>
+										<? if ($bill->num_rows() > 0 ) { ?>
+										<? foreach ($bill->result() as $r) : ?>
 											<tr>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
+												<td align="center" width=""><?=$r->site_code?></td>
+												<td align="center" width=""><?=$r->province_code?></td>
+												<td align="center" width=""><?=$r->primary_flag?></td>
+												<td align="center" width=""><?=$r->address1?><?=$r->address2?></td>
+												<td align="center" width=""><?=$r->postcode?></td>
 												
 												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
-												<td align="center" width=""></td>
+												<td align="center" width=""><?=$r->contact_person?></td>
+												<td align="center" width=""><?=$r->phone_number?></td>
+												<td align="center" width=""><?=$r->mobile_number?></td>
 												<td align="center" width=""></td>
 											</tr>
+										<? endforeach ?>
+										<? }?>
 										</tbody>
 										<tfoot>
 										</tfoot>
@@ -143,26 +154,24 @@
             
 	<div id="myModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Adddress</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-						<label class="col-md-3 control-label">ชื่อลูกค้า</label>
-						<div class="col-md-9">
-											<input type="text" class="form-control input-inline input-medium" 
-											 placeholder="ชื่อลูกค้า" id="customer_name" name = "customer_name"
-											value="<?=isset($customer_name)?$customer_name:''?>" >
-						</div>
-					</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
+        	<form class="form-horizontal" role="form" method="post">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                    <h4 class="modal-title">Add Adddress</h4>
+	                </div>
+	                <div class="modal-body">
+	                		<b><?=isset($warngin_msg2)?$warngin_msg2:""?></b>
+	               			<input type="hidden" name="customer_id" value="<?=$customer_id?>"  />
+	                		<? $this->load->view("customer/form_address");?>
+	                		
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                    <button type="submit" class="btn green">Save changes</button>
+	                </div>
+	            </div>
+            </form>
         </div>
     </div>
  <script>
@@ -173,7 +182,11 @@
 		    alert('Modal is successfully shown!');
 		});*/
 
- 		$(".btn").click(function(){
+ 		$(".add1").click(function(){
+ 	        $("#myModal").modal('show');
+ 	    });
+
+		$(".add2").click(function(){
  	        $("#myModal").modal('show');
  	    });
  		
