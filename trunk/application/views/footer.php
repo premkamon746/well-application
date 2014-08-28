@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".btn").click(function(){
+	$(".modalc").click(function(){
 		$("#myModal").modal('show');
 	});
 	App.init();
