@@ -84,7 +84,7 @@ class Quotation extends MY_Controller {
 	
 	function sale_item_ajax($category){
 		$item_cat = $this->quotation_model->getItemCatagoryName($category);
-		$total = $this->quotation_model->getItemCatagoryRecord($category);
+		//$total = $this->quotation_model->getItemCatagoryRecord($category);
 		$data['sale_item'] = $item_cat;
 		echo $this->load->view('quotation/sale_item',$data,false);
 	}

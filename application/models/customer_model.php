@@ -14,8 +14,10 @@
 			return $this->db->query($sql)->row();
 		}
 		
-		function getSite($cid,$site_type){
-			$sql = "select * from ar_t_sites where customer_id = $cid and site_type='$site_type'";
+		function getSite($cid,$site_type=""){
+			$where="";
+			if($site_type != "") $where = "and site_type='$site_type'";
+			$sql = "select * from ar_t_sites where customer_id = $cid $where";
 			return $this->db->query($sql);
 		}
 		
