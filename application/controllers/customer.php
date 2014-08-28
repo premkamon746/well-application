@@ -15,10 +15,23 @@ class Customer extends MY_Controller {
 	
 	function create($id=0){
 		$data = array();
-		if($post = $this->input->post()){
+		
+		if(($post = $this->input->post())
+				&& isset($post['customer_id']))
+		{
+			
+		//print_r($post);
+			if($this->validateFormAddress($post)){
+				$this->customer_model->createCustAddress($post,$this->user_id);
+				redirect(base_url("customer/create/$id"),'refresh');
+			}else{
+				$data['warngin_msg2'] ="Please fill all field.";
+				$data = array_merge($data, $post);
+			}
+		}else if($post = $this->input->post()){
 			if($this->validateForm($post)){
 				$id = $this->customer_model->createCustomer($post,$this->user_id);
-				redirect(base_url("customer/create/$id"));
+				redirect(base_url("customer/create/$id/"));
 			}else{
 				$data['warngin_msg'] ="Please fill all field.";
 				$data = array_merge($data, $post);
@@ -27,11 +40,39 @@ class Customer extends MY_Controller {
 		
 		if($id){
 			$cusd = $this->customer_model->getCustomerById($id);
+			$data['provice'] = $this->customer_model->getProvince();
+			$data['bill'] =  $this->customer_model->getSite($id,"B");
+			$data['ship'] =  $this->customer_model->getSite($id,"S");
 			$data['customer_name'] = $cusd->customer_name;
 			$data['customer_type'] = $cusd->customer_type;
+			$data['customer_id'] = $id;
 		}
 		
 		$this->load->view('customer/create',$data);
+	}
+	
+	function saveAddress(){
+		$data = array();
+		if($post = $this->input->post()){
+			if($this->validateFormAddress($post)){
+				$id = $this->customer_model->createCustomer($post,$this->user_id);
+				redirect(base_url("customer/create/$id"));
+			}else{
+				$data['warngin_msg'] ="Please fill all field.";
+				$data = array_merge($data, $post);
+			}
+		}
+	}
+	
+	function validateFormAddress($post){
+		extract($post);
+		if($address1==""||$address2==""
+		||$postcode==""||$country_code==""
+		||$phone_number==""||$mobile_number==""
+		||$contact_person==""||$province_code==""){
+			return false;
+		}
+		return true;	
 	}
 	
 	function t(){
