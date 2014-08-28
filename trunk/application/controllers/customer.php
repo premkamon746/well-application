@@ -51,6 +51,16 @@ class Customer extends MY_Controller {
 		$this->load->view('customer/create',$data);
 	}
 	
+	function search(){
+		$data = array();
+		if($post = $this->input->post()){
+			$data['quot_search'] = $this->quotation_model->getSearch($post);
+			$data = array_merge($data, $post);
+		}
+		$data['customer'] = $this->customer_model->getCustomer();
+		$this->load->view('customer/search',$data);
+	}
+	
 	function saveAddress(){
 		$data = array();
 		if($post = $this->input->post()){
@@ -87,7 +97,7 @@ class Customer extends MY_Controller {
 		return true;	
 	}
 	
-	public function search()
+	public function xsearch()
 	{
 		$data = array();
 		
