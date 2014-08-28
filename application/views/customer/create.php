@@ -62,13 +62,38 @@
 								</div>
 							</div>
 							
-							<?php if(isset($customer_name)) {?>
 							
-							</br></br>
+						</form>
+					</div>
+				</div>
+				<!-- End Portlet -->
+            </div>
+            
+            <?php if(isset($customer_name)) {?>
 									<a  href="#myModal"  type="button" class="btn blue add1" onclick="">เพิ่มที่อยู่</a>
-									
-									</br></br>									
-									<table id="tblMain" class="table table-striped table-bordered table-hover">
+							
+							
+            <div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet box light-grey">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-globe"></i>ผลการค้นหา
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<table id="tblMain" class="table table-striped table-bordered table-hover">
 										<thead>
 										<tr>
 											<td align="center" width="12%"><b>Site</b></td>
@@ -105,10 +130,34 @@
 										<tfoot>
 										</tfoot>
 										</table>
-										
-							</br></br>
-									
-									<table id="tblMain" class="table table-striped table-bordered table-hover">
+						</div>
+					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet box light-grey">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-globe"></i>ผลการค้นหา
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<table id="tblMain" class="table table-striped table-bordered table-hover">
 										<thead>
 										<tr>
 											<td align="center" width="12%"><b>Site</b></td>
@@ -145,13 +194,13 @@
 										<tfoot>
 										</tfoot>
 										</table>
-								<?php }?>
-						</form>
+						</div>
 					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
 				</div>
-				<!-- End Portlet -->
-            </div>
-            
+			</div>
+			
+			<?php }?>
 	<div id="myModal" class="modal fade">
         <div class="modal-dialog">
         	<form class="form-horizontal" role="form" method="post">
