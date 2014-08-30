@@ -77,8 +77,8 @@
 									<? }?>
 									
 										<select name="bill_to_id" class="form-control input-inline input-medium" id="bill_select">
-											<option></option>
-										</select>
+				
+										</select><span id="bill_load"></span>
 										<? if(isset($customer_id)){ ?>
 										<script>
 											$(document).ready(function(){
@@ -115,8 +115,7 @@
 									<? }?>
 									
 										<select name="ship_to_id" class="form-control input-inline input-medium" id="site_select">
-											<option></option>
-										</select>
+										</select><span id="ship_load"></span>
 										<input type="text" class="form-control input-inline input-medium" style="margin-left: 240px" value="จัดส่งภายใน (วัน)" readonly="">
 									</div>
 								</div>
@@ -196,12 +195,22 @@
             </div>
   <script>
  	$(document).ready(function(){
+
+ 		
+		
  	 	$('#customer_select').change(function(){
  	 	 	cid = $(this).val();
  	 		url = "<?=base_url()?>job/get_cust_site_ajax/"+cid;
+
+ 	 		var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
+ 			$('#bill_load').html(img);
+ 			$('#ship_load').html(img);
  	 		$.getJSON(url, function(data){
  	 			getDropDownList(data,$('#bill_select'));
  	 			getDropDownList(data,$("#site_select")); 
+
+ 	 			$('#bill_load').html("");
+ 	 			$('#ship_load').html("");
  	 		});
  	 		
  	 	});
