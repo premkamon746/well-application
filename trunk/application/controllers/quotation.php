@@ -74,10 +74,10 @@ class Quotation extends MY_Controller {
 		$data = array();
 		
 		if($post = $this->input->post()){
-			//$data['quot_search'] = $this->quotation_model->getSearch($post);
-			//$data = array_merge($data, $post);
+			$data['quot_search'] = $this->quotation_model->createLine($post,$id,$this->user_id);
 		}
 		
+		$data['line'] = $this->quotation_model->getLine($id);
 		$data['item_cat'] = $this->quotation_model->getItemCatagory();
 		$this->load->view('quotation/create_line',$data);
 	}
