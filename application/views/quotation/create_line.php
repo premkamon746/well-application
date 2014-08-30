@@ -46,13 +46,35 @@
 									<td align="center" width="18%"></td>
 									<td align="center" width="22%"></td>
 								</tr>
+								<? $all_line = 0;?>
+								<? if($line->num_rows() >0 ) {?>
+									<? $i = 0;?>
+									
+									<? foreach ($line->result() as $r) {?>
+										<tr>
+											<td align="center" width="12%"><?=++$i?></td>
+											<td align="center" width="35%"><?=$r->remarks?></td>
+											<td align="center" width="13%"><?=$r->quantity?></td>
+											<td align="center" width="18%"><?=$r->unit_selling_price?></td>
+											<td align="center" width="22%"><?=$r->line_amount?></td>
+										</tr>
+										<? $all_line +=$r->line_amount?>
+									<?}?>
+								<? }?>
+								
 							</tbody>
 							<tfoot>
 							<tr>
 								<td colspan="5" align="right">
-									<input type="text" style="width: 120px; height: 28px" value=" Grand Total"> &nbsp; + &nbsp;
-									<input type="text" style="width: 100px; height: 28px" value=" Vat"> &nbsp; = &nbsp;
-									<input type="text" style="width: 160px; height: 28px" value=" Total">
+									<input type="text" 
+									class="form-control input-inline input-xsmall" 
+									placeholder=" Grand Total" value="<?=$all_line?>"> &nbsp; + &nbsp;
+									<input type="text" 
+									class="form-control input-inline input-xsmall"
+									placeholder=" Vat"> &nbsp; = &nbsp;
+									<input type="text" 
+									class="form-control input-inline input-xsmall" 
+									placeholder=" Total"  value="<?=$all_line?>">
 								</td>
 							</tr>
 							</tfoot>
@@ -68,13 +90,13 @@
 			
 <div id="myModal" class="modal fade">
         <div class="modal-dialog" style="width:1000px;">
-        	<form class="form-horizontal" role="form" method="post">
+        	<form id="sale_item_form" class="form-horizontal" role="form" method="post">
 	            <div class="modal-content">
 	                <div class="modal-header">
 	                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	                    <h4 class="modal-title">Item</h4>
 	                </div>
-	                <div class="modal-body">
+	                <div class="modal-body"  style="margin-bottom:0px;padding-bottom:0px;">
 							<div class="col-md-12">
 								<!-- BEGIN EXAMPLE TABLE PORTLET-->
 								<div class="portlet box light-grey">
@@ -84,7 +106,7 @@
 												<option value="">Catagory</option>
 												<? if($item_cat->num_rows() > 0) {?>
 													<? foreach($item_cat->result() as $cs){ ?>
-														<option value="<?=$cs->category ?>"><?=$cs->category ?></option>
+														<option value="<?=substr($cs->category,0,3)?>"><?=$cs->category ?></option>
 													<? }?>
 												<? } // job type?>
 											</select>
@@ -101,24 +123,32 @@
 										</div>
 									</div>
 									<div class="portlet-body">
-										<div id="sale_item_data"></div>
+										<div id="sale_item_data" style="height:200px;overflow: auto;"></div>
 									</div>
 								</div>
 								<!-- END EXAMPLE TABLE PORTLET-->
 							</div>
 	                		
 	                </div>
+	                
+	                <?php $this->load->view("quotation/data_item"); ?>
+	                
+	                
 	                <div class="modal-footer">
 	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	                    <button type="submit" class="btn green">Save changes</button>
 	                </div>
 	            </div>
             </form>
+            
+       		
         </div>
     </div>
-
+	
 <script>
 	function getSaleItem(id){
+		var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
+		$('#sale_item_data').html(img);
 		var url = "<?=base_url()?>quotation/sale_item_ajax/"+id;
 		$.get(url, function(data){
 			$('#sale_item_data').html(data);
@@ -128,6 +158,36 @@
 	$(document).ready(function(){
 		$("#catagory").change(function(){
 			getSaleItem($(this).val())
+		});
+
+		$('#sale_item_form').submit(function(){
+
+			rest = true;
+			if($('#desc').val() == ""){
+				$('#desc').addClass("redbox");
+				rest =  false;
+			}
+
+			if($('#quantity').val() == ""){
+				$('#quantity').addClass("redbox");
+				rest =  false;
+			}
+
+			if($('#price').val() == ""){
+				$('#price').addClass("redbox");
+				rest =  false;
+			}
+
+			if($('#toprice').val() == ""){
+				$('#toprice').addClass("redbox");
+				rest =  false;
+			}
+			
+			if(rest==true){
+				$('#sale_item_form').submit();
+			}
+			
+			return false;
 		});
 	});
 </script>

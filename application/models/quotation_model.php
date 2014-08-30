@@ -26,6 +26,22 @@
 			return $this->db->insert_id();
 		}
 		
+		function createLine($post,$quot_id,$create_user = 0){
+			extract($post);
+    
+			$data = array(
+				"quote_id"					=>$quot_id
+				,"remarks"					=>$desc
+				,"quantity"					=>$quantity
+				,"unit_selling_price"		=>$price
+				,"line_amount"				=>$toprice
+				,"create_user"				=>$create_user
+			);
+			$this->db->set('create_date', 'now()',FALSE); 
+			$this->db->insert('job_t_quote_lines', $data); 
+			return $this->db->insert_id();
+		}
+		
 		function createQouNo(){
 			$running = $this->getRunningCode();
 					//J(2digit year)(2 digit month)(5digit running)
@@ -80,7 +96,7 @@
 	}
 	
 	function getItemCatagoryName($cat){
-		$sql = "select * from inv_item_list where  category = '$cat' ";
+		$sql = "select * from inv_item_list where  category like '$cat%' ";
 		$result = $this->db->query($sql);
 		return $result;
 	}
@@ -89,6 +105,12 @@
 		$sql = "select count(*) to_record from inv_item_list where category = '$cat' ";
 		$result = $this->db->query($sql);
 		return $result->row()->to_record;
+	}
+	
+	function getLine($id){
+		$sql = "select * from job_t_quote_lines where quote_id = $id  ";
+		$result = $this->db->query($sql);
+		return $result;
 	}
 }
 

@@ -73,9 +73,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="<?=base_url()?>assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/scripts/custom/ui-extended-modals.js" type="text/javascript"></script>
 
+
 <style>
 	input[type=radio]{
 		margin-left:0 !important;
+	}
+	
+	.redbox{
+		border:1px solid red;
 	}
 </style>
 </head>

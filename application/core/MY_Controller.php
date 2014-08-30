@@ -17,6 +17,10 @@ class MY_Controller extends CI_Controller
 		}
 	}
 	
+	function test(){
+		$this->load->view('test/test');
+	}
+	
 	function logout(){
 		$this->session->unset_userdata('login_object');
 		redirect("authorize/login");
