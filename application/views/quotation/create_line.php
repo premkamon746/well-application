@@ -36,16 +36,7 @@
 							</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td align="center" width="12%">
-									<a heft="#myModal"  class="glyphicon glyphicon-plus modalc" ></a>
-									
-									</td>
-									<td align="center" width="35%"></td>
-									<td align="center" width="13%"></td>
-									<td align="center" width="18%"></td>
-									<td align="center" width="22%"></td>
-								</tr>
+								
 								<? $all_line = 0;?>
 								<? if($line->num_rows() >0 ) {?>
 									<? $i = 0;?>
@@ -61,7 +52,16 @@
 										<? $all_line +=$r->line_amount?>
 									<?}?>
 								<? }?>
-								
+								<tr>
+									<td align="center" width="12%">
+									<a heft="#myModal"  class="glyphicon glyphicon-plus modalc" ></a>
+									
+									</td>
+									<td align="center" width="35%"></td>
+									<td align="center" width="13%"></td>
+									<td align="center" width="18%"></td>
+									<td align="center" width="22%"></td>
+								</tr>
 							</tbody>
 							<tfoot>
 							<tr>

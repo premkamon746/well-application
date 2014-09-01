@@ -100,7 +100,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="form-group">
+								<!--  div class="form-group">
 									<label class="col-md-3 control-label">Status</label>
 									<div class="col-md-9">
 									
@@ -113,15 +113,15 @@
 									<? }?>
 										<select name="status_code" class="form-control input-inline input-medium" id="status_code">
 											<option value="">เลือกประเภทงานย่อย</option>
-											<? if($job_status->num_rows() > 0) {?>
-												<? foreach($job_status->result() as $jst){ ?>
-													<option value="<?=$jst->status_code ?>"><?=$jst->status_code ?></option>
-												<? }?>
-											<? } // job type?>
+											<? //if($job_status->num_rows() > 0) {?>
+												<? //foreach($job_status->result() as $jst){ ?>
+													<option value="<?//=$jst->status_code ?>"><?//=$jst->status_code ?></option>
+												<? //}?>
+											<? //} // job type?>
 										</select>
 									</div>
 								</div>
-							</div>
+							</div-->
 							<div class="form-actions fluid">
 								<div class="col-md-offset-3 col-md-9">
 									<button type="submit" class="btn green" onclick="">ค้นหา</button>
