@@ -28,7 +28,10 @@ class Authorize extends CI_Controller {
 	
 	public function setSession($user_data){
 		$du = array("uname"	=>$user_data->usr_name,
-					"uid"	=>$user_data->user_id);
+					"uid"	=>$user_data->user_id,
+					"rid"	=>$user_data->role_id,
+					"deptid"	=>$user_data->dept_id,
+					"aflag"	=>$user_data->approve_flag);
 		$this->session->set_userdata('login_object',$du);
 		//$this->session->set_userdata('uid',$user_data->user_id);
 	}

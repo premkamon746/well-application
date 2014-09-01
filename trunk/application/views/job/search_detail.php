@@ -39,7 +39,10 @@
 							<table width="96%">
 							<tbody><tr>
 								<td width="30%" align="left" style="padding-left: 20px">
+									<?php $data = $this->session->userdata('login_object');  ?>
+									<?php if($data["deptid"]==1){//QC ?>
 									<button type="button" class="btn gray" onclick="">ยกเลิกใบสั่งงาน</button>
+									<?php }?>
 									&nbsp; &nbsp; &nbsp;
 									<button type="button" class="btn blue" onclick=""> &nbsp; พิมพ์ Label &nbsp; </button>
 								</td>

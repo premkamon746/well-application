@@ -122,8 +122,21 @@
 			if(isset($sub_type_id) &&$sub_type_id !=''){
 				$search .=" and o.sub_type_id = '$sub_type_id'";
 			}
-			if(isset($status_code) &&$status_code !=''){
+			/*if(isset($status_code) &&$status_code !=''){
 				$search .=" and o.job_status = '$status_code'";
+			}*/
+			
+			$data = $this->session->userdata('login_object');
+			if($data["deptid"]==8){//QC
+				$search .=" and o.job_status = 'NEW'";
+			}elseif($data["deptid"]==12){//Mechanic
+				$search .=" and o.job_status = 'CHECK'";
+			}elseif($data["deptid"]==4){//Marketing
+				$search .=" and o.job_status = 'WAIT CONFIRM'";
+			}elseif($data["deptid"]==10){//Planning
+				$search .=" and o.job_status = 'CONFIRM'";
+			}elseif($data["deptid"]==11){//production
+				$search .=" and o.job_status = 'PROCESSING'";
 			}
 			
 			$sql = "select * from job_t_orders  o

@@ -594,6 +594,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
+				
+				<? if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) {?>
 				<li class="start ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
@@ -604,12 +606,14 @@ License: You must have a valid license purchased only from themeforest(the above
 						</span>
 					</a>
 					<ul class="sub-menu">
+						<? if(isset($this->dept_id) && ($this->dept_id == 8 || $this->role_id == 1 ) ) {?>
 						<li>
 							<a href="<?=base_url('quotation/create')?>">
 								<i class="fa fa-bullhorn"></i>
 								สร้างใบเสนอราคา
 							</a>
 						</li>
+						<? }?>
 						<li>
 							<a href="<?=base_url('quotation/search')?>">
 								<i class="fa fa-bullhorn"></i>
@@ -619,6 +623,9 @@ License: You must have a valid license purchased only from themeforest(the above
 					</ul>
 				</li>
 				
+				<? } //endif role_id?>
+				
+				<? if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) {?>
 				<li class="start ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
@@ -644,6 +651,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</ul>
 				</li>
 				
+				
 				<li class="last ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
@@ -668,6 +676,8 @@ License: You must have a valid license purchased only from themeforest(the above
 						</li>
 					</ul>
 				</li>
+				
+				<? } //endif role_id?>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
