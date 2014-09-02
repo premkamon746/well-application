@@ -153,6 +153,25 @@
 			return $this->db->query($sql);
 		}
 		
+		function approveJob($job_id){
+			$data = $this->session->userdata('login_object');
+			$status = "";
+			if($data["deptid"]==8){//QC
+				$status ="CHECK";
+			}elseif($data["deptid"]==12){//Mechanic
+				$status ="WAIT CONFIRM";
+			}elseif($data["deptid"]==4){//Marketing
+				$status ="CONFIRM";
+			}elseif($data["deptid"]==10){//Planning
+				$status ="PROCESSING";
+			}elseif($data["deptid"]==11){//production
+				$status ="CLOSED";
+			}
+			
+			$sql = "UPDATE job_t_orders SET job_status = '$status' where job_id = $job_id";
+			return $this->db->query($sql);
+		}
+		
 		function getJobTypeById($id){
 			$sql = "select * from job_t_type where job_type_id = $id";
 			return $this->db->query($sql)->row();
