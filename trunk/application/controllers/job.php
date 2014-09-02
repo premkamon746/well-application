@@ -48,6 +48,7 @@ class Job extends MY_Controller {
 		$this->load->view('job/detail',$data);
 	}
 	
+	
 	public function search()
 	{
 		$data = array();
@@ -66,17 +67,43 @@ class Job extends MY_Controller {
 		$this->load->view('job/search',$data);
 	}
 	
-	public function search_detail($id)
+	
+	public function search_detail($job_id)
 	{
 		$data = array();
 		$this->load->helper("job");
-		$data['job'] = $this->job_model->getJobCustomerDetail($id);
+		$data['job'] = $this->job_model->getJobCustomerDetail($job_id);
 		
 		if($post = $this->input->post()){
-			$this->job_model->createJobDetail($post,$id,$this->user_id);
+			$this->job_model->createJobDetail($post,$job_id,$this->user_id);
 		}
-		$data['job_line'] = $this->job_model->getJobLine($id);
+		
+		$sess = $this->session->userdata('login_object');
+		$status = "";
+		if($sess["deptid"]==8){//QC
+				$status ="NEW";
+			}elseif($sess["deptid"]==12){//Mechanic
+				$status ="CHECK";
+			}elseif($sess["deptid"]==4){//Marketing
+				$status ="WAIT CONFIRM";
+			}elseif($sess["deptid"]==10){//Planning
+				$status ="CONFIRM";
+			}elseif($sess["deptid"]==11){//production
+				$status ="PROCESSING";
+			}
+		
+		$data['job_status'] = $status;
+		$data['job_id'] = $job_id;
+		$data['job_line'] = $this->job_model->getJobLine($job_id);
 		$this->load->view('job/search_detail',$data);
+	}
+	
+
+	public function approve_job(){
+		if($job_id = $this->input->post("job_id")){
+			$this->job_model->approveJob($job_id);
+			redirect(base_url("job/search_detail/$job_id"));
+		}
 	}
 	
 	function validateForm($post){
