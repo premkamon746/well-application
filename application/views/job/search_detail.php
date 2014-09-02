@@ -96,7 +96,7 @@
 							
 							</tbody>
 							</table>
-							<? if($job->job_status==$job_status) { ?>
+							<? if($job->job_status==$job_status && $this->approve_flag=='Y') { ?>
 								<form method="POST" action="<?=base_url()?>job/approve_job">
 									<input type="hidden" name="job_id" value="<?=$job_id?>"/>
 									<button type="submit" class="btn red" >Approve</button>
