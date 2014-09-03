@@ -20,7 +20,7 @@ class Job extends MY_Controller {
 		if($post = $this->input->post()){
 			if($this->validateForm($post)){
 				$id = $this->job_model->createJob($post,$this->user_id);
-				redirect(base_url("job/detail/$id"));
+				redirect(base_url("job/search_detail/$id"));
 			}else{
 				$data['warngin_msg'] ="Please fill all field.";
 				$data = array_merge($data, $post);

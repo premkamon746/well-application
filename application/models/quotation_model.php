@@ -18,6 +18,7 @@
 				,"cc_to"			=>$cc_to
 				,"email"			=>$email
 				,"create_user"		=>$create_user
+				,"quote_status"		=>"WAIT CONFIRM"
 				//,"update_date"	=>$job_no
 				//,"update_user"	=>0
 			);
@@ -45,14 +46,15 @@
 		function createQouNo(){
 			$running = $this->getRunningCode();
 					//J(2digit year)(2 digit month)(5digit running)
-			$job_no = "QUO".date('y').date('m').$running;
-			return $job_no;
+			$quote_no = "QUO".date('y').date('m').$running;
+			return $quote_no;
 		}
 		
 		function getRunningCode(){
 			$this->db->select_max('quote_id');
-			$query = $this->db->get('job_t_quote_jobs');
-			
+			$query = $this->db->get('job_t_quote_headers');
+			//echo $this->db->last_query();
+			//exit;
 			if($query->num_rows() > 0)
 				$str = intval($query->row()->quote_id)+1;
 			else

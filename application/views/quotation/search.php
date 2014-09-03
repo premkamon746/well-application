@@ -14,7 +14,7 @@
 						</div-->
 					</div>
 					<div class="portlet-body form">
-						<form class="form-horizontal" role="form">
+						<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
 								<div class="form-group">
 									<label class="col-md-3 control-label">Quotation No.</label>
@@ -102,21 +102,27 @@
 								<td align="center" width="18%"><b>วันที่ใบเสนอราคา</b></td>
 								<td align="center" width="35%"><b>ลูกค้า</b></td>
 								<td align="center" width="15%"><b>Status</b></td>
-								<td align="center" width="20%"><b>&nbsp;</b></td>
 							</tr>
 							</thead>
 							<tbody>
-							<? if(isset($job_search) > 0){?>
-								<? foreach ($job_search->result() as $js){ ?>
+							<? if(isset($quot_search) > 0){?>
+								<? foreach ($quot_search->result() as $js){ ?>
 									<tr>
 										<td align="center">
-											<a href="<?=base_url('job/search_detail/'.$js->job_id)?>"><?=$js->job_no?></a>
+											<a href="<?=base_url('quotation/detail/'.$js->quote_id)?>"><?=$js->quote_number?></a>
 										</td>
-										<td align="center"><?=$js->quote_number?></td>
 										<td align="center"><?=$js->quote_date?></td>
 										<td align="center"><?=$js->customer_name?></td>
-										<td align="center"><span class="label label-sm label-success"> อนุมัติ</span></td>
-										<td align="center"><a href="#" class="fa fa-file-text"></a></td>
+										<td align="center">
+										<? if($js->quote_status == "WAIT CONFIRM") {?>
+											<span class="label label-sm label-warning"> รออนุมัติ</span>
+										<? }else if($js->quote_status == "CONFIRM"){?>
+											<span class="label label-sm label-success"> อนุมัติ</span>
+										<? }else if($js->quote_status == "CANCEL"){?>
+											<span class="label label-sm label-success"> ไม่อนุมัติ</span>
+										<? }?>
+										
+										</td>
 									</tr>
 								<? }?>
 							<?}?>
