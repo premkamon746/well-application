@@ -158,17 +158,17 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				
 				<? if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) {?>
-				<li class="start ">
+				<li class="open ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
 							Quotation
 						</span>
-						<span class="arrow ">
+						<span class="arrow open">
 						</span>
 					</a>
-					<ul class="sub-menu">
-						<? if(isset($this->dept_id) && ($this->dept_id == 8 || $this->role_id == 1 ) ) {?>
+					<ul class="sub-menu always-open" style="display:block !important;">
+						<? if(isset($this->dept_id) && ($this->dept_id == 4 || $this->role_id == 1 ) ) {?>
 						<li>
 							<a href="<?=base_url('quotation/create')?>">
 								<i class="fa fa-bullhorn"></i>
@@ -188,16 +188,16 @@ License: You must have a valid license purchased only from themeforest(the above
 				<? } //endif role_id?>
 				
 				<? if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) {?>
-				<li class="start ">
+				<li class="open ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
 							Customer
 						</span>
-						<span class="arrow ">
+						<span class="arrow open">
 						</span>
 					</a>
-					<ul class="sub-menu">
+					<ul class="sub-menu always-open" style="display:block !important;">
 						<li>
 							<a href="<?=base_url('customer/search')?>">
 								<i class="fa fa-bullhorn"></i>
@@ -214,16 +214,16 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				
 				
-				<li class="last ">
+				<li class="open ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
 							Job
 						</span>
-						<span class="arrow ">
+						<span class="arrow open">
 						</span>
 					</a>
-					<ul class="sub-menu">
+					<ul class="sub-menu always-open" style="display:block !important;">
 						<li>
 							<a href="<?=base_url('job/create')?>">
 								<i class="fa fa-bullhorn"></i>
