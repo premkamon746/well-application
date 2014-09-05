@@ -47,6 +47,10 @@ class Quotation extends MY_Controller {
 		$data = array();
 		
 		if($post = $this->input->post()){
+			$this->session->set_userdata("array_val",$post);
+			$data['quot_search'] = $this->quotation_model->getSearch($post);
+			$data = array_merge($data, $post);
+		}if($post =$this->session->userdata("array_val")){
 			$data['quot_search'] = $this->quotation_model->getSearch($post);
 			$data = array_merge($data, $post);
 		}
@@ -67,6 +71,13 @@ class Quotation extends MY_Controller {
 		}
 		$data['job_line'] = $this->job_model->getJobLine($id);
 		$this->load->view('job/search_detail',$data);
+	}
+	
+	public function approve(){
+		if($post = $this->input->post()){
+			$this->quotation_model->approve($post);
+			redirect(site_url('quotation/search'));
+		}
 	}
 	
 	public function line($id)

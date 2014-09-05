@@ -114,6 +114,21 @@
 		$result = $this->db->query($sql);
 		return $result;
 	}
+	
+	function approve($post){
+		
+		$array = $post["id_check"];
+		$status ='CANCEL';
+		if($post["stauts"]==1){
+			$status = 'CONFIRM';
+		}
+		$separated = implode(" or quote_id = ", $array);
+		
+		$update = "UPDATE job_t_quote_headers set quote_status = '$status'
+					where quote_id = $separated";
+		//echo $update; exit;
+		$this->db->query($update);
+	}
 }
 
 
