@@ -76,6 +76,7 @@
 				<!-- End Portlet -->
             </div>
 			<div class="row">
+				<form method="post">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box light-grey">
@@ -98,6 +99,7 @@
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>
 							<tr>
+								<td align="center" width="1%"><input type="checkbox" id="qcheck_all" /></td>
 								<td align="center" width="12%"><b>Quotation No.</b></td>
 								<td align="center" width="18%"><b>วันที่ใบเสนอราคา</b></td>
 								<td align="center" width="35%"><b>ลูกค้า</b></td>
@@ -108,6 +110,7 @@
 							<? if(isset($quot_search) > 0){?>
 								<? foreach ($quot_search->result() as $js){ ?>
 									<tr>
+										<td align="center"><input type="checkbox" class="q_check" value="<?=$js->quote_id?>" /></td>
 										<td align="center">
 											<a href="<?=base_url('quotation/detail/'.$js->quote_id)?>"><?=$js->quote_number?></a>
 										</td>
@@ -128,9 +131,35 @@
 							<?}?>
 							</tbody>
 							</table>
+							<button type="submit" class="btn blue">อนุมัติ</button>
+							<button type="submit" class="btn red">ไม่อนุมัติ</button>
 						</div>
 					</div>
 					<!-- END EXAMPLE TABLE PORTLET-->
 				</div>
+				</form>
 			</div>
+<script>
+	$(document).ready(function(){
+
+		$('#qcheck_all').click(function () {
+
+			if($(this).is(':checked')){
+				$('.q_check').each(function() {
+					//console.log($(this).parent());
+		     		$(this).prop("checked",true);
+		     		$(this).parent().addClass('checked');
+		     		
+		    	});
+			}else{
+				$('.q_check').each(function() {
+		     		$(this).prop("checked",false);
+		     		$(this).parent().removeClass('checked');
+		    	});
+			}/**/
+		});
+		
+		
+	});
+</script>
 <?php $this->load->view("footer");?>

@@ -191,7 +191,7 @@
 							<? foreach ($job_search->result() as $js){ ?>
 							<tr>
 								<td align="center">
-									<a href="<?=base_url('job/search_detail/'.$js->job_id)?>" target="_blank"><?=$js->job_no?></a>
+									<a href="<?=base_url('job/search_detail/'.$js->job_id)?>"><?=$js->job_no?></a>
 								</td>
 								<td align="center"><?=$js->job_date?></td>
 								<td align="center"><?=$js->customer_name?></td>
