@@ -177,8 +177,40 @@
 			return $this->db->query($sql)->row();
 		}
 		
+		function getJobTypeByJobNo($job_no){
+			$sql = "select * from job_t_orders o
+					join job_t_order_lines l
+					on l.job_id = o.job_id
+					where o.job_no = '$job_no' ";
+			
+			return $this->db->query($sql);
+		}
+		
 		function getJobSubTypeById($id){
 			$sql = "select * from job_t_subtype where sub_type_id = $id";
 			return $this->db->query($sql)->row();
+		}
+		
+		function saveQuoteJob($post,$create_user = 0){
+			$qoute_id = $post["quote_id"];
+			$job_id = $this->findJobIdByJobNo($post["job_no"]);
+			
+			if($job_id > 0 ){
+				foreach ($post["id_check"] as $jlid){
+					$sql = "insert into job_t_quote_jobs (quote_id,job_id,job_line_id,create_date,create_user)
+					value ($qoute_id,$job_id,$jlid,now(),'$create_user')";
+					$this->db->query($sql);
+				}
+			}
+			//$sql = "select * from job_t_subtype where sub_type_id = $id";
+		}
+		
+		function findJobIdByJobNo($job_no){
+			$sql = "select job_id from job_t_orders where job_no = '$job_no'";
+			$result = $this->db->query($sql);
+			if($result->num_rows() > 0){
+				return $result->row()->job_id;
+			}
+			return 0;
 		}
 	}

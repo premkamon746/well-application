@@ -5,6 +5,7 @@ class Quotation extends MY_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('quotation_model');
+		$this->load->model('job_model');
 		$this->load->model('customer_model');
 	}
 	
@@ -83,14 +84,31 @@ class Quotation extends MY_Controller {
 	public function line($id)
 	{
 		$data = array();
-		
 		if($post = $this->input->post()){
 			$data['quot_search'] = $this->quotation_model->createLine($post,$id,$this->user_id);
 		}
-		
+		$data['quote_id'] = $id;
 		$data['line'] = $this->quotation_model->getLine($id);
 		$data['item_cat'] = $this->quotation_model->getItemCatagory();
 		$this->load->view('quotation/create_line',$data);
+	}
+	
+	public function quote_job($quote_id){
+		$data = array();
+		
+		if($post = $this->input->post()){
+			$data['job_search'] = $this->job_model->getJobTypeByJobNo($post["job_no"]);
+			$data["job_no"] = $post["job_no"];
+		}
+		$data["quote_id"] = $quote_id;
+		$this->load->view('quotation/qoute_job',$data);
+	}
+	
+	public function save_quote_job(){
+		if($post = $this->input->post()){
+			$data['job_search'] = $this->job_model->saveQuoteJob($post,$this->user_id);
+			redirect(site_url('/quotation/quote_job/'.$post['quote_id']));
+		}
 	}
 	
 	function sale_item_ajax($category){

@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<div class="row" align="center">
-				<button type="button" class="btn green" onclick="createQuoLine()">บันทึก</button>
+				<button type="button" class="btn green" onclick="window.location='<?=base_url()?>quotation/quote_job/<?=$quote_id?>'">บันทึก</button>
 			</div>
 			
 <div id="myModal" class="modal fade">
