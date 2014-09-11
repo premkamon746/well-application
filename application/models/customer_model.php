@@ -21,6 +21,11 @@
 			return $this->db->query($sql);
 		}
 		
+		function getAddress($site_id){
+			$sql = "select * from ar_t_sites where site_id = $site_id";
+			return $this->db->query($sql);
+		}
+		
 		function getAllSite(){
 			$sql = "select * from ar_t_sites";
 			return $this->db->query($sql);

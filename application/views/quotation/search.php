@@ -116,18 +116,20 @@
 										<td align="center"><input type="checkbox" name="id_check[]" class="q_check" value="<?=$js->quote_id?>" /></td>
 										<?php }?>
 										<td align="center">
-											<a href="<?=base_url('quotation/detail/'.$js->quote_id)?>"><?=$js->quote_number?></a>
+										<a href="<?=base_url();?>quotation/detail/<?=$js->quote_id?>"><?=$js->quote_number?></a>
 										</td>
-										<td align="center"><?=$js->quote_date?></td>
-										<td align="center"><?=$js->customer_name?></td>
+										<td align="center"><a href="<?=base_url();?>quotation/detail/<?=$js->quote_id?>"><?=$js->quote_date?></a></td>
+										<td align="center"><a href="<?=base_url();?>quotation/detail/<?=$js->quote_id?>"><?=$js->customer_name?></a></td>
 										<td align="center">
-										<? if($js->quote_status == "WAIT CONFIRM") {?>
-											<span class="label label-sm label-warning"> รออนุมัติ</span>
-										<? }else if($js->quote_status == "CONFIRM"){?>
-											<span class="label label-sm label-success"> อนุมัติ</span>
-										<? }else if($js->quote_status == "CANCEL"){?>
-											<span class="label label-sm label-danger"> ไม่อนุมัติ</span>
-										<? }?>
+										<a href="<?=base_url();?>quotation/detail/<?=$js->quote_id?>">
+											<? if($js->quote_status == "WAIT CONFIRM") {?>
+												<span class="label label-sm label-warning"> รออนุมัติ</span>
+											<? }else if($js->quote_status == "CONFIRM"){?>
+												<span class="label label-sm label-success"> อนุมัติ</span>
+											<? }else if($js->quote_status == "CANCEL"){?>
+												<span class="label label-sm label-danger"> ไม่อนุมัติ</span>
+											<? }?>
+										</a>
 										
 										</td>
 									</tr>

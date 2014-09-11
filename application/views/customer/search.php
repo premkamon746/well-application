@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-md-12">
 					<h3 class="page-title">
-					บันทึกข้อมูลลูกค้า &nbsp;<small>(Create Customer)</small>
+					ค้นหาข้อมูลลูกค้า &nbsp;<small>(Customer Search)</small>
 					</h3>
 				</div>
             </div>
@@ -111,10 +111,25 @@
 										<? if (isset($quot_search)&&$quot_search->num_rows() > 0 ) { ?>
 										<? foreach ($quot_search->result() as $r) : ?>
 											<tr>
-												<td align="center" width=""><?=$r->quote_number?></td>
-												<td align="center" width=""><?=$r->quote_date?></td>
-												<td align="center" width=""><?=$r->customer_name?></td>
-												<td align="center" width=""><?=$r->quote_status?></td>
+												<td align="center" width="">
+													<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
+														<?=$r->quote_number?>
+													</a>
+												</td>
+												<td align="center" width="">
+												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
+													<?=$r->quote_date?>
+												</a>
+												</td>
+												<td align="center" width="">
+												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
+												<?=$r->customer_name?>
+												</a></td>
+												<td align="center" width="">
+												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
+												<?=$r->quote_status?>
+												</a>
+												</td>
 											</tr>
 										<? endforeach ?>
 										<? }?>
