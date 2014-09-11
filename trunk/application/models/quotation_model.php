@@ -37,6 +37,7 @@
 				,"unit_selling_price"		=>$price
 				,"line_amount"				=>$toprice
 				,"create_user"				=>$create_user
+				,"quote_line_status"		=>"WAIT CONFIRM"
 			);
 			$this->db->set('create_date', 'now()',FALSE); 
 			$this->db->insert('job_t_quote_lines', $data); 
@@ -82,7 +83,7 @@
 				$search .=" and o.customer_id = '$customer_id'";
 			}
 			
-			$sql = "select * from job_t_quote_headers  o
+			$sql = "select o.*,c.*,DATE_FORMAT(quote_date,'%d/%m/%Y') as quote_date from job_t_quote_headers  o
 					join ar_t_customers c
 					on o.customer_id = c.customer_id
 					where 1 $search
@@ -107,6 +108,30 @@
 		$sql = "select count(*) to_record from inv_item_list where category = '$cat' ";
 		$result = $this->db->query($sql);
 		return $result->row()->to_record;
+	}
+	
+	function getQuotation($id){
+		$sql = "select q.*,c.*,DATE_FORMAT(quote_date,'%d/%m/%Y') as quote_date
+				from job_t_quote_headers  q
+				left join ar_t_customers c
+				on q.customer_id = c.customer_id
+				where quote_id = $id  ";
+		$result = $this->db->query($sql);
+		return $result->row();
+	}
+	
+	function updateLineStatus($post,$quote_id){
+		
+		foreach ($post["quote_line_status"] as $st){
+			$pieces = explode(":", $st);
+			$status = $pieces[0];
+			$line_id = $pieces[1];
+			$sql = "update job_t_quote_lines 
+					SET quote_line_status = '$status' 
+					where line_id='$line_id' ";
+			//echo $sql;
+			$result = $this->db->query($sql);
+		}
 	}
 	
 	function getLine($id){

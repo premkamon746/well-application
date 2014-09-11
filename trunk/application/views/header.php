@@ -201,13 +201,13 @@ License: You must have a valid license purchased only from themeforest(the above
 						<li>
 							<a href="<?=base_url('customer/search')?>">
 								<i class="fa fa-bullhorn"></i>
-								Customer Search
+								ค้นหาข้อมูลลูกค้า
 							</a>
 						</li>
 						<li>
 							<a href="<?=base_url('customer/create')?>">
 								<i class="fa fa-bullhorn"></i>
-								new
+								สร้างข้อมูลลูกค้า
 							</a>
 						</li>
 					</ul>

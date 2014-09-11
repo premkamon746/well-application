@@ -7,6 +7,8 @@ class Quotation extends MY_Controller {
 		$this->load->model('quotation_model');
 		$this->load->model('job_model');
 		$this->load->model('customer_model');
+		$this->load->helper('customer');
+		$this->load->helper('formx');
 	}
 	
 	public function index()
@@ -74,6 +76,24 @@ class Quotation extends MY_Controller {
 		$this->load->view('job/search_detail',$data);
 	}
 	
+	public function detail($id)
+	{
+		$data = array();
+		$data['job'] = $this->job_model->getJob($id);
+		
+		if($post = $this->input->post()){
+			$quote_id = $post["quote_id"];
+			$data["quote"] = $this->quotation_model->updateLineStatus($post,$quote_id);
+		}
+		
+		$data["quote"] = $this->quotation_model->getQuotation($id);
+		$data["quote_id"] = $id;
+		
+		$data["quote_line"] = $this->quotation_model->getLine($id);
+		$data['job_line'] = $this->job_model->getJobLine($id);
+		$this->load->view('quotation/detail',$data);
+	}
+	
 	public function approve(){
 		if($post = $this->input->post()){
 			$this->quotation_model->approve($post);
@@ -107,7 +127,7 @@ class Quotation extends MY_Controller {
 	public function save_quote_job(){
 		if($post = $this->input->post()){
 			$data['job_search'] = $this->job_model->saveQuoteJob($post,$this->user_id);
-			redirect(site_url('/quotation/quote_job/'.$post['quote_id']));
+			redirect(base_url().'quotation/quote_job/'.$post['quote_id']);
 		}
 	}
 	
