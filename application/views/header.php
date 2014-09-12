@@ -156,7 +156,20 @@ License: You must have a valid license purchased only from themeforest(the above
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				
+				<li class="open ">
+					<a href="javascript:;">
+						
+						<span class="title">
+							<a href="<?=base_url()?>" >
+								<i class="fa fa-shopping-cart"></i>
+								DashBoard
+							</a>
+						</span>
+						<span class="open">
+						</span>
+					</a>
+				</li>
+					
 				<? if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) {?>
 				<li class="open ">
 					<a href="javascript:;">

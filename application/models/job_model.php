@@ -153,6 +153,57 @@
 			return $this->db->query($sql);
 		}
 		
+		
+	function getSearchStatus($status,$limit,$start){
+			$search = "";
+			
+			/*$data = $this->session->userdata('login_object');
+			if($data["deptid"]==8){//QC
+				$search .=" and o.job_status = 'NEW'";
+			}elseif($data["deptid"]==12){//Mechanic
+				$search .=" and o.job_status = 'CHECK'";
+			}elseif($data["deptid"]==4){//Marketing
+				$search .=" and o.job_status = 'WAIT CONFIRM'";
+			}elseif($data["deptid"]==10){//Planning
+				$search .=" and o.job_status = 'CONFIRM'";
+			}elseif($data["deptid"]==11){//production
+				$search .=" and o.job_status = 'PROCESSING'";
+			}*/
+			$sql = "select * from job_t_orders  o
+					join ar_t_customers c
+					on o.customer_id = c.customer_id
+					left join job_t_type jt
+					on jt.job_type_id = o.job_type_id
+					left join job_t_subtype js
+					on js.sub_type_id = o.sub_type_id
+					
+					where o.job_status = '$status'
+					order by job_no desc
+					limit $start, $limit";
+			//echo $sql;
+			return $this->db->query($sql);
+		}
+		
+		function getTotalSearchStatus($status){
+			$search = "";
+			
+			$sql = "select count(*) total_row from job_t_orders  o
+					join ar_t_customers c
+					on o.customer_id = c.customer_id
+					left join job_t_type jt
+					on jt.job_type_id = o.job_type_id
+					left join job_t_subtype js
+					on js.sub_type_id = o.sub_type_id
+					
+					where o.job_status = '$status'";
+			$result =  $this->db->query($sql);
+			
+			if($result->num_rows() > 0){
+				return $result->row()->total_row;
+			}
+			return 0;
+		}
+		
 		function approveJob($job_id){
 			$data = $this->session->userdata('login_object');
 			$status = "";
