@@ -1,7 +1,9 @@
 <?php $this->load->view("header");?>
 
             <div class="row">
-            	<?php  if ($this->dept_id == 8 || $this->dept_id == 12 || $this->dept_id == 4) {?>
+            	<?php  if ($this->dept_id == 8 || $this->dept_id == 12 || $this->dept_id == 4) {
+            	//QC, Mechanic , Marketing
+            		?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat red">
                         <div class="visual">
@@ -21,7 +23,9 @@
                     </div>
                 </div>
                 <? }?>
-                <?php  if ($this->dept_id == 12||$this->dept_id == 4) {?>
+                <?php  if ($this->dept_id == 12||$this->dept_id == 4) {
+                //Mechanic,Marketing
+                	?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat blue">
                         <div class="visual">
@@ -41,7 +45,9 @@
                     </div>
                 </div>
                 <? }?>
-                 <?php  if ($this->dept_id == 4 ||$this->dept_id == 10) {?>
+                 <?php  if ($this->dept_id == 4 ||$this->dept_id == 10) {
+                 
+                 	//Marketing, Planning?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="dashboard-stat purple">
 						<div class="visual">
@@ -63,7 +69,9 @@
 				<?php }?>
             </div>
             <div class="row">
-             <?php  if ($this->dept_id == 4 ||$this->dept_id == 10) {?>
+             <?php  if ($this->dept_id == 4 ||$this->dept_id == 10) {
+             //Marketing, Planning
+             	?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="dashboard-stat purple">
 						<div class="visual">
@@ -83,7 +91,9 @@
 					</div>
 				</div>
 				<?php }?>
-				<?php  if ($this->dept_id == 8 || $this->dept_id == 4 ||$this->dept_id == 11) {?>
+				<?php  if ($this->dept_id == 8 || $this->dept_id == 4 ||$this->dept_id == 11) {
+					///Marketing, QC, production
+					?>
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="dashboard-stat yellow">
 						<div class="visual">
@@ -104,7 +114,9 @@
 				</div>
 				<?php }?>
 				
-				<?php  if ($this->dept_id == 8 || $this->dept_id == 4 ||$this->dept_id == 11) {?>
+				<?php  if ($this->dept_id == 8 || $this->dept_id == 4 ||$this->dept_id == 11) {
+				/////Marketing, QC, production
+					?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="dashboard-stat green">
 						<div class="visual">

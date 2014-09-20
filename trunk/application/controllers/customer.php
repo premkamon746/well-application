@@ -6,6 +6,7 @@ class Customer extends MY_Controller {
 		parent::__construct();
 		$this->load->model('quotation_model');
 		$this->load->model('customer_model');
+		$this->load->model('employee_model');
 	}
 	
 	public function index()
@@ -30,23 +31,39 @@ class Customer extends MY_Controller {
 			}
 		}else if($post = $this->input->post()){
 			if($this->validateForm($post)){
-				$id = $this->customer_model->createCustomer($post,$this->user_id);
-				redirect(base_url("customer/create/$id/"));
+				if($id){
+					$this->customer_model->updateCustomer($post,$id);
+					redirect(base_url("customer/create/$id/"));
+				}
+				else{
+					$id = $this->customer_model->createCustomer($post,$this->user_id);
+					redirect(base_url("customer/create/$id/"));
+				}
 			}else{
 				$data['warngin_msg'] ="Please fill all field.";
 				$data = array_merge($data, $post);
 			}
 		}
 		
+		
+		
 		if($id){
 			$cusd = $this->customer_model->getCustomerById($id);
 			$data['provice'] = $this->customer_model->getProvince();
-			$data['bill'] =  $this->customer_model->getSite($id,"B");
-			$data['ship'] =  $this->customer_model->getSite($id,"S");
+			$data['bill'] =  $this->customer_model->getSite($id,"BILL");
+			$data['ship'] =  $this->customer_model->getSite($id,"SHIP");
 			$data['customer_name'] = $cusd->customer_name;
 			$data['customer_type'] = $cusd->customer_type;
+			$data['tax_number'] = $cusd->tax_number;
+			
+			$data['effective_date_from'] = $cusd->effective_date_from;
+			$data['effective_date_to'] = $cusd->effective_date_to;
 			$data['customer_id'] = $id;
+			$data['country'] = $this->customer_model->getCountry();
 		}
+		
+		$data['sale_rep'] = $this->employee_model->getSaleRep();
+		$data['term'] = $this->quotation_model->getCreditTerm();
 		
 		$this->load->view('customer/create',$data);
 	}
@@ -76,7 +93,8 @@ class Customer extends MY_Controller {
 	
 	function validateFormAddress($post){
 		extract($post);
-		if($address1==""||$address2==""
+		//print_r($post);
+		if($address1==""
 		||$postcode==""||$country_code==""
 		||$phone_number==""||$mobile_number==""
 		||$contact_person==""||$province_code==""){
@@ -91,7 +109,7 @@ class Customer extends MY_Controller {
 	
 	function validateForm($post){
 		extract($post);
-		if($customer_type==""||$customer_name==""){
+		if($customer_type==""||$customer_name==""||$tax_number==""){
 			return false;
 		}
 		return true;	
