@@ -70,10 +70,39 @@ class Customer extends MY_Controller {
 	
 	function search(){
 		$data = array();
-		if($post = $this->input->post()){
-			$data['quot_search'] = $this->quotation_model->getSearch($post);
+		if(($post = $this->input->post())|| ($post = $this->session->userdata("c_serch"))) {
+			
+			$this->load->library('pagination');
+			
+			$config['base_url'] = base_url()."customer/search";
+			$config['total_rows'] = $this->customer_model->getTotalSearch($post);
+			$config['per_page'] = 10;
+			$config['uri_segment'] = 3;
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			
+			//		$config['full_tag_open'] = '<li>';
+			//		$config['full_tag_close'] = '</li>';
+// 			$config['cur_tag_open'] = '<li class="disabled"><a>';
+// 			$config['cur_tag_close'] = '</a></li>';
+			
+// 			$config['num_tag_open'] = '<li>';
+// 			$config['num_tag_close'] = '</li>';
+// 			$config['prev_tag_open'] = '<li>';
+// 			$config['prev_tag_close'] = '</li>';
+			
+// 			$config['next_tag_open'] = '<li>';
+// 			$config['next_tag_close'] = '</li>';
+			
+			$this->pagination->initialize($config);
+			$data['pagination'] =  $this->pagination->create_links();
+			
+			
+			$data['customer_search'] = $this->customer_model->getSearch($post,$config["per_page"],$page);
+			
 			$data = array_merge($data, $post);
+			$this->session->set_userdata("c_serch",$post);
 		}
+		
 		$data['customer'] = $this->customer_model->getCustomer();
 		$this->load->view('customer/search',$data);
 	}

@@ -43,8 +43,6 @@ class Index extends MY_Controller {
 		
 		$this->pagination->initialize($config); 
 		$data['pagination'] =  $this->pagination->create_links();
-		
-		
 
 		$data['job_search'] = $this->job_model->getSearchStatus($status,$config["per_page"],$page);
 		
