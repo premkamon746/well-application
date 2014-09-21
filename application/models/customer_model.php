@@ -55,6 +55,51 @@
 			$this->db->query($sql);
 		}
 		
+		function getSearch($post,$limit,$start){
+			extract($post);
+			$search = "";
+			if(isset($customer_name) && $customer_name !=''){
+				$search .=" and c.customer_name like '%$customer_name%'";
+			}
+			if(isset($customer_id)&&$customer_id !=''){
+				$search .=" and c.customer_id = '$customer_id'";
+			}
+				
+			$sql = "select c.*
+							,DATE_FORMAT(effective_date_from,'%d/%m/%Y') as effective_date_from
+							,DATE_FORMAT(effective_date_to,'%d/%m/%Y') as effective_date_to
+
+			 from ar_t_customers  c
+			 where 1 $search
+			 order by customer_id desc
+			
+					 limit $start, $limit";
+			//echo $sql;
+			return $this->db->query($sql);
+		}
+		
+		function getTotalSearch($post){
+			extract($post);
+			$search = "";
+// 			if(isset($customer_name) && $customer_name !=''){
+// 				$search .=" and c.customer_name like '%$customer_name%'";
+// 			}
+			if(isset($customer_id)&&$customer_id !=''){
+				$search .=" and c.customer_id = '$customer_id'";
+			}
+				
+			$sql = "select count(*) total_row
+					 from ar_t_customers  c
+					 where 1 $search";
+
+			$result =  $this->db->query($sql);
+			
+			if($result->num_rows() > 0){
+				return $result->row()->total_row;
+			}
+			return 0;
+		}
+		
 		function createCustAddress($post,$create_user = 0){
 			extract($post);
 			$data = array(

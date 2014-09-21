@@ -17,7 +17,7 @@
 					</div>
 					<div class="portlet-body form">
 				
-						<form class="form-horizontal" role="form" method="post">
+						<form class="form-horizontal" role="form" method="post" action="<?=base_url()?>customer/search">
 							<div class="form-body">
 								
 								<div class="form-group">
@@ -30,18 +30,6 @@
 								</div>
 							</div>
 							
-							<div class="form-group">
-									<label class="col-md-3 control-label">วันที่ใบเสนอราคา</label>
-									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-											<input type="text" class="form-control input-inline input-medium" 
-											readonly name="quote_date" placeholder="วันที่รับงาน" 
-											id="quote_date"
-											value="<?=isset($quote_date)?$quote_date:''?>" >
-											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-										</div>
-									</div>
-								</div>
 							
 							<div class="form-group">
 									<label class="col-md-3 control-label">ลูกค้า</label>
@@ -54,7 +42,7 @@
 									</script>
 									<? }?>
 										<select name="customer_id" class="form-control input-inline input-medium" id="customer_select">
-											<option>เลือกลูกค้า</option>
+											<option value="">เลือกลูกค้า</option>
 											<? if($customer->num_rows() > 0) {?>
 												<?foreach($customer->result() as $cs){ ?>
 													<option value="<?=$cs->customer_id ?>"><?=$cs->customer_name ?></option>
@@ -101,33 +89,39 @@
 							<table id="tblMain" class="table table-striped table-bordered table-hover">
 										<thead>
 										<tr>
-											<td align="center" width="12%"><b>Qoutation No.</b></td>
-											<td align="center" width="15%"><b>วันที่เสนอราคา</b></td>
-											<td align="center" width="13%"><b>ลูกค้า</b></td>
-											<td align="center" width="10%"><b>Status</b></td>
+											<td align="center" width="12%"><b>ชื่อลูกค้า</b></td>
+											<td align="center" width="15%"><b>ประเภท</b></td>
+											<td align="center" width="13%"><b>หมายเลขผู้เสียภาษี</b></td>
+											<td align="center" width="10%"><b>มีผลตั้งแต่</b></td>
+											<td align="center" width="10%"><b>มีผลถึง</b></td>
 										</tr>
 										</thead>
 										<tbody>
-										<? if (isset($quot_search)&&$quot_search->num_rows() > 0 ) { ?>
-										<? foreach ($quot_search->result() as $r) : ?>
+										<? if (isset($customer_search)&&$customer_search->num_rows() > 0 ) { ?>
+										<? foreach ($customer_search->result() as $r) : ?>
 											<tr>
 												<td align="center" width="">
-													<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
-														<?=$r->quote_number?>
+													<a href="<?=base_url();?>customer/create/<?=$r->customer_id?>">
+														<?=$r->customer_name?>
 													</a>
 												</td>
 												<td align="center" width="">
-												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
-													<?=$r->quote_date?>
+												<a href="<?=base_url();?>customer/create/<?=$r->customer_id?>">
+													<?=$r->customer_type?>
 												</a>
 												</td>
 												<td align="center" width="">
-												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
-												<?=$r->customer_name?>
+												<a href="<?=base_url();?>customer/create/<?=$r->customer_id?>">
+												<?=$r->tax_number?>
 												</a></td>
 												<td align="center" width="">
-												<a href="<?=base_url();?>quotation/detail/<?=$r->quote_id?>">
-												<?=$r->quote_status?>
+												<a href="<?=base_url();?>customer/create/<?=$r->customer_id?>">
+												<?=$r->effective_date_from?>
+												</a>
+												</td>
+												<td align="center" width="">
+												<a href="<?=base_url();?>customer/create/<?=$r->customer_id?>">
+												<?=$r->effective_date_to?>
 												</a>
 												</td>
 											</tr>
@@ -137,6 +131,9 @@
 										<tfoot>
 										</tfoot>
 										</table>
+										<? if (isset($customer_search)&&$customer_search->num_rows() > 0 ) { ?>
+										<?=$pagination?>
+										<?php }?>
 						</div>
 					</div>
 					<!-- END EXAMPLE TABLE PORTLET-->
