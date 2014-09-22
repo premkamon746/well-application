@@ -140,6 +140,14 @@
 		return $result;
 	}
 	
+	function delLine($id){
+		$sql = "delete from job_t_quote_lines where line_id = $id  ";
+		//echo $sql;
+		//exit;
+		$result = $this->db->query($sql);
+		return $result;
+	}
+	
 	function approve($post){
 		
 		$array = $post["id_check"];

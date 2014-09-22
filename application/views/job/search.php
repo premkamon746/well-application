@@ -14,7 +14,7 @@
 					</div>
 					<div class="portlet-body form">
 						<form class="form-horizontal" role="form" method="post"">
-							<div class="form-body">
+							
 								<div class="form-group">
 									<label class="col-md-3 control-label">Job No.</label>
 									<div class="col-md-9">

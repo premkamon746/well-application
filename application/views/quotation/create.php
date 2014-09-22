@@ -67,7 +67,7 @@
 									<? if(isset($ship_to_id)&&isset($customer_id)){ ?>
 									<script>
 										$(document).ready(function(){
-											url = "<?=base_url()?>job/get_cust_site_ajax/"+<?=$customer_id?>;
+											url = "<?=base_url()?>job/get_cust_site_ajax_bill/"+<?=$customer_id?>;
 								 	 		$.getJSON(url, function(data){
 								 	 			getDropDownList(data,$('#bill_select'));
 								 	 			$('#bill_select').val("<?=$ship_to_id?>");
@@ -105,7 +105,7 @@
 									<? if(isset($ship_to_id)&&isset($customer_id)){ ?>
 									<script>
 										$(document).ready(function(){
-											url = "<?=base_url()?>job/get_cust_site_ajax/"+<?=$customer_id?>;
+											url = "<?=base_url()?>job/get_cust_site_ajax_ship/"+<?=$customer_id?>;
 								 	 		$.getJSON(url, function(data){
 								 	 			getDropDownList(data,$('#site_select'));
 								 	 			$('#site_select').val("<?=$ship_to_id?>");
@@ -127,14 +127,21 @@
 										value="<?=isset($contact_person)?$contact_person:''?>"
 										>
 										
-										<select class="form-control input-inline input-medium" style="margin-left: 240px">
-										  <option>Sales</option>
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
+										
+												<? if(isset($salesrep_id)){ ?>
+													<script>
+														$(document).ready(function(){
+															$('#salesrep_id').val("<?=$salesrep_id?>");
+														})
+													</script>
+												<? }?>									
+											<select name = "default_sales" class="form-control input-inline input-medium" id="default_sales" style="margin-left:240px;">
+												<option value="">sale rep</option>
+												<? foreach ($sale_rep->result() as $r) : ?>
+													<option value="<?=$r->salesrep_id?>"><?=$r->sales_name?></option>
+												<? endforeach ?>
+											</select>
+										
 										
 										
 									</div>
@@ -200,16 +207,23 @@
 		
  	 	$('#customer_select').change(function(){
  	 	 	cid = $(this).val();
- 	 		url = "<?=base_url()?>job/get_cust_site_ajax/"+cid;
+ 	 		url = "<?=base_url()?>job/get_cust_site_ajax_bill/"+cid;
 
  	 		var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
  			$('#bill_load').html(img);
- 			$('#ship_load').html(img);
  	 		$.getJSON(url, function(data){
  	 			getDropDownList(data,$('#bill_select'));
- 	 			getDropDownList(data,$("#site_select")); 
 
  	 			$('#bill_load').html("");
+ 	 		});
+
+ 	 		url = "<?=base_url()?>job/get_cust_site_ajax_ship/"+cid;
+
+ 	 		var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
+ 			$('#ship_load').html(img);
+ 	 		$.getJSON(url, function(data){
+ 	 			getDropDownList(data,$("#site_select")); 
+
  	 			$('#ship_load').html("");
  	 		});
  	 		
@@ -219,6 +233,11 @@
  	//function getDropDownList(name, id, optionList) {
  	function getDropDownList(optionList,obj) {
  	    //var combo = $("<select></select>").attr("id", id).attr("name", name);
+ 	    
+ 	    $(obj).find("option").each(function() {
+		    $(this).remove();
+		});
+ 	    
 		var combo = obj;
  	    $.each(optionList, function (i, el) {
  	        combo.append("<option value="+el.site_id+">" + el.address + "</option>");

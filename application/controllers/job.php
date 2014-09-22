@@ -116,8 +116,8 @@ class Job extends MY_Controller {
 		return true;
 	}
 	
-	public function get_cust_site_ajax($cid){
-		 $result = $this->customer_model->getSite($cid);
+	public function get_cust_site_ajax_bill($cid){
+		 $result = $this->customer_model->getSite($cid,"BILL");
 		 $res_arr = array();
 		 $i = 0;
 		 foreach($result->result() as $r){
@@ -127,6 +127,19 @@ class Job extends MY_Controller {
 		 	$res_arr[$i++] = $data;
 		 }
 		 echo json_encode($res_arr);
+	}
+	
+	public function get_cust_site_ajax_ship($cid){
+		$result = $this->customer_model->getSite($cid,"SHIP");
+		$res_arr = array();
+		$i = 0;
+		foreach($result->result() as $r){
+			$data = array(
+					"site_id"=>$r->site_id
+					, "address"=>$r->address1);
+			$res_arr[$i++] = $data;
+		}
+		echo json_encode($res_arr);
 	}
 }
 

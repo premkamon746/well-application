@@ -7,6 +7,7 @@ class Quotation extends MY_Controller {
 		$this->load->model('quotation_model');
 		$this->load->model('job_model');
 		$this->load->model('customer_model');
+		$this->load->model('employee_model');
 		$this->load->helper('customer');
 		$this->load->helper('formx');
 	}
@@ -29,6 +30,7 @@ class Quotation extends MY_Controller {
 			}
 		}
 		
+		$data['sale_rep'] = $this->employee_model->getSaleRep();
 		$data['customer'] = $this->customer_model->getCustomer();
 		$data['term'] = $this->quotation_model->getCreditTerm();
 		
@@ -111,6 +113,11 @@ class Quotation extends MY_Controller {
 		$data['line'] = $this->quotation_model->getLine($id);
 		$data['item_cat'] = $this->quotation_model->getItemCatagory();
 		$this->load->view('quotation/create_line',$data);
+	}
+	
+	public function del_line($line_id,$quote_id){
+		$this->quotation_model->delLine($line_id);
+		redirect(base_url()."/quotation/line/{$quote_id}");
 	}
 	
 	public function quote_job($quote_id){

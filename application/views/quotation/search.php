@@ -106,6 +106,7 @@
 								<td align="center" width="18%"><b>วันที่ใบเสนอราคา</b></td>
 								<td align="center" width="35%"><b>ลูกค้า</b></td>
 								<td align="center" width="15%"><b>Status</b></td>
+								<td align="center" width="15%"><b>แก้ไข</b></td>
 							</tr>
 							</thead>
 							<tbody>
@@ -113,7 +114,11 @@
 								<? foreach ($quot_search->result() as $js){ ?>
 									<tr>
 										<? if($this->approve_flag=='Y') {?>
-										<td align="center"><input type="checkbox" name="id_check[]" class="q_check" value="<?=$js->quote_id?>" /></td>
+										<td align="center">
+										<? if($js->quote_status == "WAIT CONFIRM") {?>
+										<input type="checkbox" name="id_check[]" class="q_check" value="<?=$js->quote_id?>" />
+										<?php }?>
+										</td>
 										<?php }?>
 										<td align="center">
 										<a href="<?=base_url();?>quotation/detail/<?=$js->quote_id?>"><?=$js->quote_number?></a>
@@ -131,6 +136,11 @@
 											<? }?>
 										</a>
 										
+										</td>
+										<td align="center" width="15%">
+											<? if($js->quote_status == "WAIT CONFIRM") {?>
+											<a href="<?=base_url()?>quotation/line/<?php echo $js->quote_id?>" >แก้ไข</a>
+											<?php }?>
 										</td>
 									</tr>
 								<? }?>
