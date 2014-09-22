@@ -103,15 +103,15 @@
 		function createCustAddress($post,$create_user = 0){
 			extract($post);
 			$data = array(
-				"address1"			=>$address1
-				,"postcode"			=>$postcode
-				,"country_code"		=>$country_code
-				,"phone_number"		=>$phone_number
-				,"mobile_number"	=>$mobile_number
-				,"contact_person"	=>$contact_person
+				"address1"			=>$address1[0]
+				,"postcode"			=>$postcode[0]
+				,"country_code"		=>$country_code[0]
+				,"phone_number"		=>$phone_number[0]
+				,"mobile_number"	=>$mobile_number[0]
+				,"contact_person"	=>$contact_person[0]
 				,"customer_id"		=>$customer_id
-				,"province_code"	=>$province_code
-				,"site_code"	=>    $site_code
+				,"province_code"	=>$province_code[0]
+				,"site_code"	=>    "BILL"
 			);
 			
 			if(!$this->hasPrimary("BILL",$customer_id)){
@@ -123,16 +123,15 @@
 			$this->db->insert('ar_t_sites', $data); 
 			
 			//TODO :: user checkbox same bill address and ship address
-			if(isset($ship_address)&&$ship_address==1){
 				$data = array(
-						"address1"			=>$address1
-						,"postcode"			=>$postcode
-						,"country_code"		=>$country_code
-						,"phone_number"		=>$phone_number
-						,"mobile_number"	=>$mobile_number
-						,"contact_person"	=>$contact_person
+						"address1"			=>$address1[1]
+						,"postcode"			=>$postcode[1]
+						,"country_code"		=>$country_code[1]
+						,"phone_number"		=>$phone_number[1]
+						,"mobile_number"	=>$mobile_number[1]
+						,"contact_person"	=>$contact_person[1]
 						,"customer_id"		=>$customer_id
-						,"province_code"	=>$province_code
+						,"province_code"	=>$province_code[1]
 						,"site_code"		=>"SHIP"
 				);
 				
@@ -143,7 +142,6 @@
 				}
 					
 				$this->db->insert('ar_t_sites', $data);
-			}
 			
 			
 			return $this->db->insert_id();

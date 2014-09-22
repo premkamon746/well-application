@@ -93,7 +93,7 @@
 										<? if(isset($customer_id)){ ?>
 										<script>
 											$(document).ready(function(){
-												$('#credit_term').val("<?=$credit_term ?>");
+												$('#credit_term').val("<?=isset($credit_term)?$credit_term:"" ?>");
 											})
 										</script>
 										<? }?>
@@ -145,7 +145,7 @@
             </div>
             
             <?php if(isset($customer_name)) {?>
-			<a  href="#myModal"  type="button" class="btn blue add1" onclick="">เพิ่มที่อยู่ออกบิล</a>
+			<a  href="#myModal"  type="button" class="btn blue add1" onclick="">เพิ่มที่อยู่</a>
             <div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -209,7 +209,6 @@
 				</div>
 			</div>
 			
-			<a  href="#myModal2"  type="button" class="btn blue add2" onclick="">เพิ่มที่อยู่ส่งของ</a>
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -279,10 +278,7 @@
         	<form class="form-horizontal" role="form" method="post">
         		<input type="hidden" name="site_code" id="site_code"/>
 	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	                    <h4 class="modal-title">Add Adddress</h4>
-	                </div>
+	                
 	                <div class="modal-body">
 	                		<b><?=isset($warngin_msg2)?$warngin_msg2:""?></b>
 	               			<input type="hidden" name="customer_id" value="<?=$customer_id?>"  />

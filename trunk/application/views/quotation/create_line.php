@@ -33,6 +33,7 @@
 								<td align="center" width="13%"><b>จำนวน</b></td>
 								<td align="center" width="18%"><b>ราคาต่อหน่วย</b></td>
 								<td align="center" width="22%"><b>รวม (บาท)</b></td>
+								<td align="center" width="22%"><b>ลบ</b></td>
 							</tr>
 							</thead>
 							<tbody>
@@ -48,6 +49,9 @@
 											<td align="center" width="13%"><?=$r->quantity?></td>
 											<td align="center" width="18%"><?=$r->unit_selling_price?></td>
 											<td align="center" width="22%"><?=$r->line_amount?></td>
+											<td align="center" width="22%">
+												<a href="javascript:void(0)" onclick="del_line('<?=$r->line_id?>','<?=$r->quote_id?>');">ลบ</a>
+											</td>
 										</tr>
 										<? $all_line +=$r->line_amount?>
 									<?}?>
@@ -61,11 +65,12 @@
 									<td align="center" width="13%"></td>
 									<td align="center" width="18%"></td>
 									<td align="center" width="22%"></td>
+									<td align="center" width="22%"></td>
 								</tr>
 							</tbody>
 							<tfoot>
 							<tr>
-								<td colspan="5" align="right">
+								<td colspan="6" align="right">
 									<input type="text" 
 									class="form-control input-inline input-xsmall" 
 									placeholder=" Grand Total" value="<?=$all_line?>"> &nbsp; + &nbsp;
@@ -190,5 +195,11 @@
 			return false;
 		});
 	});
+
+	function del_line(line_id,quote_id){
+		if(confirm("ต้องการลบหรือไม่")){
+			window.location = "<?=base_url()?>quotation/del_line/"+line_id+"/"+quote_id;
+		}
+	}
 </script>
 <?php $this->load->view("footer");?>
