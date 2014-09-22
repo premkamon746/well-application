@@ -156,6 +156,11 @@
 			return false;
 		}
 		
+		function getProvinceById($code){
+			$sql = "select * from ar_province where province_code='$code' ";
+			return $this->db->query($sql);
+		}
+		
 		function getProvince(){
 			$sql = "select * from ar_province";
 			return $this->db->query($sql);
