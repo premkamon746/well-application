@@ -34,10 +34,34 @@
 							<table width="96%">
 							<tbody><tr>
 								<td width="30%" align="left" style="padding-left: 20px">
+								<script>
+									$(document).reay(function(){
+										
+									});
+
+									function copy_quote(quote_id){
+										if(confirm("ต้องการคัดลอก quotation หรือไม่?")){
+											window.location = "<?=base_url()?>quotation/copy/"+quote_id;
+										}
+									}
+
+									function cancel_quote(quote_id){
+										if(confirm("ต้องการยกเลิก quotation หรือไม่?")){
+											window.location = "<?=base_url()?>quotation/cancel/"+quote_id;
+										}
+									}
+								</script>
+									
 									<? if($this->approve_flag=='Y') {?>	
 									<input type="hidden" name="quote_id" value="<?=$quote_id?>"/>														
 									<button type="submit" class="btn green" onclick="" style="float:right;"> อนุมัติ </button>
 									<?php }?>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn blue" onclick="copy_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> Copy </button>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn red" onclick="cancel_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> ยกเลิก </button>
+									&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
 							</tbody></table>

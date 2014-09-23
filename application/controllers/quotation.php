@@ -40,8 +40,9 @@ class Quotation extends MY_Controller {
 	function validateForm($post){
 		extract($post);
 		if($quote_date==""||$customer_id==""||$bill_to_id==""
-			||$ship_to_id==""||$contact_person==""||$attention==""
-			||$cc_to==""||$subject==""||$email=="" ||$remarks==""){
+			||$ship_to_id=="" /*||$contact_person==""||$attention==""
+			||$cc_to==""||$subject==""||$email=="" ||$remarks=="" */
+		    || $credit_term=="" || $default_sales==""){
 			return false;
 		}
 		return true;	
@@ -96,6 +97,16 @@ class Quotation extends MY_Controller {
 		$this->load->view('quotation/detail',$data);
 	}
 	
+	public function copy($quote_id){
+		$new_id = $this->quotation_model->copy($quote_id);
+		redirect(base_url()."quotation/detail/{$new_id}");
+	}
+	
+	public function cancel($quote_id){
+		$this->quotation_model->cancel($quote_id);
+		redirect(base_url()."quotation/detail/{$quote_id}");
+	}
+	
 	public function approve(){
 		if($post = $this->input->post()){
 			$this->quotation_model->approve($post);
@@ -112,6 +123,8 @@ class Quotation extends MY_Controller {
 		$data['quote_id'] = $id;
 		$data['line'] = $this->quotation_model->getLine($id);
 		$data['item_cat'] = $this->quotation_model->getItemCatagory();
+		
+		$data['vat'] = $this->customer_model->getVat($id);
 		$this->load->view('quotation/create_line',$data);
 	}
 	

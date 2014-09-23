@@ -148,6 +148,71 @@
 		return $result;
 	}
 	
+	function copy($quote_id){
+		$sql ="select * from job_t_quote_headers where quote_id = '$quote_id' ";
+		
+		$res = $this->db->query($sql);
+		if($res->num_rows() >0){
+			$data = $res->row();
+			
+			$data = array(
+					"quote_number"		=>$this->createQouNo()
+					,"quote_date"		=>$data->quote_date
+					,"customer_id"		=>$data->customer_id
+					,"bill_to_id"		=>$data->bill_to_id
+					,"ship_to_id"		=>$data->ship_to_id
+					,"contact_person"	=>$data->contact_person
+					,"attention"		=>$data->attention
+					,"cc_to"			=>$data->cc_to
+					,"email"			=>$data->email
+					,"create_user"		=>$data->create_user
+					,"quote_status"		=>"WAIT CONFIRM"
+					//,"update_date"	=>$job_no
+					//,"update_user"	=>0
+			);
+			$this->db->set('create_date', 'now()',FALSE);
+			$this->db->insert('job_t_quote_headers', $data);
+			$new_qid = $this->db->insert_id();
+			if($new_qid > 0){
+				$this->copy_line($quote_id,$new_qid);
+			}
+			
+			return $new_qid;
+		}
+		
+		return 0;
+	}
+	
+	
+	function cancel($quote_id){
+		$update = "UPDATE job_t_quote_headers set quote_status = 'CANCEL' where quote_id = $quote_id";
+		//echo $update; exit;
+		$this->db->query($update);
+	}
+	
+	function copy_line($quote_id,$new_qid){
+		$sql = "select * from job_t_quote_lines where quote_id = '$quote_id'";
+		$res = $this->db->query($sql);
+		
+		if($res->num_rows() >0){
+			
+			foreach ($res->result() as $r){
+				$data = array(
+						"quote_id"					=>$new_qid
+						,"remarks"					=>$r->remarks
+						,"quantity"					=>$r->quantity
+						,"unit_selling_price"		=>$r->unit_selling_price
+						,"line_amount"				=>$r->line_amount
+						,"create_user"				=>$r->create_user
+						,"quote_line_status"		=>"WAIT CONFIRM"
+				);
+				$this->db->set('create_date', 'now()',FALSE);
+				$this->db->insert('job_t_quote_lines', $data);
+			}
+			
+		}
+	}
+	
 	function approve($post){
 		
 		$array = $post["id_check"];
