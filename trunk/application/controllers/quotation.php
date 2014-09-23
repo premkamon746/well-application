@@ -124,7 +124,7 @@ class Quotation extends MY_Controller {
 		$data['line'] = $this->quotation_model->getLine($id);
 		$data['item_cat'] = $this->quotation_model->getItemCatagory();
 		
-		$data['vat'] = $this->customer_model->getVat($id);
+		$data['vat'] = $this->customer_model->getVat();
 		$this->load->view('quotation/create_line',$data);
 	}
 	
