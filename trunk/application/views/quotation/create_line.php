@@ -71,15 +71,21 @@
 							<tfoot>
 							<tr>
 								<td colspan="6" align="right">
-									<input type="text" 
-									class="form-control input-inline input-xsmall" 
-									placeholder=" Grand Total" value="<?=$all_line?>"> &nbsp; + &nbsp;
-									<input type="text" 
-									class="form-control input-inline input-xsmall"
-									placeholder=" Vat"> &nbsp; = &nbsp;
-									<input type="text" 
-									class="form-control input-inline input-xsmall" 
-									placeholder=" Total"  value="<?=$all_line?>">
+									<table class="table table-striped table-bordered table-hover" style="width:200px;">
+										<tr>
+											<td>ยอดเงินก่อนภาษี</td>
+											<td><?=$all_line?> </td>
+										</tr>
+										<tr>
+											<td>ภาษี</td>
+											<td><?=$vat?>% </td>
+										</tr>
+										<tr>
+											<td>รวมเป็นเงิน</td>
+											<td><?=($all_line + ($all_line*$vat*0.01) )?></td>
+										</tr>
+									
+									</table>
 								</td>
 							</tr>
 							</tfoot>

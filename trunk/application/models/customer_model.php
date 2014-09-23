@@ -171,4 +171,13 @@
 			return $this->db->query($sql);
 		}
 		
+		function getVat(){
+			$sql = "select * from ar_organization order by org_id desc limit 1";
+			$res = $this->db->query($sql);
+			if($res->num_rows() > 0){
+				return $res->row()->vat_pct;
+			}
+			return 7;
+		}
+		
 	}

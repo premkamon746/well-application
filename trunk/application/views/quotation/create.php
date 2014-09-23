@@ -60,7 +60,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">Bill To</label>
+									<label class="col-md-3 control-label">ที่อยู่ออกบิล</label>
 									
 									<div class="col-md-9">
 									
@@ -70,7 +70,7 @@
 											url = "<?=base_url()?>job/get_cust_site_ajax_bill/"+<?=$customer_id?>;
 								 	 		$.getJSON(url, function(data){
 								 	 			getDropDownList(data,$('#bill_select'));
-								 	 			$('#bill_select').val("<?=$ship_to_id?>");
+								 	 			$('#bill_select').val("<?=$bill_to_id?>");
 								 	 		});
 										})
 									</script>
@@ -99,7 +99,7 @@
 									
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">Ship To</label>
+									<label class="col-md-3 control-label">ที่อยู่จัดส่ง</label>
 									<div class="col-md-9">
 									
 									<? if(isset($ship_to_id)&&isset($customer_id)){ ?>
