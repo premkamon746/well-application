@@ -49,6 +49,14 @@ class Job extends MY_Controller {
 	}
 	
 	
+	public function get_job_line($job_no){
+		
+		$data['job_line'] = $this->job_model->getJobTypeByJobNo($job_no);
+		
+		echo $this->load->view('job/job_line',$data,false);
+	}
+	
+	
 	public function search()
 	{
 		$data = array();

@@ -140,6 +140,8 @@ class Quotation extends MY_Controller {
 			$data['job_search'] = $this->job_model->getJobTypeByJobNo($post["job_no"]);
 			$data["job_no"] = $post["job_no"];
 		}
+		
+		$data['job_cus'] = $this->job_model->getJobByCustomerId($quote_id);
 		$data["quote_id"] = $quote_id;
 		$this->load->view('quotation/qoute_job',$data);
 	}
