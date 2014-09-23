@@ -6,37 +6,21 @@
             </div>
             <div class="row">
 				<!-- Start Portlet -->
-                <div class="portlet box red">
-					<div class="portlet-title">
-						<!--div class="caption">
-							<i class="fa fa-reorder"></i> Job Search
-						</div-->
-					</div>
-					<div class="portlet-body form">
-						<form class="form-horizontal" role="form" method="post">
+				<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
 								<div class="form-group">
 									<label class="col-md-3 control-label">Job No.</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium"  
-										placeholder="Job No."
-										name="job_no" 
-										value="<?=isset($job_no)?$job_no:''?>" >
+										<input type="text" class="form-control input-inline input-medium job_no"   name="job_no[]" readonly="readonly" >
 										<span class="help-inline"></span>
-									</div>
+										<input type="button" class="btn blue add1" onclick="" value="ค้นหา"   >
 								</div>
-								
-							</div>
-							<div class="form-actions fluid">
-								<div class="col-md-offset-3 col-md-9">
-									<button type="submit" class="btn green" onclick="">ค้นหา</button>
-									&nbsp; &nbsp; &nbsp;
-									<button type="button" class="btn default" onclick="window.location='<?=site_url('quotation/search')?>'">ยกเลิก</button>
+								<div class="html_val"></div>
 								</div>
 							</div>
+							
+							
 						</form>
-					</div>
-				</div>
 				<!-- End Portlet -->
             </div>
             
@@ -46,58 +30,81 @@
 				<input type="hidden" name="job_no" value="<?=isset($job_no)?$job_no:''?>" />
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
-					<div class="portlet box light-grey">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-globe"></i>ผลการค้นหา
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="javascript:;" class="reload">
-								</a>
-								<a href="javascript:;" class="remove">
-								</a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<table class="table table-striped table-bordered table-hover" id="sample_1">
-							<thead>
-							<tr>
-								<td align="center" width="1%"><input type="checkbox" id="qcheck_all" /></td>
-								<td align="center" width="12%"><b>รายละเอียดงาน</b></td>
-							</tr>
-							</thead>
-							<tbody>
-							<? if(isset($job_search) > 0){?>
-								<? foreach ($job_search->result() as $js){ ?>
-									<tr>
-										<td align="center">
-											<input type="checkbox" name="id_check[]" class="q_check" value="<?=$js->job_line_id?>" />
-										</td>
-										<td align="center">
-											<?=$js->description?>
-										</td>
-									</tr>
-								<? }?>
-							<?}?>
-							</tbody>
-							</table>
-								<input type="hidden" name="stauts" id="status_approve" />
-								<button type="submit" class="btn blue"  >บันทึก</button>
-						</div>
-					</div>
 					<!-- END EXAMPLE TABLE PORTLET-->
 				</div>
 				</form>
 			</div>
-			
+		
+		
+		
+		<div id="myModal" class="modal fade " >
+        <div class="modal-dialog" style="width:300px; ">
+        	<form class="form-horizontal" role="form" method="post">
+	            <div class="modal-content" >
+	                
+	                <div class="modal-body" style="width:300px;">
+	                		<table class="table table-striped table-bordered table-hover" id="job_table" style="width:200px;">
+							<thead>
+							<tr>
+								<td align="center" width="1%">job_no</td>
+								<td align="center" width="12%">job_date</td>
+								<td align="center" width="12%">job_end_date</td>
+							</tr>
+							</thead>
+							<tbody>
+							<?php if ($job_cus->num_rows() > 0) {?>
+								<?php foreach($job_cus->result() as $j) { ?>
+									<tr>
+										<td align="center" width="1%"><a href="javascript:void(0)" ><?=$j->job_no?></a></td>
+										<td align="center" width="12%"><a href="javascript:void(0)" ><?=$j->job_date?></a></td>
+										<td align="center" width="12%"><a href="javascript:void(0)" ><?=$j->job_end_date?></a></td>
+									</tr>
+								<?php }?>
+							<?php }?>
+							</tbody>
+							</table>	
+	                		
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+    
+		
 			
 			<script>
+
+		var itemClickObject;
 		$(document).ready(function(){
-	
+		
+			
+			$('#job_table tbody tr').click(function(){
+				job_no = $(this).find("td").first().text();
+				$(itemClickObject).parent().find(".job_no").val(job_no);
+				$("#myModal").modal('hide');
+				alert("<?=base_url()?>job/get_job_line/"+job_no);
+				$.get("<?=base_url()?>job/get_job_line/"+job_no,function(data){
+					$(itemClickObject).closest(".form-body").find(".html_val").html(data);
+					html ='<div class="form-body">'+
+					'<div class="form-group">'+
+						'<label class="col-md-3 control-label">Job No.</label>'+
+						'<div class="col-md-9">'+
+							'<input type="text" class="form-control input-inline input-medium job_no"   name="job_no[]" readonly="readonly" >'+
+							'<span class="help-inline"></span>'+
+							'<input type="button" class="btn blue add1" onclick="" value="ค้นหา"   >'+
+					'</div>'+
+					'<div class="html_val"></div>'+
+					'</div>'+
+					'</div>';
+					$(itemClickObject).closest(".form-body").parent().append(html);
+				
+				});
+			});
+
+			
 			$('#qcheck_all').click(function () {
 	
 				if($(this).is(':checked')){
@@ -115,7 +122,10 @@
 				}/**/
 			});
 			
-			
+			$(".add1").click(function(){
+				itemClickObject = $(this);
+	 	        $("#myModal").modal('show');
+	 	    });
 		});
 		</script>
 <?php $this->load->view("footer");?>

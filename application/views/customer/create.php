@@ -318,7 +318,7 @@
  		
  	 	$('#customer_select').change(function(){
  	 	 	cid = $(this).val();
- 	 		url = "<?=base_url()?>job/get_cust_site_ajax/"+cid;
+ 	 		url = "<?=base_url()?>job/get_cust_site_ajax_ship/"+cid;
  	 		$.getJSON(url, function(data){
  	 			getDropDownList(data) 
  	 		});

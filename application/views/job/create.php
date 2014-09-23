@@ -111,7 +111,7 @@
 									<? if(isset($ship_to_id)&&isset($customer_id)){ ?>
 									<script>
 										$(document).ready(function(){
-											url = "<?=base_url()?>job/get_cust_site_ajax/"+<?=$customer_id?>;
+											url = "<?=base_url()?>job/get_cust_site_ajax_ship/"+<?=$customer_id?>;
 								 	 		$.getJSON(url, function(data){
 								 	 			getDropDownList(data);
 								 	 			$('#site_select').val("<?=$ship_to_id?>");
@@ -174,7 +174,7 @@
  	$(document).ready(function(){
  	 	$('#customer_select').change(function(){
  	 	 	cid = $(this).val();
- 	 		url = "<?=base_url()?>job/get_cust_site_ajax/"+cid;
+ 	 		url = "<?=base_url()?>job/get_cust_site_ajax_ship/"+cid;
  	 		$.getJSON(url, function(data){
  	 			getDropDownList(data) 
  	 		});

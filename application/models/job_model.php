@@ -71,6 +71,20 @@
 			return $this->db->query($sql)->row();
 		}
 		
+		function getJobByCustomerId($quote_id){
+			$sql = "select 
+						o.*
+						,DATE_FORMAT(job_date,'%d/%m/%Y') as job_date
+						,DATE_FORMAT(job_end_date,'%d/%m/%Y') as job_end_date 
+					
+					from job_t_orders o
+					join job_t_quote_headers  q 
+					on o.customer_id = q.customer_id 
+					where quote_id = '$quote_id' 
+					and job_status != 'CANCEL' ";
+			return $this->db->query($sql);
+		}
+		
 		function getJobCustomerDetail($id){
 			$sql = "select * from job_t_orders o
 					join ar_t_customers c
@@ -236,6 +250,7 @@
 			
 			return $this->db->query($sql);
 		}
+		
 		
 		function getJobSubTypeById($id){
 			$sql = "select * from job_t_subtype where sub_type_id = $id";
