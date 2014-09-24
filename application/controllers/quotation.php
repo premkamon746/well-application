@@ -135,21 +135,62 @@ class Quotation extends MY_Controller {
 	
 	public function quote_job($quote_id){
 		$data = array();
-		
+		$job_no = array();
 		if($post = $this->input->post()){
-			$data['job_search'] = $this->job_model->getJobTypeByJobNo($post["job_no"]);
-			$data["job_no"] = $post["job_no"];
+			
+			//echo "count job no :" .count($job_no);
+			if($this->session->userdata("job_no")){
+				$job_no = $this->session->userdata("job_no");
+				//echo "count job no :" .count($job_no);
+				if(count($job_no) <=0){
+					$job_no[count($job_no)] = $post["job_no"];
+				}
+				$job_no[count($job_no)] = $post["job_no"];
+			}else{
+				$job_no[count($job_no)] = $post["job_no"];
+				
+			}
+			$job_no = array_unique($job_no);
+			$this->session->set_userdata("job_no",$job_no);
+			
+		}else{
+			$job_no = $this->session->userdata("job_no");
 		}
+		
+		$data['job_search'] = array();
+		for ($i = 0; $i < count($job_no); $i++){
+			$data['job_search'][$i] = $this->job_model->getJobTypeByJobNo($job_no[$i]);
+		}
+		//print_r($job_no);
+		$data['job_no'] = $job_no;
 		
 		$data['job_cus'] = $this->job_model->getJobByCustomerId($quote_id);
 		$data["quote_id"] = $quote_id;
 		$this->load->view('quotation/qoute_job',$data);
 	}
 	
+	function remove_qj($job_nox,$qid){
+		if($this->session->userdata("job_no")){
+			$job_no = $this->session->userdata("job_no");
+			$njob_no = array();
+			$i=0;
+			foreach ($job_no as $j){
+				if($j != $job_nox){
+					$njob_no[$i]=$j;
+					$i++;
+				}
+			}
+			$this->session->set_userdata("job_no",$njob_no);
+		}
+		redirect(base_url()."quotation/quote_job/{$qid}");
+	}
+	
 	public function save_quote_job(){
 		if($post = $this->input->post()){
 			$data['job_search'] = $this->job_model->saveQuoteJob($post,$this->user_id);
-			redirect(base_url().'quotation/quote_job/'.$post['quote_id']);
+			//redirect(base_url().'quotation/quote_job/'.$post['quote_id']);
+			$this->session->set_userdata("job_no",array());
+			redirect(base_url().'quotation/search/');
 		}
 	}
 	
