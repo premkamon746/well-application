@@ -6,6 +6,7 @@ class Job extends MY_Controller {
 		parent::__construct();
 		$this->load->model('job_model');
 		$this->load->model('customer_model');
+		$this->load->helper('customer');
 	}
 	
 	public function index()
@@ -36,24 +37,39 @@ class Job extends MY_Controller {
 		$this->load->view('job/create',$data);
 	}
 	
-	public function detail($id)
+	
+	
+	public function detail($job_id)
 	{
 		$data = array();
-		$data['job'] = $this->job_model->getJob($id);
+		$data['job'] = $this->job_model->getJob($job_id);
 		
 		if($post = $this->input->post()){
-			$this->job_model->createJobDetail($post,$id,$this->user_id);
+			$this->job_model->createJobDetail($post,$job_id,$this->user_id);
+			redirect(base_url().'job/search_detail/'.$job_id);
 		}
-		$data['job_line'] = $this->job_model->getJobLine($id);
+		$data['job_line'] = $this->job_model->getJobLine($job_id);
 		$this->load->view('job/detail',$data);
+	}
+	
+	public function job_create_line_manu($job_id){
+		$data = array();
+		
+		$data['job'] = $this->job_model->getJob($job_id);
+		$data['job_line'] = $this->job_model->getJobLine($job_id);
+		
+		$this->load->view('job/job_create_line_manu',$data);
 	}
 	
 	
 	public function get_job_line($job_no){
-		
 		$data['job_line'] = $this->job_model->getJobTypeByJobNo($job_no);
-		
 		echo $this->load->view('job/job_line',$data,false);
+	}
+	
+	public function delete_line($job_line_id,$job_id){
+		$this->db->delete('job_t_order_lines', array('job_line_id' => $job_line_id)); 
+		redirect(base_url()."job/search_detail/".$job_id);
 	}
 	
 	

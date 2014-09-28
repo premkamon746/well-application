@@ -3,7 +3,7 @@
 class MY_Controller extends CI_Controller
 {
 	protected $user_id;
-	protected $user_name;
+	public $user_name;
 	public $role_id;
 	public $dept_id;
 	public $approve_flag; 
