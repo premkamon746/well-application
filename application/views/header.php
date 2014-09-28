@@ -103,6 +103,14 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<ul class="nav navbar-nav pull-right">
+			<li class="dropdown user">
+				<a href="#" class="dropdown-toggle" >
+					<span class="username">
+						 Login User :::-- <?php echo $this->user_name?> --:::
+					</span>
+				</a>
+			</li>
+
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user">
 			
@@ -170,7 +178,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 				</li>
 					
-				<? if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) {?>
+				<? //if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) 
+				{?>
 				<li class="open ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
@@ -181,7 +190,8 @@ License: You must have a valid license purchased only from themeforest(the above
 						</span>
 					</a>
 					<ul class="sub-menu always-open" style="display:block !important;">
-						<? if(isset($this->dept_id) && ($this->dept_id == 4 || $this->role_id == 1 ) ) {?>
+						<? //if(isset($this->dept_id) && ($this->dept_id == 4 || $this->role_id == 1 ) ) 
+						{?>
 						<li>
 							<a href="<?=base_url('quotation/create')?>">
 								<i class="fa fa-bullhorn"></i>
@@ -200,7 +210,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				
 				<? } //endif role_id?>
 				
-				<? if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) {?>
+				<? //if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) 
+				{?>
 				<li class="open ">
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>

@@ -20,7 +20,6 @@
 				</tr>
 				</table>
 			</div>
-			<button type="button" class="btn red" onclick="manuPlan()"> &nbsp; &nbsp; บันทึก &nbsp; &nbsp; </button>
 			<br/><br/>
 			<div class="row">
 				<div class="col-md-12">

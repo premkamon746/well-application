@@ -2,11 +2,11 @@
 
 if ( ! function_exists('getAddress'))
 {
-    function getAddress($id)
+    function getAddress($site_id)
     {
         $CI = & get_instance();
         $CI->load->model('customer_model');
-        $addr =  $CI->customer_model->getAddress($id)->row();
+        $addr =  $CI->customer_model->getAddress($site_id)->row();
         
         $contact = $addr->contact_person;
         $address = $addr->address1;

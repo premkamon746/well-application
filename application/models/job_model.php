@@ -183,6 +183,7 @@
 			}elseif($data["deptid"]==11){//production
 				$search .=" and o.job_status = 'PROCESSING'";
 			}*/
+			$status = urldecode($status);
 			$sql = "select * from job_t_orders  o
 					join ar_t_customers c
 					on o.customer_id = c.customer_id
