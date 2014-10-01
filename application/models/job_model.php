@@ -30,6 +30,39 @@
 			return $this->db->insert_id();
 		}
 		
+		function saveTask($post,$job_id,$create_user = 0){
+			extract($post);
+				
+			$data = array(
+					"job_id"				=>$job_id
+					,"description"			=>$description
+					,"assign_to_dept_id"	=>$assign_to_dept_id
+					,"plan_date_from"		=>$plan_date_from
+					,"plan_date_to"			=>$plan_date_to
+					,"task_status"			=>'WAIT CONFIRM'
+					,"actual_date_start"	=>$actual_date_start
+					,"actual_finish_date"	=>$actual_finish_date
+			);
+			$this->db->set('create_date', 'now()',FALSE);
+			$this->db->insert('job_t_tasks', $data);
+			return $this->db->insert_id();
+		}
+		
+		function getTask($job_id){
+			$sql = "select 
+						s.*,d.*
+						,DATE_FORMAT(plan_date_from,'%d/%m/%Y') as plan_date_from
+						,DATE_FORMAT(plan_date_to,'%d/%m/%Y') as plan_date_to 
+						,DATE_FORMAT(actual_date_start,'%d/%m/%Y') as actual_date_start
+						,DATE_FORMAT(actual_finish_date,'%d/%m/%Y') as actual_finish_date 
+			from job_t_tasks  s
+			left join sec_department d
+			on d.dept_id = s.assign_to_dept_id
+			where job_id = $job_id";
+			$res = $this->db->query($sql);
+			return $res;
+		}
+		
 		function createJobDetail($post,$job_id,$create_user = 0){
 			extract($post);
 			$seq_no = 0;

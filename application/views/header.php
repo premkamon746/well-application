@@ -106,12 +106,14 @@ License: You must have a valid license purchased only from themeforest(the above
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" >
 					<span class="username">
-						 Login User :::-- <?php echo $this->user_name?> --:::
+						  <?php echo isset( $this->user_name)?"Login User :::--".$this->user_name."--:::":""?> 
 					</span>
 				</a>
 			</li>
 
 			<!-- BEGIN USER LOGIN DROPDOWN -->
+			
+			<?php if(isset($this->user_name))  {?>
 			<li class="dropdown user">
 			
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -128,6 +130,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					</li>
 				</ul>
 			</li>
+			<?php }?>
+			
 			<!-- END USER LOGIN DROPDOWN -->
 		</ul>
 		<!-- END TOP NAVIGATION MENU -->
@@ -143,6 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
+			<?php if(isset($this->user_name))  {?>
 			<ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
 				<li class="sidebar-toggler-wrapper">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -265,6 +270,8 @@ License: You must have a valid license purchased only from themeforest(the above
 				
 				<? } //endif role_id?>
 			</ul>
+			
+			<?php }?>
 			<!-- END SIDEBAR MENU -->
 		</div>
 	</div>
