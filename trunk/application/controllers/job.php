@@ -52,14 +52,7 @@ class Job extends MY_Controller {
 		$this->load->view('job/detail',$data);
 	}
 	
-	public function job_create_line_manu($job_id){
-		$data = array();
-		
-		$data['job'] = $this->job_model->getJob($job_id);
-		$data['job_line'] = $this->job_model->getJobLine($job_id);
-		
-		$this->load->view('job/job_create_line_manu',$data);
-	}
+	
 	
 	
 	public function get_job_line($job_no){
@@ -120,6 +113,48 @@ class Job extends MY_Controller {
 		$data['job_id'] = $job_id;
 		$data['job_line'] = $this->job_model->getJobLine($job_id);
 		$this->load->view('job/search_detail',$data);
+	}
+	
+	
+	public function job_create_line_manu($job_id){
+		$data = array();
+		$this->load->model("employee_model");
+		
+		if($post = $this->input->post()){
+			$this->job_model->saveTask($post,$job_id,$this->user_id);
+		}
+		
+		$data = array();
+		$this->load->helper("job");
+		
+		$data['dept'] = $this->employee_model->getDept();
+		
+		$data['job'] = $this->job_model->getJobCustomerDetail($job_id);
+		$data['task'] = $this->job_model->getTask($job_id);
+		//$data['job'] = $this->job_model->getJob($job_id);
+		$data['job_line'] = $this->job_model->getJobLine($job_id);
+		$data['job_id'] = $job_id;
+	
+		$this->load->view('job/job_create_line_manu',$data);
+	}
+	
+	public function chane_status($job_id, $method){
+		$status = '';
+		if($method == 'start'){
+			$status = 'WAIT CONFIRM';
+		}else if($method == 'end'){
+			$status = 'WAIT CONFIRM3';
+		}else if($method == 'forward'){
+			$status = 'WAIT CONFIRM4';
+		}
+		
+		$data = array(
+               'task_status' => $status,
+            );
+
+		$this->db->where('job_id', $job_id);
+		$this->db->update('job_t_tasks', $data); 
+		redirect(base_url()."job/job_create_line_manu/".$job_id);
 	}
 	
 

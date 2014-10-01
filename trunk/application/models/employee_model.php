@@ -11,4 +11,10 @@
 			return $res;
 		}
 		
+		function getDept(){
+			$sql = "select * from sec_department where active_flag = 'Y'";
+			$res = $this->db->query($sql);
+			return $res;
+		}
+		
 	}

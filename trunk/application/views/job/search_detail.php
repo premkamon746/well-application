@@ -38,6 +38,7 @@
 							
 							
 							</table>
+							
 							<br>
 							<table width="96%">
 							<tbody><tr>
@@ -62,6 +63,8 @@
 								</td>
 							</tr>
 							</tbody></table>
+							<button type="button" class="btn blue" onclick="window.location='<?=base_url()?>job/job_create_line_manu/<?=$job_id?>'"> 
+							&nbsp; &nbsp; Next&nbsp; &nbsp; </button>
 							<br>
 						</div>
 					</div>
