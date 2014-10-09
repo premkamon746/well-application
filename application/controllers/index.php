@@ -49,6 +49,32 @@ class Index extends MY_Controller {
 		
 		$this->load->view('dashboard/job',$data);
 	}
+	
+	public function pdf(){
+		$this->load->library('Pdf');
+		
+		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+		
+		$this->pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetTitle('My Title');
+		$pdf->SetHeaderMargin(30);
+		$pdf->SetTopMargin(20);
+		$pdf->setFooterMargin(20);
+		$pdf->SetAutoPageBreak(true);
+		$pdf->SetAuthor('Author');
+		$pdf->SetDisplayMode('real', 'default');
+		
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+		
+		
+		$pdf->SetFont('cordiaupc', '', 18, '', true);
+		$pdf->AddPage();
+		//$pdf->Write(0, $txt);
+		$pdf->Write(0, "", '', 0, 'C', true, 0, false, false, 0);
+		$pdf->Output('qouta.pdf', 'I');
+	}
+	
+	
 }
 
 /* End of file welcome.php */
