@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Quotation extends MY_Controller {
-
+	public $pdf;
 	function __construct(){
 		parent::__construct();
 		$this->load->model('quotation_model');
@@ -199,6 +199,219 @@ class Quotation extends MY_Controller {
 		//$total = $this->quotation_model->getItemCatagoryRecord($category);
 		$data['sale_item'] = $item_cat;
 		echo $this->load->view('quotation/sale_item',$data,false);
+	}
+	
+	function qprint($quote_id){
+		$this->load->library('Pdf');
+		$this->load->model('quotation_model');
+		
+		$this->pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+		
+		$this->pdf->SetCreator(PDF_CREATOR);
+		$this->pdf->SetTitle('My Title');
+		$this->pdf->SetHeaderMargin(30);
+		$this->pdf->SetTopMargin(20);
+		$this->pdf->setFooterMargin(20);
+		$this->pdf->SetAutoPageBreak(true);
+		$this->pdf->SetAuthor('Author');
+		$this->pdf->SetDisplayMode('real', 'default');
+		
+		$this->pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+		
+		
+		$this->pdf->SetFont('cordiaupc', 'B', 16, '', true);
+		$this->pdf->AddPage();
+		//$this->pdf->Write(0, $txt);
+		$this->pdf->ln(14);
+		
+		
+		$quote = $this->quotation_model->getQuotation($quote_id);
+		
+		$html = $this->write_html_header($quote);
+		// output the HTML content
+		$this->pdf->writeHTML($html, true, 0, true, 0);
+		
+		$header = array('Item', 'Description', 'Quantity', '@', 'Total (Baht)');
+		
+		// data loading
+		//$data = $this->LoadData($quote_id);
+		
+		// print colored table
+		$this->ColoredTable($header, $quote_id,$quote);
+		
+		
+		$this->pdf->Output('qouta.pdf', 'I');
+	}
+	
+	
+	// Colored table
+	public function ColoredTable($header,$quote_id,$quote) {
+		// Colors, line width and bold font
+		$this->pdf->SetFillColor(255, 255, 255);
+		$this->pdf->SetTextColor(0);
+		//$this->pdf->SetDrawColor(128, 0, 0);
+		$this->pdf->SetLineWidth(0.3);
+		//$this->SetFont('', 'B');
+		// Header
+		$w = array(10, 100, 25, 25,30);
+		//$num_headers = count($header);
+		//$this->pdf->Write(1, 'Example of HTML tables', '', 0, 'L', true, 0, false, false, 0);
+// 		for($i = 0; $i < $num_headers; ++$i) {
+// 			$this->pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
+// 		}
+		//$header = array('Item', 'Description', 'Quantity', '@', 'Total (Baht)');
+		
+		//$data = array();
+		//print_r($quote_line->result());
+		
+		
+		$html = '<table  cellspacing="0" cellpadding="1" border="1">
+					<tr>
+						<td width="10">Item</td>
+						<td width="100">Description</td>
+						<td width="25">Quantity</td>
+						<td width="25">@</td>
+						<td width="30">Total (Baht)</td>
+					</tr>';
+		
+		$html = '
+<table cellspacing="0" cellpadding="1" border="1">
+    <tr>
+						<td width="30" align="center">Item</td>
+						<td width="300" align="center">Description</td>
+						<td width="75" align="center">Quantity</td>
+						<td width="75" align="center">@</td>
+						<td width="75" align="center">Total (Baht)</td>
+					</tr>';
+		
+// 		$this->pdf->Ln();
+// 		// Color and font restoration
+// 		$this->pdf->SetFillColor(224, 235, 255);
+// 		$this->pdf->SetTextColor(0);
+// 		$this->pdf->SetFont('');
+		// Data
+// 		$fill = 0;
+
+		
+
+		$quote_line = $this->quotation_model->getLine($quote_id);
+		$i = 1;
+		$total = 0;
+		$discount = 0;
+		foreach($quote_line->result() as $l) {
+			 $html .= '<tr>
+						<td width="30" align="left">'.$i.'</td>
+						<td width="300" align="left">'.$l->remarks.'</td>
+						<td width="75" align="right">'.$l->quantity.'</td>
+						<td width="75" align="right">'.number_format($l->unit_selling_price).'</td>
+						<td width="75" align="right">'.number_format($l->line_amount).'</td>
+					</tr>';
+			 $total += $l->line_amount;
+			//$fill=!$fill;
+		}
+		
+		$total_discount = $total - $discount;
+		$vat = $total_discount*0.07;
+		$grand = $total_discount+$vat;
+		
+		$this->load->helper('currency');
+		$currency = currency($grand);
+			$html .= ' <tr>
+					    <td colspan="5">Contact Person : '.$quote->contact_person.'</td>
+					  </tr>
+					  <tr>
+					    <td colspan="2" rowspan="5">
+							Delivery		:	Within	7	days  after  received  Purchase  Order<br/>			
+							Payment		:	Credit	30	Days  after  date  of  delivery.	<br/>			
+							Validity		:	30	days after quoted date.			<br/>		
+							JOB		:	WM5704-441						
+					    		
+					    </td>
+					    <td colspan="2">Total</td>
+					    <td align="right">'.number_format($total,2).'</td>
+					  </tr>
+					  <tr>
+					    <td colspan="2">Discount</td>
+					    <td align="right">'.number_format($discount,2).'</td>
+					  </tr>
+					  <tr>
+					    <td colspan="2">Total</td>
+					    <td align="right">'.number_format($total_discount,2).'</td>
+					  </tr>
+					  <tr>
+					    <td colspan="2">Vat 7%</td>
+					    <td align="right">'.number_format($vat,2).'</td>
+					  </tr>
+					  <tr>
+					    <td colspan="2">Grand Total</td>
+					    <td align="right">'.number_format($grand,2).'</td>
+					  </tr>
+					    		<tr>
+					    <td align="right" colspan="5">'.$currency.'</td>
+					  </tr>';
+
+		
+		$html .= '</table>';
+		
+		$this->pdf->writeHTML($html, true, 0, true, 0);
+		
+		//$this->pdf->Cell(array_sum($w), 0, '', 'T');
+	}
+	
+	
+	private function write_html_header($quote){
+		$address = getProvince($quote->bill_to_id)->province_name;
+		$site = getSiteInfo($quote->bill_to_id);
+		$phone = $site->phone_number;
+		//$phone = $site->phone_number;
+		$html = <<<EOD
+		<table>
+    		<tr>
+    			<td width="80" >Quotation</td>
+    			<td  width="200">: $quote->quote_number</td>
+				<td width="80" ></td>
+    			<td></td>
+    		</tr>
+			<tr>
+    			<td>Customer</td>
+    			<td>: $quote->customer_name</td>
+				<td></td>
+    			<td></td>
+    		</tr>
+			<tr>
+    			<td>Location</td>
+    			<td>: $address</td>
+				<td align="right">Date </td>
+    			<td>: $quote->quote_date </td>
+    		</tr>
+			<tr>
+    			<td>Attention</td>
+    			<td>: $quote->attention </td>
+				<td align="right">Tell </td>
+    			<td>: $phone </td>
+    		</tr>
+			<tr>
+    			<td>CC.</td>
+    			<td>: $quote->cc_to</td>
+				<td align="right">Fax </td>
+    			<td>:</td>
+    		</tr>
+			<tr>
+    			<td>Subject</td>
+    			<td>: $quote->subject </td>
+				<td></td>
+    			<td></td>
+    		</tr>
+			<tr>
+    			<td>Refer</td>
+    			<td>:</td>
+				<td align="right">Email </td>
+    			<td>:</td>
+    		</tr>
+    	</table>
+EOD;
+		
+		return $html;
 	}
 	
 }

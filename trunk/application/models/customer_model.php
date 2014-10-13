@@ -161,6 +161,11 @@
 			return $this->db->query($sql);
 		}
 		
+		function getSiteInfo($site_id){
+			$sql = "select * from ar_t_sites where site_id='$site_id' ";
+			return $this->db->query($sql);
+		}
+		
 		function getProvince(){
 			$sql = "select * from ar_province";
 			return $this->db->query($sql);
