@@ -24,5 +24,11 @@ if ( ! function_exists('getAddress'))
     	 
     }
     
+    function getSiteInfo($id){
+    	$CI = & get_instance();
+    	$CI->load->model('customer_model');
+    	return  $CI->customer_model->getSiteInfo($id)->row();
+    }
+    
     
 }

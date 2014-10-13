@@ -35,9 +35,6 @@
 							<tbody><tr>
 								<td width="30%" align="left" style="padding-left: 20px">
 								<script>
-									$(document).reay(function(){
-										
-									});
 
 									function copy_quote(quote_id){
 										if(confirm("ต้องการคัดลอก quotation หรือไม่?")){
@@ -50,18 +47,25 @@
 											window.location = "<?=base_url()?>quotation/cancel/"+quote_id;
 										}
 									}
+
+									function print_quote(quote_id){
+										if(confirm("ต้องการพิมพ์quotation หรือไม่?")){
+											window.location = "<?=base_url()?>quotation/qprint/"+quote_id;
+										}
+									}
 								</script>
 									
 									<? if($this->approve_flag=='Y') {?>	
-									<input type="hidden" name="quote_id" value="<?=$quote_id?>"/>														
-									<button type="submit" class="btn green" onclick="" style="float:right;"> อนุมัติ </button>
-									<?php }?>
+										<input type="hidden" name="quote_id" value="<?=$quote_id?>"/>														
+										<button type="submit" class="btn green" onclick="" style="float:right;"> อนุมัติ </button>
+									<?php } ?>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn blue" onclick="copy_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> Copy </button>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn red" onclick="cancel_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> ยกเลิก </button>
 									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn green" onclick="print_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> พิมพ์ </button>
 								</td>
 							</tr>
 							</tbody></table>

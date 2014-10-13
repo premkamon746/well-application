@@ -40,7 +40,7 @@ class Pdf extends TCPDF
     // Page footer
     public function Footer() {
     	// Position at 15 mm from bottom
-    	$this->SetY(-100);
+    	$this->SetY(-70);
     	// Set font
     	
     	// Page number
@@ -48,86 +48,53 @@ class Pdf extends TCPDF
     	
     	// Set some content to print
     	$html = <<<EOD
-<table border="0" cellpadding="0" cellspacing="0" style='border-collapse:
- collapse;table-layout:fixed;width:653pt'>
-  <tr class="xl89" height="27">
-    <td height="27" class="xl89" style='height:20.25pt'></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl144" colspan="4" align="left" style='mso-ignore:colspan'>Yours
-      faithfully</td>
-    <td class="xl137"></td>
-    <td class="xl137"></td>
-    <td class="xl137"></td>
-  </tr>
-   <tr class="xl89" height="27" style='mso-height-source:userset;height:20.25pt'>
-    <td height="27" class="xl89" style='height:20.25pt'></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl89"></td>
-    <td class="xl150">&nbsp;</td>
-    <td class="xl152"></td>
-    <td colspan="4" rowspan="4" height="105" class="xl89" width="142" style='mso-ignore:
-  colspan-rowspan;height:78.75pt;width:106pt'></td>
-    <td class="xl137"></td>
-  </tr>
-<tr class="xl89" height="26" style='mso-height-source:userset;height:19.5pt'>
-    <td height="26" class="xl89" style='height:19.5pt'></td>
-    <td colspan="9" class="xl193" style='border-right:1.0pt solid black'>Customer
-      Only</td>
-    <td class="xl145" style='border-left:none'>&nbsp;</td>
-    <td class="xl91"></td>
-    <td class="xl91"></td>
-    <td class="xl94"></td>
-  </tr>
+		<table>
+    			<tr>
+    			<td></td>
+    			<td style="padding:10px;">Yours faithfully</td>	
+    		</tr>	
+    		<tr>
+    			<td style="border:1px solid #000000;text-align:center;padding:10px;">
+    				<u>Customer Only</u>
+    				<div style="font-size:0.8em;">Accepted for Term and Conditions by Authorized Signature</div>
+    				<br/><br/><br/>
+    				<div style="font-size:0.8em;">Authorized by …...……………….....   Date ……..…………….	</div>
+    				<div style="font-weight:bold;">Please return by Fax to. 662-397-9330</div>				
     			
-    			<tr class="xl89" height="26" style='mso-height-source:userset;height:19.5pt'>
-    <td height="26" class="xl89" style='height:19.5pt'></td>
-    <td colspan="9" class="xl178" style='border-right:1.0pt solid black'>Accepted for
-      Term and Conditions by Authorized Signature</td>
-    <td class="xl146" style='border-left:none'>&nbsp;</td>
-    <td class="xl91"></td>
-    <td class="xl91"></td>
-    <td class="xl94"></td>
-  </tr>
-<tr class="xl89" height="26" style='mso-height-source:userset;height:19.5pt'>
-    <td height="26" class="xl89" style='height:19.5pt'></td>
-    <td class="xl146">&nbsp;</td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl148"></td>
-    <td class="xl149">&nbsp;</td>
-    <td class="xl146" style='border-left:none'>&nbsp;</td>
-    <td class="xl91"></td>
-    <td class="xl91"></td>
-    <td class="xl137"></td>
-  </tr>
-  <tr class="xl91" height="29" style='mso-height-source:userset;height:21.75pt'>
-    <td height="29" class="xl91" style='height:21.75pt'></td>
-    <td colspan="9" class="xl183" style='border-right:1.0pt solid black'>Please
-      return by Fax to. 662-397-9330</td>
-    <td class="xl91"></td>
-    <td class="xl91" colspan="7" align="left" style='mso-ignore:colspan'>E mail :
-      patchareeya@well-engineering.com</td>
-  </tr>
-</table>
+    			</td>
+    			<td style="">
+    			<br/><br/><br/><br/><br/><br/>
+    			<span style="margin-left:10px;font-size:0.8em;">
+    				------------------------------
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				------------------------------
+    			</span><br/>
+    			
+    			<span style="margin-left:10px;font-size:0.8em;">
+    				Patchareeya  Hongsinee
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Chutikarn  OuyNong
+    			</span><br/>
+    			<span style="margin-left:10px;font-size:0.8em;">
+    				Assistant Sale Manager
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Marketing Director
+    			</span><br/>
+    			<span style="margin-left:10px;font-size:0.8em;">
+    				Mobile: 081 628 7405
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				Mobile: 081-811-7266
+    			</span><br/>
+    			<span style="margin-left:10px;font-size:0.8em;">
+    				E mail : patchareeya@well-engineering.com
+    			</span>
+    			</td>	
+    		</tr>		
+    	</table>
 EOD;
 		
 		// output the HTML content
