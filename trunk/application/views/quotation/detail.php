@@ -103,11 +103,11 @@
 								<? foreach ($quote_line->result() as $jl) {?>
 									<tr class="odd gradeX">
 										<td><?=++$i?></td>
-										<td><?=$jl->remarks?></td>
-										<td><?=$jl->quantity?></td>
-										<td><?=$jl->unit_selling_price?></td>
-										<td><?=$jl->line_amount?></td>
-										<td>
+										<td align="left"><?=$jl->remarks?></td>
+										<td align="center"><?=$jl->quantity?></td>
+										<td align="right"><?=number_format($jl->unit_selling_price,2) ?></td>
+										<td align="right"><?=number_format($jl->line_amount,2) ?></td>
+										<td align="center">
 											<? if($this->approve_flag=='Y') {?>		
 											
 											
