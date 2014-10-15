@@ -45,10 +45,10 @@
 									<? foreach ($line->result() as $r) {?>
 										<tr>
 											<td align="center" width="12%"><?=++$i?></td>
-											<td align="center" width="35%"><?=$r->remarks?></td>
+											<td align="left" width="35%"><?=$r->remarks?></td>
 											<td align="center" width="13%"><?=$r->quantity?></td>
-											<td align="center" width="18%"><?=$r->unit_selling_price?></td>
-											<td align="center" width="22%"><?=$r->line_amount?></td>
+											<td align="right" width="18%"><?=number_format($r->unit_selling_price,2)?></td>
+											<td align="right" width="22%"><?=number_format($r->line_amount,2)?></td>
 											<td align="center" width="22%">
 												<a href="javascript:void(0)" onclick="del_line('<?=$r->line_id?>','<?=$r->quote_id?>');">ลบ</a>
 											</td>
@@ -74,15 +74,15 @@
 									<table class="table table-striped table-bordered table-hover" style="width:200px;">
 										<tr>
 											<td>ยอดเงินก่อนภาษี</td>
-											<td><?=$all_line?> </td>
+											<td align="right"><?=number_format($all_line,2)?> </td>
 										</tr>
 										<tr>
 											<td>ภาษี</td>
-											<td><?=$vat?>% </td>
+											<td  align="right"><?=$vat?>% </td>
 										</tr>
 										<tr>
 											<td>รวมเป็นเงิน</td>
-											<td><?=($all_line + ($all_line*$vat*0.01) )?></td>
+											<td  align="right"><?=number_format(($all_line + ($all_line*$vat*0.01) ),2)?></td>
 										</tr>
 									
 									</table>

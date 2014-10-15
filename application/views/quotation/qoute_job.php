@@ -16,7 +16,7 @@
 									<div class="col-md-9">
 										<input type="text" class="form-control input-inline input-medium job_no"  readonly="readonly" value=<?=$job_no[$i]?> >
 										<span class="help-inline"></span>
-										<input type="button" class="btn blue remove" onclick="" value="-"   >
+										<input type="button" class="btn blue remove" onclick="" value="ลบ"   >
 										<table class="table table-striped table-bordered table-hover" style="width:500px;">
 											<thead>
 												<tr role="row" class="heading">

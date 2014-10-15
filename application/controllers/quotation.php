@@ -303,10 +303,11 @@ class Quotation extends MY_Controller {
 						<td width="30" align="left">'.$i.'</td>
 						<td width="300" align="left">'.$l->remarks.'</td>
 						<td width="75" align="right">'.$l->quantity.'</td>
-						<td width="75" align="right">'.number_format($l->unit_selling_price).'</td>
-						<td width="75" align="right">'.number_format($l->line_amount).'</td>
+						<td width="75" align="right">'.number_format($l->unit_selling_price,2).'</td>
+						<td width="75" align="right">'.number_format($l->line_amount,2).'</td>
 					</tr>';
 			 $total += $l->line_amount;
+			 $i++;
 			//$fill=!$fill;
 		}
 		
