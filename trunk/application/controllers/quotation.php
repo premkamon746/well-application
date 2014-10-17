@@ -128,6 +128,8 @@ class Quotation extends MY_Controller {
 		$this->load->view('quotation/create_line',$data);
 	}
 	
+	
+	
 	public function del_line($line_id,$quote_id){
 		$this->quotation_model->delLine($line_id);
 		redirect(base_url()."/quotation/line/{$quote_id}");
@@ -199,6 +201,48 @@ class Quotation extends MY_Controller {
 		//$total = $this->quotation_model->getItemCatagoryRecord($category);
 		$data['sale_item'] = $item_cat;
 		echo $this->load->view('quotation/sale_item',$data,false);
+	}
+	
+	function sale_item_s1_ajax($category,$segment1){
+		$item_cat = $this->quotation_model->getItemCatagoryName($category,$segment1);
+		//$total = $this->quotation_model->getItemCatagoryRecord($category);
+		$data['sale_item'] = $item_cat;
+		echo $this->load->view('quotation/sale_item',$data,false);
+	}
+	
+	function sale_item_s2_ajax($category,$segment1,$segment2){
+		$item_cat = $this->quotation_model->getItemCatagoryName($category,$segment1,urldecode($segment2));
+		//$total = $this->quotation_model->getItemCatagoryRecord($category);
+		$data['sale_item'] = $item_cat;
+		echo $this->load->view('quotation/sale_item',$data,false);
+	}
+	
+	public function get_segment1($category){
+		$item_cat = $this->quotation_model->getItemSegment1($category);
+		//$total = $this->quotation_model->getItemCatagoryRecord($category);
+
+		$res_arr = array();
+		$i = 0;
+		foreach($item_cat->result() as $r){
+			$data = array(
+					"segment"=>$r->segment1);
+			$res_arr[$i++] = $data;
+		}
+		echo json_encode($res_arr);
+	}
+	
+	public function get_segment2($category,$segment1){
+		$item_cat = $this->quotation_model->getItemSegment2($category,$segment1);
+		//$total = $this->quotation_model->getItemCatagoryRecord($category);
+	
+		$res_arr = array();
+		$i = 0;
+		foreach($item_cat->result() as $r){
+			$data = array(
+					"segment"=>$r->segment2);
+			$res_arr[$i++] = $data;
+		}
+		echo json_encode($res_arr);
 	}
 	
 	function qprint($quote_id){
