@@ -98,8 +98,38 @@
 		return $result;
 	}
 	
-	function getItemCatagoryName($cat){
-		$sql = "select * from inv_item_list where  category like '$cat%' ";
+	function getItemCatagoryName($cat,$sement1="",$sement2=""){
+		$s1 = "";
+		$s2 = "";
+		if($sement1 != ""){
+			$s1 = " and segment1 ='$sement1' ";
+			if($sement2 != ""){
+				$s2 = " and segment2 ='$sement2' ";
+			}
+		}
+		$sql = "select * from inv_item_list where  category like '$cat%' $s1 $s2";
+		//echo $sql ;
+		$result = $this->db->query($sql);
+		return $result;
+	}
+	
+	function getItemSegment1($cat){
+		
+		$sql = "select segment1 from inv_item_list where  category like '$cat%' group by segment1";
+		$result = $this->db->query($sql);
+		return $result;
+	}
+	
+	function getItemSegment2($cat,$segment1=""){
+		$s1 = "";
+		if($segment1!=""){
+			$s1 = " and segment1 ='$segment1' ";
+		}
+	
+		$sql = "select segment2 from inv_item_list
+		where  category like '$cat%'
+		$s1
+		group by segment2";
 		$result = $this->db->query($sql);
 		return $result;
 	}

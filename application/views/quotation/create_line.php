@@ -121,6 +121,15 @@
 													<? }?>
 												<? } // job type?>
 											</select>
+											
+											<select name="segment1" class="form-control input-inline input-medium" id="segment1">
+												<option value="">Segment 1</option>
+											</select>
+											
+											
+											<select name="segment2" class="form-control input-inline input-medium" id="segment2">
+												<option value="">Segment 2</option>
+											</select>
 										</div>
 										<div class="tools">
 											<a href="javascript:;" class="collapse">
@@ -157,6 +166,9 @@
     </div>
 	
 <script>
+
+	
+	
 	function getSaleItem(id){
 		var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
 		$('#sale_item_data').html(img);
@@ -166,11 +178,85 @@
 		});
 	}
 
+	function getSaleItemSegment1(s1){
+		cat = $("#catagory").val();
+		alert(s1);
+		var url = "<?=base_url()?>quotation/sale_item_s1_ajax/"+cat+"/"+s1;
+		$.get(url, function(data){
+			$('#sale_item_data').html(data);
+		});
+	}
+
+	function getSaleItemSegment2(s2){
+		cat = $("#catagory").val();
+		s1 = $.trim($("#segment1").val());
+		var url = "<?=base_url()?>quotation/sale_item_s2_ajax/"+cat+"/"+s1+"/"+s2;
+		$.get(url, function(data){
+			$('#sale_item_data').html(data);
+		});
+	}
+
+
+
+	function getSegment1(id){
+		//var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
+		//$('#sale_item_data').html(img);
+		var url = "<?=base_url()?>quotation/get_segment1/"+id;
+		$.getJSON(url, function(data){
+			getDropDownList(data,$("#segment1"));
+		});
+	}
+
+	function getSegment2(s1){
+		//var img = "<img src='<?=base_url()?>assets/img/loading.gif' />";
+		//$('#sale_item_data').html(img);
+		cat = $("#catagory").val();
+		var url = "<?=base_url()?>quotation/get_segment2/"+cat+"/"+s1;
+		$.getJSON(url, function(data){
+			getDropDownList(data,$("#segment2"));
+		});
+	}
+
+	function getDropDownList(optionList,obj) {
+	    $(obj).find("option").each(function() {
+	    	$(this).remove();
+		});
+	    
+	var combo = obj;
+	    $.each(optionList, function (i, el) {
+		 
+	        combo.append("<option value='"+el.segment+"'>" + el.segment + "</option>");
+	    });
+
+	    obj.append(combo);
+	}
+
 	$(document).ready(function(){
 		$("#catagory").change(function(){
-			getSaleItem($(this).val())
+
+			if($(this).val()!=""){
+				getSaleItem($(this).val());
+				getSegment1($(this).val());
+
+
+				//remove segment2 first
+				$('#segment2').find("option").each(function() {
+			    	$(this).remove();
+				});
+			}
 		});
 
+		$("#segment1").change(function(){
+			console.log($(this).val());
+			getSaleItemSegment1($(this).val())
+			getSegment2($(this).val());
+		});
+
+		$("#segment2").change(function(){
+			getSaleItemSegment2($(this).val())
+		});
+
+		
 		$('#sale_item_form').submit(function(){
 
 			rest = true;
