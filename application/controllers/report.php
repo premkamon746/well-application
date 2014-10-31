@@ -58,7 +58,7 @@ class Report extends MY_Controller {
 			$customer_id = $post['customer_id'];
 				
 			if($from !="" && $to !=""){
-				$data['close_search'] = $this->report_model->job($from,$to,$customer_id);
+				$data['close_search'] = $this->report_model->qoute($from,$to,$customer_id);
 				$data["from"] = $from;
 				$data["to"] = $to;
 				$data["customer_id"] = $customer_id;
@@ -67,6 +67,33 @@ class Report extends MY_Controller {
 			}
 		}
 		$this->load->view('report/job_report',$data);
+	}
+	
+	public function quote(){
+	
+		$data['customer'] = $this->customer_model->getCustomer();
+		$data['total'] 			= $this->report_model->count_quote();
+		$data['NEW'] 			= $this->report_model->count_quote('NEW');
+		$data['APPROVE'] 		= $this->report_model->count_quote('APPROVE');
+		$data['CANCEL'] 		= $this->report_model->count_quote('CANCEL');
+		//print_r($data['close_search']->result());
+	
+		if($post = $this->input->post()){
+	
+			$from = $post['job_end_date_start'];
+			$to = $post['job_end_date_end'];
+			$customer_id = $post['customer_id'];
+				
+			if($from !="" && $to !=""){
+				$data['close_search'] = $this->report_model->quote($from,$to,$customer_id);
+				$data["from"] = $from;
+				$data["to"] = $to;
+				$data["customer_id"] = $customer_id;
+			}else{
+				$data["message"] = "Please select start and end date.";
+			}
+		}
+		$this->load->view('report/quote_report',$data);
 	}
 	
 }

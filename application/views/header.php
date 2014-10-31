@@ -268,6 +268,37 @@ License: You must have a valid license purchased only from themeforest(the above
 					</ul>
 				</li>
 				
+				<li class="open ">
+					<a href="javascript:;">
+						<i class="fa fa-shopping-cart"></i>
+						<span class="title">
+							Report
+						</span>
+						<span class="arrow open">
+						</span>
+					</a>
+					<ul class="sub-menu always-open" style="display:block !important;">
+						<li>
+							<a href="<?=base_url('report/note')?>">
+								<i class="fa fa-bullhorn"></i>
+								note
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url('report/job')?>">
+								<i class="fa fa-bullhorn"></i>
+								job
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url('report/quote')?>">
+								<i class="fa fa-bullhorn"></i>
+								quotation
+							</a>
+						</li>
+					</ul>
+				</li>
+				
 				<? } //endif role_id?>
 			</ul>
 			
