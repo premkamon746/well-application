@@ -25,7 +25,7 @@
 										<input type="text" class="form-control form-filter input-medium" 
 											readonly="" 
 											name="job_end_date_start" 
-											placeholder="วันที่ใบเสนอราคา"
+											placeholder=""
 											value="<?=isset($from)?$from:''?>">
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 											</div>
@@ -34,7 +34,7 @@
 										<input type="text" class="form-control form-filter input-medium" 
 											readonly="" 
 											name="job_end_date_end" 
-											placeholder="วันที่ใบเสนอราคา"
+											placeholder=""
 											value="<?=isset($to)?$to:''?>">
 											
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -44,7 +44,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">ลูกค้า</label>
+									<label class="col-md-3 control-label">สถานะ</label>
 									<div class="col-md-9">
 									<? if(isset($customer_id)){ ?>
 									<script>

@@ -60,6 +60,33 @@
 			return $result;
 		}
 		
+		function quote($from, $to, $customer_id){
+			$cond = "";
+			if($from != ""){
+				$cond .=" and quo.quote_date between '$from' and '$to' ";
+			}
+			
+			if($customer_id > 0){
+				$cond .=" and cus.customer_id ='$customer_id'";
+			}
+			
+			$sql = "select DATE_FORMAT(quote_date,'%d/%m/%Y') quote_date
+							,sales_name
+							,quote_number
+							,quote_status
+							,customer_name
+							,(select sum(line_amount) from job_t_quote_lines l where l.quote_id = quo.quote_id ) amount
+						from job_t_quote_headers quo
+					left join ar_t_customers cus
+					on quo.customer_id = cus.customer_id
+					left join ar_salesrep sal
+					on sal.salesrep_id = quo.salesrep_id
+					where 1  $cond";
+			//echo $sql;
+			$result = $this->db->query($sql);
+			return $result;
+		}
+		
 		function count_job($status=""){
 				
 			if($status!=""){
@@ -77,6 +104,25 @@
 			}
 			
 				return 0;
+		}
+		
+		function count_quote($status=""){
+		
+			if($status!=""){
+				$sql = "select count(*) TOTAL
+				from job_t_quote_headers
+				where quote_status = '$status' ";
+			}else{
+				$sql = "select count(*) TOTAL
+						from job_t_quote_headers";
+			}
+			$result = $this->db->query($sql);
+			if($result->num_rows() > 0){
+				//print_r( $result->row());
+				return $result->row()->TOTAL;
+			}
+				
+			return 0;
 		}
 }
 
