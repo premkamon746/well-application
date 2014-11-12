@@ -12,7 +12,15 @@ class Index extends MY_Controller {
 	{
 		//$result = $this->db->query("select * from ar_province");
 		//print_r($result);
-		$this->load->view('index');
+		$data = array();
+		$data["NEW"] = $this->job_model->countJobStatus("NEW");
+		$data["CHECK"] = $this->job_model->countJobStatus("CHECK");
+		$data["WAIT_CONFIRM"] = $this->job_model->countJobStatus("WAIT CONFIRM");
+		$data["CONFIRM"] = $this->job_model->countJobStatus("PROCESSING");
+		$data["PROCESSING"] = $this->job_model->countJobStatus("PROCESSING");
+		$data["CLOSE"] = $this->job_model->countJobStatus("CLOSE");
+		
+		$this->load->view('index',$data);
 	}
 	
 	public function job($status)
