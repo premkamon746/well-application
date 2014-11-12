@@ -112,10 +112,10 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">sale</label>
 									<div class="col-md-9">
-									<? if(isset($salesrep_id)){ ?>
+									<? if(isset($default_sales)){ ?>
 										<script>
 											$(document).ready(function(){
-												$('#salesrep_id').val("<?=$salesrep_id?>");
+												$('#default_sales').val("<?=$default_sales?>");
 											})
 										</script>
 									<? }?>									

@@ -59,6 +59,10 @@ class Customer extends MY_Controller {
 			$data['effective_date_from'] = $cusd->effective_date_from;
 			$data['effective_date_to'] = $cusd->effective_date_to;
 			$data['customer_id'] = $id;
+			$data['credit_term'] = $cusd->credit_term;
+			$data['default_sales'] = $cusd->default_sales;
+			
+			
 			$data['country'] = $this->customer_model->getCountry();
 		}
 		

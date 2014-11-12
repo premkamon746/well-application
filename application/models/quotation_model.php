@@ -161,6 +161,12 @@
 					where line_id='$line_id' ";
 			//echo $sql;
 			$result = $this->db->query($sql);
+			
+			$update = "UPDATE job_t_quote_headers 
+							set quote_status = 'CONFIRM' 
+							where quote_id = $quote_id";
+			//echo $update; exit;
+			$this->db->query($update);
 		}
 	}
 	

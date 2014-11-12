@@ -146,6 +146,11 @@
 			return $this->db->query($sql);
 		}
 		
+		function getSubtypeByTypeId($job_type_id){
+			$sql = "select * from job_t_subtype where active_flag = 'Y' and job_type_id = $job_type_id";
+			return $this->db->query($sql);
+		}
+		
 		function getJobStatus(){
 			$sql = "select * from job_t_status where active_flag = 'Y'";
 			return $this->db->query($sql);

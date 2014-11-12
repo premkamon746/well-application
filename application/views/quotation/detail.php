@@ -1,5 +1,22 @@
 <?php $this->load->view("header");?>
-<form method="post">
+
+<script>
+	function validateQuote(){
+		ret = true;
+		$('.quote_line_status').each(function(){
+			console.log()
+ 			if($(this)[0].selectedIndex <= 0){
+ 				ret = false;
+ 			}
+		});
+		if(ret==false){
+			alert("กรุณาเลือกสถานะให้ครบก่อน");
+			return false;
+		}
+		return ret;
+	}
+</script>
+<form method="post" onsubmit="return validateQuote()">
             <div class="row">
                 <div class="col-md-12">
 					<h3 class="page-title">รายละเอียดใบเสนอราคา</h3>
@@ -55,9 +72,12 @@
 									}
 								</script>
 									
-									<? if($this->approve_flag=='Y') {?>	
-										<input type="hidden" name="quote_id" value="<?=$quote_id?>"/>														
-										<button type="submit" class="btn green" onclick="" style="float:right;"> อนุมัติ </button>
+									<? if($this->approve_flag=='Y'  ) {?>	
+										
+										<input type="hidden" name="quote_id" value="<?=$quote_id?>"/>		
+										<? if( ($quote->quote_status!="CONFIRM" && $quote->quote_status!="CANCEL")){ ?>												
+											<button type="submit" class="btn green" onclick="" style="float:right;"> ยืนยันใบเสนอราคา </button>
+										<?  } ?>
 									<?php } ?>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn blue" onclick="copy_quote('<?=$quote_id?>');" style="float:right;margin-right:80px !important;"> Copy </button>
@@ -110,12 +130,28 @@
 										<td align="center">
 											<? if($this->approve_flag=='Y') {?>		
 											
-											
-												<select name="quote_line_status[]">
+												<? if( ($quote->quote_status!="CONFIRM" && $quote->quote_status!="CANCEL")){ ?>	
+												<select name="quote_line_status[]" class="quote_line_status">
 													<option value="WAIT CONFIRM:<?=$jl->line_id?>" <?=selected($jl->quote_line_status,"WAIT CONFIRM")?> >รออนุมัติ</option>
 													<option value="CONFIRM:<?=$jl->line_id?>" <?=selected($jl->quote_line_status,"CONFIRM")?>>อนุมัติ</option>
 													<option value="CANCEL:<?=$jl->line_id?>" <?=selected($jl->quote_line_status,"CANCEL")?>>ไม่อนุมัติ</option>
 												</select>
+												<?php  }else{ ?>
+												
+													<? if($jl->quote_line_status == "WAIT CONFIRM") {
+														echo 'รออนุมัติ';
+														 }else if($jl->quote_line_status == "CONFIRM"){
+															echo 'อนุมัติ';
+														 }else if($jl->quote_line_status == "CANCEL"){
+															echo 'ไม่อนุมัติ';
+														 }else{
+														echo "<span>";
+													}
+													
+													echo "&nbsp;&nbsp;&nbsp;</span>"; ?>
+												
+												<?php }?>
+												
 												<? if($jl->quote_line_status == "WAIT CONFIRM") {
 													echo '<span class="label label-sm label-warning">';
 												 }else if($jl->quote_line_status == "CONFIRM"){

@@ -200,6 +200,19 @@ class Job extends MY_Controller {
 		}
 		echo json_encode($res_arr);
 	}
+	
+	public function get_job_subtype($job_type_id){
+		$result = $this->job_model->getSubtypeByTypeId($job_type_id);
+		$res_arr = array();
+		$i = 0;
+		foreach($result->result() as $r){
+			$data = array(
+					"sub_type_id"=>$r->sub_type_id
+					, "sub_type_name"=>$r->sub_type_name);
+			$res_arr[$i++] = $data;
+		}
+		echo json_encode($res_arr);
+	}
 }
 
 /* End of file welcome.php */
