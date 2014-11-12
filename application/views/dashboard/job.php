@@ -66,7 +66,7 @@
 							<tbody></tbody>
 							</table>
 							<ul class="pagination bootpag">
-							<?=$pagination?>
+								<?=$pagination?>
 							</ul>
 							<!--  ul class="pagination bootpag">
 								<li data-lp="1" class="prev">

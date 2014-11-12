@@ -11,7 +11,7 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                 4
+                                 <?=$NEW?>
                             </div>
                             <div class="desc">
                                  New
@@ -33,7 +33,7 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                 9
+                                 <?=$CHECK?>
                             </div>
                             <div class="desc">
                                  Check
@@ -55,7 +55,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 3
+								 <?=$WAIT_CONFIRM?>
 							</div>
 							<div class="desc">
 								 Wait Confirm
@@ -79,7 +79,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 5
+								 <?=$CONFIRM?>
 							</div>
 							<div class="desc">
 								 Confirm
@@ -101,7 +101,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 12
+								 <?=$PROCESSING?>
 							</div>
 							<div class="desc">
 								 Processing
@@ -124,7 +124,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 15
+								 <?=$CLOSE?>
 							</div>
 							<div class="desc">
 								 Closed

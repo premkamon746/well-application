@@ -223,7 +223,7 @@
 			}*/
 			$status = urldecode($status);
 			$sql = "select * from job_t_orders  o
-					join ar_t_customers c
+					left join ar_t_customers c
 					on o.customer_id = c.customer_id
 					left join job_t_type jt
 					on jt.job_type_id = o.job_type_id
@@ -237,11 +237,18 @@
 			return $this->db->query($sql);
 		}
 		
+		function countJobStatus($status){
+			$status = urldecode($status);
+			$sql = "select count(*) COUNT_STATUS from job_t_orders where job_status = '$status'";
+			//echo $sql;
+			return $this->db->query($sql)->row()->COUNT_STATUS;
+		}
+		
 		function getTotalSearchStatus($status){
 			$search = "";
 			
 			$sql = "select count(*) total_row from job_t_orders  o
-					join ar_t_customers c
+					left join ar_t_customers c
 					on o.customer_id = c.customer_id
 					left join job_t_type jt
 					on jt.job_type_id = o.job_type_id
