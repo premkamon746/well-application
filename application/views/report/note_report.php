@@ -2,7 +2,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-					<h3 class="page-title">ค้นหาใบเสนอราคา &nbsp;<small>(Search Quotation)</small></h3>
+					<h3 class="page-title">Delivery Note Report &nbsp;<small>(Search Quotation)</small></h3>
 				</div>
             </div>
             <div class="row">
@@ -21,7 +21,7 @@
 									<div class="col-md-9">
 									
 								
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 										<input type="text" class="form-control form-filter input-medium" 
 											readonly="" 
 											name="job_end_date_start" 
@@ -30,7 +30,7 @@
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 											</div>
 										 
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 										<input type="text" class="form-control form-filter input-medium" 
 											readonly="" 
 											name="job_end_date_end" 

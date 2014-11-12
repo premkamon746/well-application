@@ -2,7 +2,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-					<h3 class="page-title">Job Monthly Report &nbsp;<small>(Search Quotation)</small></h3>
+					<h3 class="page-title">Quotation Report &nbsp;<small>(Search Quotation)</small></h3>
 				</div>
             </div>
             <div class="row">
@@ -17,10 +17,8 @@
 						<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
 								<div class="form-group">
-									<label class="col-md-3 control-label">Job Date from</label> 
+									<label class="col-md-3 control-label">Quotation Date from</label> 
 									<div class="col-md-9">
-									
-								
 										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 										<input type="text" class="form-control form-filter input-medium" 
 											readonly="" 
@@ -44,7 +42,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">สถานะ</label>
+									<label class="col-md-3 control-label">ลูกค้า</label>
 									<div class="col-md-9">
 									<? if(isset($customer_id)){ ?>
 									<script>
@@ -54,10 +52,10 @@
 									</script>
 									<? }?>
 										<select name="customer_id" class="form-control input-inline input-medium" id="customer_select">
-											<option value="">job status</option>
-											<? if($js->num_rows() > 0) {?>
-												<? foreach($js->result() as $cs){ ?>
-													<option value="<?=$cs->status_code ?>"><?=$cs->status_code ?></option>
+											<option value="">เลือกลูกค้า</option>
+											<? if($customer->num_rows() > 0) {?>
+												<? foreach($customer->result() as $cs){ ?>
+													<option value="<?=$cs->customer_id ?>"><?=$cs->customer_name ?></option>
 												<? }?>
 											<? } // job type?>
 										</select>
@@ -103,12 +101,12 @@
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>
 							<tr>    
-								<td>Job Date</td>
-								<td>Job Type</td>
-								<td>Job Number</td>
-								<td>Job Closed Date</td>
+								<td>Quotation Date</td>
+								<td>Sales</td>
+								<td>Quotation Number</td>
 								<td>Status</td>
-								
+								<td>Customer</td>
+								 <td>Amount</td>    
 							</tr>
 							</thead>
 							<tbody>
@@ -118,12 +116,12 @@
 							<? if(isset($close_search) > 0){?>
 								<? foreach ($close_search->result() as $js){ ?>
 									<tr>
-										<td><?=$js->job_date?></td>
-										<td><?=$js->type_name?></td>
-										<td><?=$js->job_no?></td>
-										<td><?=$js->job_end_date?></td>
-										<td><?=$js->job_status?></td>
-										
+										<td><?=$js->quote_date?></td>
+										<td><?=$js->sales_name?></td>
+										<td><?=$js->quote_number?></td>
+										<td><?=$js->quote_status?></td>
+										<td><?=$js->customer_name?></td>
+										<td><?=number_format($js->amount,2)?></td>
 									</tr>
 								<? }?>
 							<?}?>
@@ -139,35 +137,23 @@
 						<div class="portlet-body" >
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 								<tr>
-									<td>Job Summary Total</td>
+									<td>Quotation Summary</td>
 									<td><?=$total?></td>
-									<td></td>
-									<td></td>
-									<td></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>NEW</td>
 									<td><?=$NEW?></td>
-									<td>CONFIRM</td>
-									<td><?=$CONFIRM?></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>APPROVE</td>
+									<td><?=$APPROVE?></td>
+									<td></td>
+								</tr>
+								<tr>
 									<td>CANCEL</td>
 									<td><?=$CANCEL?></td>
-								</tr>
-								<tr>
-									<td>CHECK</td>
-									<td><?=$CHECK?></td>
-									<td>PROCESSING</td>
-									<td><?=$PROCESSING?></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>WAIT CONFIRM</td>
-									<td><?=$WAIT_CONFIRM?></td>
-									<td>CLOSED</td>
-									<td><?=$CLOSED?></td>
-									<td></td>
 									<td></td>
 								</tr>
 							</table>

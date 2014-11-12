@@ -21,14 +21,14 @@ class Report extends MY_Controller {
 		
 		if($post = $this->input->post()){
 
-			$from = $post['job_end_date_start'];
-			 $to = $post['job_end_date_end'];
+			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
+			 $to = date("Y-m-d",strtotime($post['job_end_date_end']));
 			$customer_id = $post['customer_id'];
 			
 			if($from !="" && $to !=""){
 				$data['close_search'] = $this->report_model->note($from,$to,$customer_id);
-				$data["from"] = $from;
-				$data["to"] = $to;
+				$data["from"] = $post['job_end_date_start'];
+				$data["to"] = $post['job_end_date_end'];
 				$data["customer_id"] = $customer_id;
 			}else{
 				$data["message"] = "Please select start and end date.";
@@ -53,15 +53,15 @@ class Report extends MY_Controller {
 	
 		if($post = $this->input->post()){
 	
-			$from = $post['job_end_date_start'];
-			$to = $post['job_end_date_end'];
-			$customer_id = $post['customer_id'];
+			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
+			$to = date("Y-m-d",strtotime($post['job_end_date_end']));
+			$job_status = $post['customer_id'];
 				
 			if($from !="" && $to !=""){
-				$data['close_search'] = $this->report_model->qoute($from,$to,$customer_id);
-				$data["from"] = $from;
-				$data["to"] = $to;
-				$data["customer_id"] = $customer_id;
+				$data['close_search'] = $this->report_model->job($from,$to,$job_status);
+				$data["from"] = $post['job_end_date_start'];
+				$data["to"] = $post['job_end_date_end'];
+				$data["customer_id"] = $job_status;
 			}else{
 				$data["message"] = "Please select start and end date.";
 			}
@@ -80,14 +80,14 @@ class Report extends MY_Controller {
 	
 		if($post = $this->input->post()){
 	
-			$from = $post['job_end_date_start'];
-			$to = $post['job_end_date_end'];
+			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
+			$to = date("Y-m-d",strtotime($post['job_end_date_end']));
 			$customer_id = $post['customer_id'];
 				
 			if($from !="" && $to !=""){
 				$data['close_search'] = $this->report_model->quote($from,$to,$customer_id);
-				$data["from"] = $from;
-				$data["to"] = $to;
+				$data["from"] = $post['job_end_date_start'];
+				$data["to"] = $post['job_end_date_end'];
 				$data["customer_id"] = $customer_id;
 			}else{
 				$data["message"] = "Please select start and end date.";
