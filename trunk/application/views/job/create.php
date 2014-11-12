@@ -52,27 +52,31 @@
 										</select>
 									</div>
 								</div>
+								
 								<div class="form-group">
 									<label class="col-md-3 control-label">ประเภทงานย่อย</label>
 									<div class="col-md-9">
 									
-									<? if(isset($sub_type_id)){ ?>
+									<? if(isset($sub_type_id)&&isset($job_type_id)){ ?>
 									<script>
 										$(document).ready(function(){
-											$('#sub_type_id').val("<?=$sub_type_id?>")
+											url = "<?=base_url()?>job/get_job_subtype/"+<?=$job_type_id?>;
+								 	 		$.getJSON(url, function(data){
+								 	 			getDropSubTypeDownList(data);
+								 	 			$('#sub_type_id').val("<?=$sub_type_id?>");
+								 	 		});
+											
 										})
 									</script>
 									<? }?>
+									
 										<select name="sub_type_id" class="form-control input-inline input-medium" id="sub_type_id">
 											<option>เลือกประเภทงานย่อย</option>
-											<? if($job_subtype->num_rows() > 0) {?>
-												<?foreach($job_subtype->result() as $jst){ ?>
-													<option value="<?=$jst->sub_type_id ?>"><?=$jst->sub_type_name ?></option>
-												<? }?>
-											<? } // job type?>
 										</select>
 									</div>
 								</div>
+								
+								
 								<div class="form-group">
 									<label class="col-md-3 control-label">กำหนดวันส่งมอบ</label>
 									<div class="col-md-9">
@@ -179,12 +183,21 @@
  	 			getDropDownList(data) 
  	 		});
  	 	});
+
+ 	 	$('#job_type_id').change(function(){
+ 	 	 	job_type_id = $(this).val();
+ 	 		url = "<?=base_url()?>job/get_job_subtype/"+job_type_id;
+ 	 		$.getJSON(url, function(data){
+ 	 			getDropSubTypeDownList(data) 
+ 	 		});
+ 	 	});
  	});
 
  	//function getDropDownList(name, id, optionList) {
  	function getDropDownList(optionList) {
  	    //var combo = $("<select></select>").attr("id", id).attr("name", name);
 		var combo = $("#site_select");
+		combo.children('option').remove();
  	    $.each(optionList, function (i, el) {
  	        combo.append("<option value="+el.site_id+">" + el.address + "</option>");
  	    });
@@ -192,6 +205,19 @@
  	    //return combo;
  	    // OR
  	    $("#site_select").append(combo);
+ 	}
+
+ 	function getDropSubTypeDownList(optionList) {
+ 	    //var combo = $("<select></select>").attr("id", id).attr("name", name);
+		var combo = $("#sub_type_id");
+		combo.children('option').remove();
+ 	    $.each(optionList, function (i, el) {
+ 	        combo.append("<option value="+el.sub_type_id+">" + el.sub_type_name + "</option>");
+ 	    });
+
+ 	    //return combo;
+ 	    // OR
+ 	    $("#sub_type_id").append(combo);
  	}
  </script>
 <?php $this->load->view("footer");?>

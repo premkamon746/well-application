@@ -36,8 +36,21 @@
 		
 		function createCustomer($post){
 			extract($post);
-			$sql = "insert into ar_t_customers (customer_name, customer_type,tax_number,effective_date_from,effective_date_to,credit_term,default_sales)
-						values('$customer_name','$customer_type','$tax_number','$effective_date_from','$effective_date_to','$credit_term','$default_sales')";
+			$sql = "insert into ar_t_customers (customer_name
+			, customer_type
+			,tax_number
+			,effective_date_from
+			,effective_date_to
+			,credit_term
+			,default_sales)
+						values('$customer_name'
+			,'$customer_type'
+			,'$tax_number'
+			,'$effective_date_from'
+			,'$effective_date_to'
+			,'$credit_term'
+			,'$default_sales')";
+			
 			$this->db->query($sql);
 			return $this->db->insert_id();
 		}
@@ -50,6 +63,8 @@
 			,tax_number = '$tax_number'
 			,effective_date_from = '$effective_date_from'
 			,effective_date_to = '$effective_date_to'
+			,credit_term = '$credit_term'
+			,default_sales ='$default_sales'
 			where customer_id = $customer_id";
 			//echo $sql;
 			$this->db->query($sql);
@@ -111,7 +126,7 @@
 				,"contact_person"	=>$contact_person[0]
 				,"customer_id"		=>$customer_id
 				,"province_code"	=>$province_code[0]
-				,"site_code"	=>    "BILL"
+				,"site_code"		=>"BILL"
 			);
 			
 			if(!$this->hasPrimary("BILL",$customer_id)){
