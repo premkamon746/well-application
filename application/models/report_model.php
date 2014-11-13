@@ -55,7 +55,7 @@
 			on job.job_type_id = typ.job_type_id
 		
 			where 1  $cond";
-			//echo $sql;
+			echo $sql;
 			$result = $this->db->query($sql);
 			return $result;
 		}

@@ -21,8 +21,8 @@ class Report extends MY_Controller {
 		
 		if($post = $this->input->post()){
 
-			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
-			 $to = date("Y-m-d",strtotime($post['job_end_date_end']));
+			$from = $this->convDate($post['job_end_date_start']);
+			$to = $this->convDate($post['job_end_date_end']);
 			$customer_id = $post['customer_id'];
 			
 			if($from !="" && $to !=""){
@@ -53,8 +53,8 @@ class Report extends MY_Controller {
 	
 		if($post = $this->input->post()){
 	
-			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
-			$to = date("Y-m-d",strtotime($post['job_end_date_end']));
+			$from = $this->convDate($post['job_end_date_start']);
+			$to = $this->convDate($post['job_end_date_end']);
 			$job_status = $post['customer_id'];
 				
 			if($from !="" && $to !=""){
@@ -80,8 +80,8 @@ class Report extends MY_Controller {
 	
 		if($post = $this->input->post()){
 	
-			$from = date("Y-m-d",strtotime($post['job_end_date_start']));
-			$to = date("Y-m-d",strtotime($post['job_end_date_end']));
+			$from = $this->convDate($post['job_end_date_start']);
+			$to = $this->convDate($post['job_end_date_end']);
 			$customer_id = $post['customer_id'];
 				
 			if($from !="" && $to !=""){
@@ -94,6 +94,11 @@ class Report extends MY_Controller {
 			}
 		}
 		$this->load->view('report/quote_report',$data);
+	}
+	
+	function convDate($date){
+		list($d ,$m ,$y) = explode("/",$date);
+		return $y."-".$m."-".$d;
 	}
 	
 }
