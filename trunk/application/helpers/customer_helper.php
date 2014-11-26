@@ -11,9 +11,22 @@ if ( ! function_exists('getAddress'))
         $contact = $addr->contact_person;
         $address = $addr->address1;
         $province = getProvince($addr->province_code);
-        $t = "ผู้ติดต่อ : ".$contact." ที่อยู่ :".$address." ".$province->province_name;
+        $t = $address." ".$province->province_name;
         return $t;
-    }  
+    } 
+
+    function getContact($site_id)
+    {
+    	$CI = & get_instance();
+    	$CI->load->model('customer_model');
+    	$addr =  $CI->customer_model->getAddress($site_id)->row();
+    
+    	$contact = $addr->contact_person;
+    	$address = $addr->address1;
+    	$province = getProvince($addr->province_code);
+    	$t = $contact;
+    	return $t;
+    }
 
     
     function getProvince($id)

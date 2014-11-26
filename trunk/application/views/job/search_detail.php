@@ -8,7 +8,7 @@
 				<div class="col-md-12">
 					<div class="portlet box green">
 						<div class="portlet-title"></div>
-						<div class="portlet-body">
+						<div class="portlet-body" style="position:relative;">
 							<table width="75%" align="center">
 							<tbody><tr>
 								<td height="32px" width="20%"><b>วันที่รับงาน</b></td>
@@ -26,7 +26,7 @@
 								<td height="32px"><b>ประเภทงานย่อย</b></td>
 								<td><?=getJobSubType($job->sub_type_id)?></td>
 								<td><b>ผู้ติดต่อ</b></td>
-								<td><?=$job->job_end_date?></td>
+								<td><?=getContact($job->site_id)?></td>
 							</tr>
 							<tr>
 								<td height="32px" width="15%"><b>กำหนดวันส่งมอบ</b></td>
@@ -38,7 +38,7 @@
 							
 							
 							</table>
-							
+							<b style="color:red;position:absolute; right:0; top:0;padding:10px;font-size:1.3em;"><?=$job->job_status?></b>
 							<br>
 							<table width="96%">
 							<tbody><tr>
@@ -63,8 +63,10 @@
 								</td>
 							</tr>
 							</tbody></table>
+							<? if($job->job_status!="NEW") :?>
 							<button type="button" class="btn blue" onclick="window.location='<?=base_url()?>job/job_create_line_manu/<?=$job_id?>'"> 
 							&nbsp; &nbsp; Next&nbsp; &nbsp; </button>
+							<? endif ?>
 							<br>
 						</div>
 					</div>
@@ -100,7 +102,7 @@
 								<? foreach ($job_line->result() as $jl) {?>
 									<tr class="odd gradeX">
 										<td><?=++$i?></td>
-										<td><?=$jl->description?></td>
+										<td width=500><?=$jl->description?></td>
 										<td><?=$jl->status?></td>
 										<td><?=$jl->usr_name?></td>
 										
@@ -159,7 +161,7 @@
       </div>
       <div class="modal-body">
       		
-        		รายละเอียด : <br/><textarea name="description" rows="4" cols="60"></textarea>
+        		รายละเอียด : <br/><textarea name="description" rows="4" cols="60" maxlength="200" ></textarea>
         		
       </div>
       <div class="modal-footer">

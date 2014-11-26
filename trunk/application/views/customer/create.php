@@ -16,16 +16,17 @@
 						</div>
 					</div>
 					<div class="portlet-body form">
-				<b><?=isset($warngin_msg)?$warngin_msg:""?></b>
+				<b style="color:red;"><?=isset($warngin_msg)?$warngin_msg:""?></b>
 						<form class="form-horizontal" role="form" method="post">
 							<div class="form-body">
 								
 								<div class="form-group">
 									<label class="col-md-3 control-label">ชื่อลูกค้า</label>
+									
 									<div class="col-md-9">
 											<input type="text" class="form-control input-inline input-medium" 
 											 placeholder="ชื่อลูกค้า" id="customer_name" name = "customer_name"
-											value="<?=isset($customer_name)?$customer_name:''?>" >
+											value="<?=isset($customer_name)?$customer_name:''?>" ><span style="color:red;">*</span>
 									</div>
 								</div>
 								
@@ -34,7 +35,7 @@
 									<div class="col-md-9">
 											<input type="text" class="form-control input-inline input-medium" 
 											 placeholder="เลขประจำตัวผู้เสียภาษี" id="tax_number" name = "tax_number"
-											value="<?=isset($tax_number)?$tax_number:''?>" >
+											value="<?=isset($tax_number)?$tax_number:''?>" ><span style="color:red;">*</span>
 									</div>
 								</div>
 								
@@ -56,15 +57,15 @@
 												<option value="ห้างร้าน">ห้างร้าน</option>
 												<option value="บุคคล">บุคคล</option>
 												<option value="อื่นๆ">อื่นๆ</option>
-											</select>
+											</select><span style="color:red;">*</span>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-md-3 control-label">วันที่มีผลตั้งแต่</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-											<input type="text" class="form-control input-inline input-medium" 
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+											<span style="color:red;">*</span><input type="text" class="form-control input-inline input-medium" 
 											readonly name="effective_date_from" placeholder="วันที่มีผลตั้งแต่" 
 											id="effective_date_from"
 											value="<?=isset($effective_date_from)?$effective_date_from:''?>" >
@@ -74,20 +75,21 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label">วันที่มีผลตั้งถึง</label>
+									<label class="col-md-3 control-label">วันที่มีผลถึง</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 											<input type="text" class="form-control input-inline input-medium" 
 											readonly name="effective_date_to" placeholder="วันที่มีผลตั้งถึง" 
 											id="effective_date_from"
-											value="<?=isset($effective_date_to)?$effective_date_to:''?>" >
+											value="<?=isset($effective_date_to)?$effective_date_to:''?>" ><span style="color:red;">*</span>
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+										
 										</div>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label">เครดิทเทอม</label>
+									<label class="col-md-3 control-label">เครดิตเทอม</label>
 									
 									<div class="col-md-9">
 										<? if(isset($customer_id)){ ?>

@@ -2,6 +2,7 @@
 	class Job_model extends CI_Model{
 		function __construct(){
 			parent::__construct();
+			$this->load->helpers("date");
 		}
 		
 		function createJob($post,$create_user = 0){
@@ -12,8 +13,8 @@
 				,"customer_id"	=>$customer_id
 				//,"bill_to_id"	=>$job_no
 				,"ship_to_id"	=>$ship_to_id
-				,"job_date"		=>$job_date
-				,"job_end_date"	=>$job_end_date
+				,"job_date"		=>convDate($job_date)
+				,"job_end_date"	=>convDate($job_end_date)
 				,"tag_no"		=>$tag_no
 				,"job_status"	=>'NEW'
 				//,"org_id"		=>$org_id
@@ -119,7 +120,10 @@
 		}
 		
 		function getJobCustomerDetail($id){
-			$sql = "select * from job_t_orders o
+			$sql = "select o.*,c.*,s.*
+					,DATE_FORMAT(job_end_date,'%d/%m/%Y') as job_end_date 
+					
+					from job_t_orders o
 					join ar_t_customers c
 					on c.customer_id = c.customer_id
 					left join ar_t_sites s
@@ -163,6 +167,7 @@
 				$search .=" and o.job_no = '$job_no'";
 			}
 			if(isset($job_date)&&$job_date !=''){
+				$job_date = convDate($job_date);
 				$search .=" and o.job_date = '$job_date'";
 			}
 			if(isset($customer_id) &&$customer_id !=''){
