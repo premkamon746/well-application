@@ -8,7 +8,7 @@
 						<div class="col-md-9">
 											<textarea class="form-control input-inline input-medium" 
 											 placeholder="address1" id="address1" name = "address1[]"><?=isset($address1)?$address1:''?></textarea>
-						</div>
+						<span style="color:red;">*</span></div>
 					</div>
 			
 					
@@ -18,7 +18,7 @@
 											<input type="text" class="form-control input-inline input-medium" 
 											 placeholder="postcode" id="postcode" name = "postcode[]"
 											value="<?=isset($postcode)?$postcode:''?>" >
-						</div>
+						<span style="color:red;">*</span></div>
 					</div>
 					
 					<div class="form-group">
@@ -33,7 +33,7 @@
 									<? endforeach ?>
 								<? } ?>
 							</select>
-						</div>
+						<span style="color:red;">*</span></div>
 					</div>
 					
 					<div class="form-group">
@@ -54,7 +54,7 @@
 												<?php endforeach ?>
 												<?php }?>
 											</select>
-						</div>
+						<span style="color:red;">*</span></div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">ผู้ติดต่อ</label>

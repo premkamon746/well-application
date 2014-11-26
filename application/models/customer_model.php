@@ -3,6 +3,7 @@
 		
 		function __construct(){
 			parent::__construct();
+			$this->load->helpers("date");
 		}
 		function getCustomer(){
 			$sql = "select * from ar_t_customers";
@@ -36,6 +37,10 @@
 		
 		function createCustomer($post){
 			extract($post);
+			
+			$effective_date_from = convDate($effective_date_from);
+			$effective_date_to = convDate($effective_date_to);
+			
 			$sql = "insert into ar_t_customers (customer_name
 			, customer_type
 			,tax_number
@@ -58,6 +63,10 @@
 		
 		function updateCustomer($post,$customer_id){
 			extract($post);
+			
+			$effective_date_from = convDate($effective_date_from);
+			$effective_date_to = convDate($effective_date_to);
+			
 			$sql = "update ar_t_customers set customer_name = '$customer_name'
 			, customer_type='$customer_type'
 			,tax_number = '$tax_number'
@@ -96,9 +105,9 @@
 		function getTotalSearch($post){
 			extract($post);
 			$search = "";
-// 			if(isset($customer_name) && $customer_name !=''){
-// 				$search .=" and c.customer_name like '%$customer_name%'";
-// 			}
+ 			if(isset($customer_name) && $customer_name !=''){
+				$search .=" and c.customer_name like '%$customer_name%'";
+			}
 			if(isset($customer_id)&&$customer_id !=''){
 				$search .=" and c.customer_id = '$customer_id'";
 			}

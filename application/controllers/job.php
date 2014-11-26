@@ -7,6 +7,7 @@ class Job extends MY_Controller {
 		$this->load->model('job_model');
 		$this->load->model('customer_model');
 		$this->load->helper('customer');
+		$this->load->helper('date');
 	}
 	
 	public function index()

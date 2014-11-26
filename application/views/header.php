@@ -155,8 +155,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<li class="sidebar-search-wrapper">
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+				<!--  li class="sidebar-search-wrapper">
+					
 					<form class="sidebar-search" action="extra_search.html" method="POST">
 						<div class="form-container">
 							<div class="input-box">
@@ -167,8 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 						</div>
 					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
+				</li-->
 				<li class="open ">
 					<a href="javascript:;">
 						
@@ -183,7 +182,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 				</li>
 					
-				<? //if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) 
+				<? if(isset($this->role_id) && ($this->role_id == 2 || $this->role_id == 1 ) ) 
 				{?>
 				<li class="open ">
 					<a href="javascript:;">
@@ -195,7 +194,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</span>
 					</a>
 					<ul class="sub-menu always-open" style="display:block !important;">
-						<? //if(isset($this->dept_id) && ($this->dept_id == 4 || $this->role_id == 1 ) ) 
+						<? if(isset($this->dept_id) && ($this->dept_id == 4 || $this->role_id == 1 ) ) 
 						{?>
 						<li>
 							<a href="<?=base_url('quotation/create')?>">
@@ -215,7 +214,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				
 				<? } //endif role_id?>
 				
-				<? //if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) 
+				<? if(isset($this->role_id) && ($this->role_id == 3 || $this->role_id == 1) ) 
 				{?>
 				<li class="open ">
 					<a href="javascript:;">

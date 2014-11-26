@@ -22,11 +22,11 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">วันที่รับงาน</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 											<input type="text" class="form-control input-inline input-medium" 
 											readonly name="job_date" placeholder="วันที่รับงาน" 
 											id="job_date"
-											value="<?=isset($job_date)?$job_date:''?>" >
+											value="<?=isset($job_date)?$job_date:''?>" ><span style="color:red;">*</span>
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 										</div>
 									</div>
@@ -49,7 +49,7 @@
 													<option value="<?=$jt->job_type_id ?>"><?=$jt->type_name ?></option>
 												<? }?>
 											<? } // job type?>
-										</select>
+										</select><span style="color:red;">*</span>
 									</div>
 								</div>
 								
@@ -72,7 +72,7 @@
 									
 										<select name="sub_type_id" class="form-control input-inline input-medium" id="sub_type_id">
 											<option>เลือกประเภทงานย่อย</option>
-										</select>
+										</select><span style="color:red;">*</span>
 									</div>
 								</div>
 								
@@ -80,10 +80,10 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">กำหนดวันส่งมอบ</label>
 									<div class="col-md-9">
-										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 											<input type="text" class="form-control input-inline input-medium" 
 											readonly name="job_end_date" placeholder="กำหนดวันส่งมอบ" 
-											id="job_end_date" value="<?=isset($job_end_date)?$job_end_date:''?>">
+											id="job_end_date" value="<?=isset($job_end_date)?$job_end_date:''?>"><span style="color:red;">*</span>
 											&nbsp; <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 										</div>
 									</div>
@@ -105,7 +105,7 @@
 													<option value="<?=$cs->customer_id ?>"><?=$cs->customer_name ?></option>
 												<? }?>
 											<? } // job type?>
-										</select>
+										</select><span style="color:red;">*</span>
 									</div>
 								</div>
 								<div class="form-group">
@@ -127,27 +127,27 @@
 									
 										<select name="ship_to_id" class="form-control input-inline input-medium" id="site_select">
 											<option></option>
-										</select>
+										</select><span style="color:red;">*</span>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">ผู้ติดต่อ</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-inline input-medium" name="order_date_from" placeholder="ผู้ติดต่อ">
-									</div>
+									<span style="color:red;">*</span></div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">โทรศัพท์</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-inline input-medium" placeholder="โทรศัพท์">
+										<input type="text" class="form-control input-inline input-medium" placeholder="โทรศัพท์"><span style="color:red;">*</span></div>
 										<span class="help-inline"></span>
-									</div>
+									
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Tag</label>
 									<div class="col-md-9">
 										<input name="tag_no" type="text" class="form-control input-inline input-medium" id="tag_no" placeholder="Tag">
-									</div>
+									<span style="color:red;">*</span></div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Serial</label>

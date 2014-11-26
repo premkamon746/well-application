@@ -10,7 +10,7 @@ class Authorize extends CI_Controller {
 	
 	public function login()
 	{
-
+		$data = array();
 		$post = $this->input->post();
 		if($post = $this->input->post()){
 			extract($post);
@@ -21,9 +21,11 @@ class Authorize extends CI_Controller {
 				//print_r($user_data);
 				$this->setSession($user_data);
 				redirect('index');
+			}else{
+				$data["alert_msg"] = "Invalid username or password";
 			}
 		}
-		$this->load->view('login');
+		$this->load->view('login',$data);
 	}
 	
 	public function setSession($user_data){
